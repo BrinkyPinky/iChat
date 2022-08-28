@@ -11,5 +11,6 @@ pod 'Alamofire'
 pod 'FirebaseAnalytics'
 pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
+pod 'FirebaseDatabase'
 
 end

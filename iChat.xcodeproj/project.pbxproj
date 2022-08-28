@@ -8,14 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		E200040A28BA1108006FA2DF /* Extension + TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200040928BA1108006FA2DF /* Extension + TextField.swift */; };
-		E220557128B77F1E002EDF83 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556B28B77F1E002EDF83 /* LoginPresenter.swift */; };
-		E220557228B77F1E002EDF83 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556C28B77F1E002EDF83 /* LoginWorker.swift */; };
-		E220557328B77F1E002EDF83 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556D28B77F1E002EDF83 /* LoginRouter.swift */; };
-		E220557428B77F1E002EDF83 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556E28B77F1E002EDF83 /* LoginModels.swift */; };
 		E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556F28B77F1E002EDF83 /* LoginViewController.swift */; };
-		E220557628B77F1E002EDF83 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220557028B77F1E002EDF83 /* LoginInteractor.swift */; };
 		E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220557C28B81FD6002EDF83 /* SignUpViewController.swift */; };
-		E2607AF728B821B600188272 /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2607AF628B821B600188272 /* FireBaseManager.swift */; };
+		E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */; };
+		E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348528BB57AA0041CF4F /* LoginViewModel.swift */; };
+		E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */; };
+		E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2607AF628B821B600188272 /* FireBaseAuthManager.swift */; };
 		E2607AFA28B824D500188272 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2607AF928B824D500188272 /* SignUpViewModel.swift */; };
 		E28F050428B777720096E22F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050328B777720096E22F /* AppDelegate.swift */; };
 		E28F050628B777720096E22F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050528B777720096E22F /* SceneDelegate.swift */; };
@@ -23,7 +21,13 @@
 		E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E28F050C28B777720096E22F /* iChat.xcdatamodeld */; };
 		E28F051028B777730096E22F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E28F050F28B777730096E22F /* Assets.xcassets */; };
 		E28F051328B777730096E22F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28F051128B777730096E22F /* LaunchScreen.storyboard */; };
-		E28F051B28B777D70096E22F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E28F051A28B777D70096E22F /* GoogleService-Info.plist */; };
+		E2CFB51128BB783E00080A2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */; };
+		E2CFB51928BB7D2100080A2F /* MessengerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFB51328BB7D2100080A2F /* MessengerPresenter.swift */; };
+		E2CFB51A28BB7D2100080A2F /* MessengerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFB51428BB7D2100080A2F /* MessengerWorker.swift */; };
+		E2CFB51B28BB7D2100080A2F /* MessengerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFB51528BB7D2100080A2F /* MessengerRouter.swift */; };
+		E2CFB51C28BB7D2100080A2F /* MessengerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFB51628BB7D2100080A2F /* MessengerModels.swift */; };
+		E2CFB51D28BB7D2100080A2F /* MessengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFB51728BB7D2100080A2F /* MessengerViewController.swift */; };
+		E2CFB51E28BB7D2100080A2F /* MessengerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFB51828BB7D2100080A2F /* MessengerInteractor.swift */; };
 		E3D39B164F724FE238CA40FD /* Pods_iChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503B25FABD625F0F8E634C10 /* Pods_iChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,14 +36,12 @@
 		503B25FABD625F0F8E634C10 /* Pods_iChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8C1053312754B498A03CB6 /* Pods-iChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChat.release.xcconfig"; path = "Target Support Files/Pods-iChat/Pods-iChat.release.xcconfig"; sourceTree = "<group>"; };
 		E200040928BA1108006FA2DF /* Extension + TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TextField.swift"; sourceTree = "<group>"; };
-		E220556B28B77F1E002EDF83 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
-		E220556C28B77F1E002EDF83 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
-		E220556D28B77F1E002EDF83 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
-		E220556E28B77F1E002EDF83 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
 		E220556F28B77F1E002EDF83 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		E220557028B77F1E002EDF83 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		E220557C28B81FD6002EDF83 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		E2607AF628B821B600188272 /* FireBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseManager.swift; sourceTree = "<group>"; };
+		E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDataManager.swift; sourceTree = "<group>"; };
+		E24B348528BB57AA0041CF4F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDatabaseManager.swift; sourceTree = "<group>"; };
+		E2607AF628B821B600188272 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
 		E2607AF928B824D500188272 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		E28F050028B777720096E22F /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28F050328B777720096E22F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,7 +51,13 @@
 		E28F050F28B777730096E22F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E28F051228B777730096E22F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E28F051428B777730096E22F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E28F051A28B777D70096E22F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E2CFB51328BB7D2100080A2F /* MessengerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerPresenter.swift; sourceTree = "<group>"; };
+		E2CFB51428BB7D2100080A2F /* MessengerWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerWorker.swift; sourceTree = "<group>"; };
+		E2CFB51528BB7D2100080A2F /* MessengerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerRouter.swift; sourceTree = "<group>"; };
+		E2CFB51628BB7D2100080A2F /* MessengerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerModels.swift; sourceTree = "<group>"; };
+		E2CFB51728BB7D2100080A2F /* MessengerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerViewController.swift; sourceTree = "<group>"; };
+		E2CFB51828BB7D2100080A2F /* MessengerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,11 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				E220556F28B77F1E002EDF83 /* LoginViewController.swift */,
-				E220557028B77F1E002EDF83 /* LoginInteractor.swift */,
-				E220556B28B77F1E002EDF83 /* LoginPresenter.swift */,
-				E220556C28B77F1E002EDF83 /* LoginWorker.swift */,
-				E220556D28B77F1E002EDF83 /* LoginRouter.swift */,
-				E220556E28B77F1E002EDF83 /* LoginModels.swift */,
+				E24B348528BB57AA0041CF4F /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -114,7 +118,9 @@
 		E2607AF828B821C300188272 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E2607AF628B821B600188272 /* FireBaseManager.swift */,
+				E2607AF628B821B600188272 /* FireBaseAuthManager.swift */,
+				E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */,
+				E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -142,6 +148,7 @@
 			children = (
 				E28F050328B777720096E22F /* AppDelegate.swift */,
 				E28F050528B777720096E22F /* SceneDelegate.swift */,
+				E2CFB51228BB7CFF00080A2F /* Messenger */,
 				E220557728B81FC2002EDF83 /* SignUp */,
 				E220556028B77EE6002EDF83 /* Login */,
 				E2607AF828B821C300188272 /* Services */,
@@ -150,10 +157,23 @@
 				E28F050F28B777730096E22F /* Assets.xcassets */,
 				E28F051428B777730096E22F /* Info.plist */,
 				E28F050C28B777720096E22F /* iChat.xcdatamodeld */,
-				E28F051A28B777D70096E22F /* GoogleService-Info.plist */,
+				E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */,
 				E200040B28BA113B006FA2DF /* Extensions */,
 			);
 			path = iChat;
+			sourceTree = "<group>";
+		};
+		E2CFB51228BB7CFF00080A2F /* Messenger */ = {
+			isa = PBXGroup;
+			children = (
+				E2CFB51728BB7D2100080A2F /* MessengerViewController.swift */,
+				E2CFB51828BB7D2100080A2F /* MessengerInteractor.swift */,
+				E2CFB51328BB7D2100080A2F /* MessengerPresenter.swift */,
+				E2CFB51428BB7D2100080A2F /* MessengerWorker.swift */,
+				E2CFB51528BB7D2100080A2F /* MessengerRouter.swift */,
+				E2CFB51628BB7D2100080A2F /* MessengerModels.swift */,
+			);
+			path = Messenger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,8 +238,8 @@
 			files = (
 				E28F051328B777730096E22F /* LaunchScreen.storyboard in Resources */,
 				E28F051028B777730096E22F /* Assets.xcassets in Resources */,
+				E2CFB51128BB783E00080A2F /* GoogleService-Info.plist in Resources */,
 				E28F050B28B777720096E22F /* Main.storyboard in Resources */,
-				E28F051B28B777D70096E22F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,19 +292,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E220557228B77F1E002EDF83 /* LoginWorker.swift in Sources */,
-				E220557128B77F1E002EDF83 /* LoginPresenter.swift in Sources */,
-				E2607AF728B821B600188272 /* FireBaseManager.swift in Sources */,
-				E220557428B77F1E002EDF83 /* LoginModels.swift in Sources */,
-				E220557328B77F1E002EDF83 /* LoginRouter.swift in Sources */,
+				E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */,
 				E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */,
 				E28F050428B777720096E22F /* AppDelegate.swift in Sources */,
 				E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */,
 				E200040A28BA1108006FA2DF /* Extension + TextField.swift in Sources */,
 				E28F050628B777720096E22F /* SceneDelegate.swift in Sources */,
+				E2CFB51928BB7D2100080A2F /* MessengerPresenter.swift in Sources */,
+				E2CFB51C28BB7D2100080A2F /* MessengerModels.swift in Sources */,
+				E2CFB51E28BB7D2100080A2F /* MessengerInteractor.swift in Sources */,
+				E2CFB51A28BB7D2100080A2F /* MessengerWorker.swift in Sources */,
+				E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */,
+				E2CFB51D28BB7D2100080A2F /* MessengerViewController.swift in Sources */,
 				E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */,
 				E2607AFA28B824D500188272 /* SignUpViewModel.swift in Sources */,
-				E220557628B77F1E002EDF83 /* LoginInteractor.swift in Sources */,
+				E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */,
+				E2CFB51B28BB7D2100080A2F /* MessengerRouter.swift in Sources */,
+				E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,11 +7,17 @@
 
 import FirebaseAuth
 
-class FireBaseManager {
-    static let shared = FireBaseManager()
+class FireBaseAuthManager {
+    static let shared = FireBaseAuthManager()
     
     func signUp(email: String, password: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { _, error in
+            completion(error)
+        }
+    }
+    
+    func login(email: String, password: String, completion: @escaping (Error?) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { _, error in
             completion(error)
         }
     }
