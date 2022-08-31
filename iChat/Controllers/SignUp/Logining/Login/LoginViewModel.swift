@@ -9,7 +9,7 @@ import Foundation
 
 protocol LoginViewModelProtocol {
     init(view: LoginViewController)
-    func loginButtonTapped(email: String, password: String)
+    func loginButtonTapped(email: String?, password: String?)
 }
 
 class LoginViewModel: LoginViewModelProtocol {
@@ -19,11 +19,11 @@ class LoginViewModel: LoginViewModelProtocol {
         self.view = view
     }
     
-    func loginButtonTapped(email: String, password: String) {
-        FireBaseAuthManager.shared.login(email: email, password: password) { [unowned self] error in
+    func loginButtonTapped(email: String?, password: String?) {
+        FireBaseAuthManager.shared.login(email: email ?? "", password: password ?? "") { [unowned self] error in
             guard let error = error else {
                 view.showViewController(with: "MessengerViewController")
-                UserLoginDataManager.shared.saveData(email: email, password: password)
+                UserLoginDataManager.shared.saveData(email: email ?? "", password: password ?? "")
                 return
             }
             view.alert(with: error.localizedDescription)

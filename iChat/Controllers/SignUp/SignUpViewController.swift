@@ -24,15 +24,15 @@ class SignUpViewController: UIViewController {
     
     @IBAction private func signUpButtonAction(_ sender: Any) {
         viewModel.signUpButtonTapped(
-            name: firstNameTextField.text ?? "",
-            surname: lastNameTextField.text ?? "",
-            email: emailTextField.text ?? "",
-            password: passwordTextField.text ?? ""
+            name: firstNameTextField.text,
+            surname: lastNameTextField.text,
+            email: emailTextField.text,
+            password: passwordTextField.text
         )
     }
     
     @objc private func textFieldDidChange() {
-        viewModel.checkMailIsValid(email: emailTextField.text ?? "")
+        viewModel.emailTextFieldDidChanged(email: emailTextField.text)
         updateEmailValidImage(with: viewModel.emailIsValid ? "checkmark" : "xmark")
     }
 

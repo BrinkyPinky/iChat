@@ -16,18 +16,15 @@
 		E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2607AF628B821B600188272 /* FireBaseAuthManager.swift */; };
 		E2607AFA28B824D500188272 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2607AF928B824D500188272 /* SignUpViewModel.swift */; };
 		E265932728BEFF370039C5B4 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932628BEFF370039C5B4 /* Extension + UIViewController.swift */; };
-		E265933028BF14230039C5B4 /* MessengerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932A28BF14230039C5B4 /* MessengerPresenter.swift */; };
-		E265933128BF14230039C5B4 /* MessengerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932B28BF14230039C5B4 /* MessengerWorker.swift */; };
-		E265933228BF14230039C5B4 /* MessengerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932C28BF14230039C5B4 /* MessengerRouter.swift */; };
-		E265933328BF14230039C5B4 /* MessengerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932D28BF14230039C5B4 /* MessengerModels.swift */; };
-		E265933428BF14230039C5B4 /* MessengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932E28BF14230039C5B4 /* MessengerViewController.swift */; };
-		E265933528BF14230039C5B4 /* MessengerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932F28BF14230039C5B4 /* MessengerInteractor.swift */; };
 		E28F050428B777720096E22F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050328B777720096E22F /* AppDelegate.swift */; };
 		E28F050628B777720096E22F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050528B777720096E22F /* SceneDelegate.swift */; };
 		E28F050B28B777720096E22F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28F050928B777720096E22F /* Main.storyboard */; };
 		E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E28F050C28B777720096E22F /* iChat.xcdatamodeld */; };
 		E28F051028B777730096E22F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E28F050F28B777730096E22F /* Assets.xcassets */; };
 		E28F051328B777730096E22F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28F051128B777730096E22F /* LaunchScreen.storyboard */; };
+		E2C8934428BF191B00FC6210 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934328BF191B00FC6210 /* ForgotPasswordViewController.swift */; };
+		E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */; };
+		E2C8934828BF193F00FC6210 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934728BF193F00FC6210 /* ValidationManager.swift */; };
 		E2CFB51128BB783E00080A2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */; };
 		E3D39B164F724FE238CA40FD /* Pods_iChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503B25FABD625F0F8E634C10 /* Pods_iChat.framework */; };
 /* End PBXBuildFile section */
@@ -45,12 +42,6 @@
 		E2607AF628B821B600188272 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
 		E2607AF928B824D500188272 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		E265932628BEFF370039C5B4 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
-		E265932A28BF14230039C5B4 /* MessengerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerPresenter.swift; sourceTree = "<group>"; };
-		E265932B28BF14230039C5B4 /* MessengerWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerWorker.swift; sourceTree = "<group>"; };
-		E265932C28BF14230039C5B4 /* MessengerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerRouter.swift; sourceTree = "<group>"; };
-		E265932D28BF14230039C5B4 /* MessengerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerModels.swift; sourceTree = "<group>"; };
-		E265932E28BF14230039C5B4 /* MessengerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerViewController.swift; sourceTree = "<group>"; };
-		E265932F28BF14230039C5B4 /* MessengerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerInteractor.swift; sourceTree = "<group>"; };
 		E28F050028B777720096E22F /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28F050328B777720096E22F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E28F050528B777720096E22F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +50,9 @@
 		E28F050F28B777730096E22F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E28F051228B777730096E22F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E28F051428B777730096E22F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2C8934328BF191B00FC6210 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		E2C8934728BF193F00FC6210 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +109,8 @@
 				E220557C28B81FD6002EDF83 /* SignUpViewController.swift */,
 				E2607AF928B824D500188272 /* SignUpViewModel.swift */,
 			);
-			path = SignUp;
+			name = SignUp;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		E2607AF828B821C300188272 /* Services */ = {
@@ -124,6 +119,7 @@
 				E2607AF628B821B600188272 /* FireBaseAuthManager.swift */,
 				E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */,
 				E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */,
+				E2C8934728BF193F00FC6210 /* ValidationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -140,10 +136,9 @@
 		E265932328BEFD190039C5B4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E2C8936628BF814B00FC6210 /* SearchResults */,
 				E2CFB51228BB7CFF00080A2F /* Messenger */,
-				E220557728B81FC2002EDF83 /* SignUp */,
-				E220556028B77EE6002EDF83 /* Login */,
-				E265933628BF14F20039C5B4 /* ForgotPassword */,
+				E2C450F328BFEF5A00F9C473 /* Logining */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -171,6 +166,8 @@
 		E265933628BF14F20039C5B4 /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
+				E2C8934328BF191B00FC6210 /* ForgotPasswordViewController.swift */,
+				E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -206,15 +203,27 @@
 			path = iChat;
 			sourceTree = "<group>";
 		};
+		E2C450F328BFEF5A00F9C473 /* Logining */ = {
+			isa = PBXGroup;
+			children = (
+				E220557728B81FC2002EDF83 /* SignUp */,
+				E220556028B77EE6002EDF83 /* Login */,
+				E265933628BF14F20039C5B4 /* ForgotPassword */,
+			);
+			name = Logining;
+			path = SignUp/Logining;
+			sourceTree = "<group>";
+		};
+		E2C8936628BF814B00FC6210 /* SearchResults */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SearchResults;
+			sourceTree = "<group>";
+		};
 		E2CFB51228BB7CFF00080A2F /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
-				E265932E28BF14230039C5B4 /* MessengerViewController.swift */,
-				E265932F28BF14230039C5B4 /* MessengerInteractor.swift */,
-				E265932A28BF14230039C5B4 /* MessengerPresenter.swift */,
-				E265932B28BF14230039C5B4 /* MessengerWorker.swift */,
-				E265932C28BF14230039C5B4 /* MessengerRouter.swift */,
-				E265932D28BF14230039C5B4 /* MessengerModels.swift */,
 			);
 			path = Messenger;
 			sourceTree = "<group>";
@@ -336,20 +345,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */,
-				E265933128BF14230039C5B4 /* MessengerWorker.swift in Sources */,
 				E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */,
 				E28F050428B777720096E22F /* AppDelegate.swift in Sources */,
 				E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */,
-				E265933328BF14230039C5B4 /* MessengerModels.swift in Sources */,
+				E2C8934828BF193F00FC6210 /* ValidationManager.swift in Sources */,
 				E200040A28BA1108006FA2DF /* Extension + TextField.swift in Sources */,
+				E2C8934428BF191B00FC6210 /* ForgotPasswordViewController.swift in Sources */,
 				E28F050628B777720096E22F /* SceneDelegate.swift in Sources */,
 				E265932728BEFF370039C5B4 /* Extension + UIViewController.swift in Sources */,
-				E265933028BF14230039C5B4 /* MessengerPresenter.swift in Sources */,
-				E265933228BF14230039C5B4 /* MessengerRouter.swift in Sources */,
-				E265933428BF14230039C5B4 /* MessengerViewController.swift in Sources */,
 				E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */,
-				E265933528BF14230039C5B4 /* MessengerInteractor.swift in Sources */,
 				E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */,
+				E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */,
 				E2607AFA28B824D500188272 /* SignUpViewModel.swift in Sources */,
 				E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */,
 				E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */,

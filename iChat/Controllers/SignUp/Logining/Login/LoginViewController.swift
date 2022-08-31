@@ -28,8 +28,8 @@ class LoginViewController: UIViewController {
     
     @IBAction private func loginButtonAction(_ sender: Any) {
         viewModel.loginButtonTapped(
-            email: emailTextField.text ?? "",
-            password: passwordTextField.text ?? ""
+            email: emailTextField.text,
+            password: passwordTextField.text
         )
     }
     

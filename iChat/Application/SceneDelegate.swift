@@ -14,19 +14,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let launchStoryboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
         
         guard let windowScene = scene as? UIWindowScene else { return }
         
-        let rootViewController: UIViewController
+        let rootViewController = launchStoryboard.instantiateViewController(withIdentifier: "launchScreen")
+    
+        let email = UserLoginDataManager.shared.email
+        let password = UserLoginDataManager.shared.password
         
-        if UserLoginDataManager.shared.email != nil {
-            let email = UserLoginDataManager.shared.email!
-            let password = UserLoginDataManager.shared.password!
-            
-            FireBaseAuthManager.shared.login(email: email, password: password, completion: {_ in })
-            rootViewController = storyboard.instantiateViewController(withIdentifier: "MessengerViewController") as! MessengerViewController
-        } else {
-            rootViewController = storyboard.instantiateViewController(withIdentifier: "NavigationControllerLogin") as! UINavigationController
+        FireBaseAuthManager.shared.login(email: email ?? "", password: password ?? "") { [unowned self] error in
+            guard let _ = error else {
+                let rootViewController = storyboard.instantiateViewController(withIdentifier: "MessengerViewController") as! UINavigationController
+                makeTransition(root: rootViewController, windowScene: windowScene)
+                return
+            }
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "NavigationControllerLogin") as! UINavigationController
+            makeTransition(root: rootViewController, windowScene: windowScene)
         }
         
         window = UIWindow(windowScene: windowScene)
@@ -34,6 +38,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         guard let _ = (scene as? UIWindowScene) else { return }
+    }
+    
+    private func makeTransition(root: UIViewController, windowScene: UIWindowScene) {
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = root
+        window?.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

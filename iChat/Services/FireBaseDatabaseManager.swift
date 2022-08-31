@@ -15,7 +15,6 @@ class FireBaseDatabaseManager {
     func createUser(email: String, name: String, surname: String) {
         var correctEmail = email.replacingOccurrences(of: ".", with: "-")
         correctEmail = correctEmail.replacingOccurrences(of: "@", with: "-")
-        print(correctEmail)
         
         db.child("Users").child(correctEmail).setValue([
             "name": name,
