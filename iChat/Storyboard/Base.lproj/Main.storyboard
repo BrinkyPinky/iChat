@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Sign Up View Controller-->
+        <!--Signing up-->
         <scene sceneID="DuN-is-VVf">
             <objects>
                 <viewController storyboardIdentifier="SignUpViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tbd-Zw-LgW" customClass="SignUpViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -79,19 +79,63 @@
                             <constraint firstItem="ZXm-go-Ygb" firstAttribute="centerX" secondItem="r0K-Rm-EuW" secondAttribute="centerX" id="lG9-Kq-hCS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="z0p-rq-7te"/>
+                    <navigationItem key="navigationItem" title="Signing up" id="z0p-rq-7te"/>
                     <connections>
                         <outlet property="emailTextField" destination="ZVf-Gx-WzN" id="UlT-bF-4g8"/>
                         <outlet property="firstNameTextField" destination="U9c-NJ-ctm" id="25k-V1-s8z"/>
                         <outlet property="lastNameTextField" destination="xRe-Qr-nU8" id="AbP-vK-4RU"/>
                         <outlet property="passwordTextField" destination="Khw-SC-mU5" id="FmR-lz-2AH"/>
                         <outlet property="signUpButton" destination="MLw-kN-upY" id="UN1-Nu-G5o"/>
-                        <segue destination="G3Y-Ck-EqI" kind="show" identifier="ShowMessenger" id="27c-xC-cch"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IK6-N5-uGe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="953.62318840579712" y="829.6875"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Uqd-rF-jiB">
+            <objects>
+                <viewController id="nSO-T4-XOa" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fzo-Yz-7Ss">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gPY-2U-glF">
+                                <rect key="frame" x="64" y="388" width="286" height="120"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lEP-Xr-P1H">
+                                        <rect key="frame" x="0.0" y="0.0" width="286" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="LRj-cx-1Ua"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coc-Jg-A9R">
+                                        <rect key="frame" x="0.0" y="70" width="286" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Send Email"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Coc-Jg-A9R" firstAttribute="height" secondItem="lEP-Xr-P1H" secondAttribute="height" id="rfN-dj-CuQ"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zFO-9q-cJb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gPY-2U-glF" firstAttribute="centerY" secondItem="Fzo-Yz-7Ss" secondAttribute="centerY" id="aFK-zr-tTc"/>
+                            <constraint firstItem="gPY-2U-glF" firstAttribute="centerX" secondItem="Fzo-Yz-7Ss" secondAttribute="centerX" id="biZ-op-9UO"/>
+                            <constraint firstItem="zFO-9q-cJb" firstAttribute="trailing" secondItem="gPY-2U-glF" secondAttribute="trailing" constant="64" id="h7z-UV-im2"/>
+                            <constraint firstItem="gPY-2U-glF" firstAttribute="leading" secondItem="zFO-9q-cJb" secondAttribute="leading" constant="64" id="r47-Xe-Wfp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="sAA-wF-hWS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="63f-on-vWp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="954" y="-624"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -149,6 +193,9 @@
                                                 <rect key="frame" x="0.0" y="66" width="286" height="31"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Forgot Password?"/>
+                                                <connections>
+                                                    <segue destination="nSO-T4-XOa" kind="show" id="eIv-0n-gTk"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -197,42 +244,40 @@
                         <outlet property="emailTextField" destination="zWu-um-Aj6" id="ebx-N2-NAy"/>
                         <outlet property="loginButton" destination="6R4-3Q-x9e" id="qmO-MX-8Pc"/>
                         <outlet property="passwordTextField" destination="bP6-7u-DF4" id="Fks-t1-BVE"/>
-                        <segue destination="G3Y-Ck-EqI" kind="show" identifier="ShowMessenger" id="GSc-Tv-3zO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="955.07246376811599" y="83.705357142857139"/>
         </scene>
-        <!--Messenger View Controller-->
-        <scene sceneID="4jP-lF-FE8">
+        <!--Table View Controller-->
+        <scene sceneID="Ecx-pL-rXO">
             <objects>
-                <viewController storyboardIdentifier="MessengerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="G3Y-Ck-EqI" customClass="MessengerViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MPD-02-yPo">
+                <tableViewController id="zvz-Og-482" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="35H-1C-pE9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7e-5o-RJK">
-                                <rect key="frame" x="170.5" y="432.5" width="73" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Log out"/>
-                                <connections>
-                                    <action selector="logOutButtonAction:" destination="G3Y-Ck-EqI" eventType="touchUpInside" id="trd-VX-yUb"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Ue0-4f-S7y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="j7e-5o-RJK" firstAttribute="centerY" secondItem="MPD-02-yPo" secondAttribute="centerY" id="bEw-Jc-d5o"/>
-                            <constraint firstItem="j7e-5o-RJK" firstAttribute="centerX" secondItem="MPD-02-yPo" secondAttribute="centerX" id="nKd-Re-JX1"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="PLb-go-gc3"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CYD-5o-ccx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7JU-qv-ySm">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7JU-qv-ySm" id="yh3-KI-Ref">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zvz-Og-482" id="DGI-Uk-Ykg"/>
+                            <outlet property="delegate" destination="zvz-Og-482" id="I44-Na-Mbg"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Pjk-Hw-1FT"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UVR-YH-Bt4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1825" y="84"/>
+            <point key="canvasLocation" x="4591.304347826087" y="83.705357142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HlW-8q-IZm">
@@ -252,10 +297,25 @@
             </objects>
             <point key="canvasLocation" x="44.927536231884062" y="83.705357142857139"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="t16-Aa-diF">
+            <objects>
+                <navigationController storyboardIdentifier="MessengerViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rhj-lH-GLe" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="46R-yn-bG4">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zvz-Og-482" kind="relationship" relationship="rootViewController" id="YVL-gj-1wO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8DZ-xU-OSu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3681.1594202898555" y="83.705357142857139"/>
+        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="GSc-Tv-3zO"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

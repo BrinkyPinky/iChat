@@ -61,10 +61,6 @@ class SignUpViewController: UIViewController {
         emailTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
-    func segueToMessenger() {
-        performSegue(withIdentifier: "ShowMessenger", sender: nil)
-    }
-    
     func alert(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

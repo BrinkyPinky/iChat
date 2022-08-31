@@ -41,10 +41,6 @@ class LoginViewController: UIViewController {
         loginButton.configuration?.cornerStyle = .capsule
     }
     
-    func segueToMessenger() {
-        performSegue(withIdentifier: "ShowMessenger", sender: nil)
-    }
-    
      func alert(with message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

@@ -26,4 +26,9 @@ class UserLoginDataManager {
         UserDefaults.standard.set(email, forKey: "email")
         UserDefaults.standard.set(password, forKey: "password")
     }
+    
+    func removeData() {
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.removeObject(forKey: "password")
+    }
 }
