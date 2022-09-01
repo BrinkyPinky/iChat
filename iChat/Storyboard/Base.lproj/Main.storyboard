@@ -263,12 +263,12 @@
             </objects>
             <point key="canvasLocation" x="955.07246376811599" y="83.705357142857139"/>
         </scene>
-        <!--Search Results View Controller-->
+        <!--Users-->
         <scene sceneID="DrK-JO-hXd">
             <objects>
-                <tableViewController id="2Vt-Gp-LXk" customClass="SearchResultsViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SearchResultsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2Vt-Gp-LXk" customClass="SearchUserViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="HqK-TX-VDG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -286,11 +286,11 @@
                             <outlet property="delegate" destination="2Vt-Gp-LXk" id="m7I-sW-XOK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="i64-Nb-IAq"/>
+                    <navigationItem key="navigationItem" title="Users" id="i64-Nb-IAq"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMc-iG-IfF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4591" y="-603"/>
+            <point key="canvasLocation" x="5345" y="-603"/>
         </scene>
         <!--Chats-->
         <scene sceneID="Ecx-pL-rXO">
@@ -315,7 +315,13 @@
                             <outlet property="delegate" destination="zvz-Og-482" id="I44-Na-Mbg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Chats" id="Pjk-Hw-1FT"/>
+                    <navigationItem key="navigationItem" title="Chats" id="Pjk-Hw-1FT">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="SXm-gA-7V7">
+                            <connections>
+                                <segue destination="FPX-Nd-Q2Q" kind="presentation" id="c6S-E3-X79"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVR-YH-Bt4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -356,6 +362,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8DZ-xU-OSu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3681.1594202898555" y="83.705357142857139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NzZ-N3-q28">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FPX-Nd-Q2Q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6TR-Pe-Peu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2Vt-Gp-LXk" kind="relationship" relationship="rootViewController" id="5UH-D4-4UH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aHe-AY-n42" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4591" y="-603"/>
         </scene>
     </scenes>
     <resources>
