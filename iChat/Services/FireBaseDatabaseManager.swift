@@ -48,7 +48,26 @@ class FireBaseDatabaseManager {
         
         query.observeSingleEvent(of: .value) { (data) in
             guard data.exists() != false else { return }
-            print(data.value)
+            guard let value = data.value as? [String:[String:Any]] else { return }
+            
+            var users: [UserModel] = []
+            
+            value.forEach { (_, value: [String : Any]) in
+                let email = value["email"] as? String
+                let name = value["name"] as? String
+                let surname = value["surname"] as? String
+                
+                let user = UserModel(email: email, name: name, surname: surname)
+                users.append(user)
+            }
+            
+            var sortedUsers: [UserModel] = []
+            
+            users.forEach { userModel in
+                if userModel.name?.contains(name) == true {
+                    sortedUsers.append(userModel)
+                }
+            }
         }
     }
 }

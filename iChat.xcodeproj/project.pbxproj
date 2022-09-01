@@ -38,6 +38,7 @@
 		E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */; };
 		E2C8934828BF193F00FC6210 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934728BF193F00FC6210 /* ValidationManager.swift */; };
 		E2CFB51128BB783E00080A2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */; };
+		E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DE9E5428C15A2F00147E51 /* UserModel.swift */; };
 		E3D39B164F724FE238CA40FD /* Pods_iChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503B25FABD625F0F8E634C10 /* Pods_iChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		E2C8934728BF193F00FC6210 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E2DE9E5428C15A2F00147E51 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 			children = (
 				E265932328BEFD190039C5B4 /* Controllers */,
 				E2607AF828B821C300188272 /* Services */,
+				E2DE9E5328C15A2200147E51 /* Models */,
 				E265932128BEFC9D0039C5B4 /* Storyboard */,
 				E265932428BEFD4D0039C5B4 /* Application */,
 				E265932528BEFD550039C5B4 /* Resources */,
@@ -262,6 +265,14 @@
 				E2C4510D28C095C900F9C473 /* MessengerConfigurator.swift */,
 			);
 			path = Messenger;
+			sourceTree = "<group>";
+		};
+		E2DE9E5328C15A2200147E51 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E2DE9E5428C15A2F00147E51 /* UserModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,6 +413,7 @@
 				E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */,
 				E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */,
 				E2C4511428C095C900F9C473 /* MessengerRouter.swift in Sources */,
+				E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */,
 				E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */,
 				E2607AFA28B824D500188272 /* SignUpViewModel.swift in Sources */,
 				E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */,
