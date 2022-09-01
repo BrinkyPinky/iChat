@@ -60,7 +60,8 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
 
 extension SearchUserViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-
+//        FireBaseDatabaseManager.shared.getUsers(with: searchController.searchBar.text ?? "a")
+        FireBaseDatabaseManager.shared.search(name: searchController.searchBar.text ?? "a")
     }
 }
 

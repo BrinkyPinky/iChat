@@ -54,9 +54,10 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLw-kN-upY">
                                         <rect key="frame" x="0.0" y="262" width="286" height="50"/>
-                                        <color key="tintColor" systemColor="systemRedColor"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Sign up"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Sign up">
+                                            <color key="baseBackgroundColor" systemColor="systemRedColor"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="signUpButtonAction:" destination="tbd-Zw-LgW" eventType="touchUpInside" id="Mr6-0A-ZTp"/>
                                         </connections>
@@ -114,9 +115,10 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coc-Jg-A9R">
                                         <rect key="frame" x="0.0" y="70" width="286" height="50"/>
-                                        <color key="tintColor" systemColor="systemRedColor"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Send Email"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Send Email">
+                                            <color key="baseBackgroundColor" systemColor="systemRedColor"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="sendEmailButtonAction:" destination="nSO-T4-XOa" eventType="touchUpInside" id="HxN-yV-Zgp"/>
                                         </connections>
@@ -192,9 +194,10 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="CH6-AB-CSD"/>
                                                 </constraints>
-                                                <color key="tintColor" systemColor="systemRedColor"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Login"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Login">
+                                                    <color key="baseBackgroundColor" systemColor="systemRedColor"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="loginButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xCv-eN-8vE"/>
                                                 </connections>
