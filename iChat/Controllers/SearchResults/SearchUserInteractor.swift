@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SearchUserBusinessLogic {
-    func doSomething(request: SearchUser.Something.Request)
+    func getUsersData(request: SearchUser.Search.Request)
 }
 
 protocol SearchUserDataStore {
@@ -24,11 +24,13 @@ class SearchUserInteractor: SearchUserBusinessLogic, SearchUserDataStore {
     
     var presenter: SearchUserPresentationLogic?
     
-    // MARK: Do something
+    // MARK: Getting List Of Users From Database
     
-    func doSomething(request: SearchUser.Something.Request) {
-        
-        let response = SearchUser.Something.Response()
-        presenter?.presentSomething(response: response)
+    func getUsersData(request: SearchUser.Search.Request) {
+        FireBaseDatabaseManager.shared.searchUser(username: request.searchText ?? "") { [unowned self] users in
+            
+            let response = SearchUser.Search.Response(users: users)
+            presenter?.presentUsers(response: response)
+        }
     }
 }

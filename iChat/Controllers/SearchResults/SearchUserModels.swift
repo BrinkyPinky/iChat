@@ -12,17 +12,41 @@
 
 import UIKit
 
+typealias UserCellViewModel = SearchUser.Search.ViewModel.UserCellViewModel
+
+
+protocol CellIdentifiable {
+    var cellIdentifier: String { get }
+}
+
 enum SearchUser {
     // MARK: Use cases
     
-    enum Something {
+    enum Search {
         struct Request {
+            var searchText: String?
         }
         
         struct Response {
+            var users: [UserModel]
         }
         
         struct ViewModel {
+            struct UserCellViewModel: CellIdentifiable {
+                var cellIdentifier: String {
+                    "UserCell"
+                }
+                
+                let fullName: String
+                let username: String
+                
+                init(user: UserModel) {
+                    self.fullName = "\(user.name ?? "No name") \(user.surname ?? "No surname")"
+                    self.username = user.username ?? "No username"
+                }
+            }
+            
+            let rows: [CellIdentifiable]
         }
     }
 }

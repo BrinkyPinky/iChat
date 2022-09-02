@@ -11,4 +11,5 @@ struct UserModel: Decodable {
     var email: String?
     var name: String?
     var surname: String?
+    var username: String?
 }

@@ -17,13 +17,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZXm-go-Ygb">
-                                <rect key="frame" x="64" y="292" width="286" height="312"/>
+                                <rect key="frame" x="64" y="260" width="286" height="376"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Mih-Re-sVU">
-                                        <rect key="frame" x="0.0" y="0.0" width="286" height="242"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="286" height="306"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U9c-NJ-ctm">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6b4-AW-tSE">
                                                 <rect key="frame" x="0.0" y="0.0" width="286" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U9c-NJ-ctm">
+                                                <rect key="frame" x="0.0" y="64" width="286" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="3gd-qu-FPA"/>
                                                 </constraints>
@@ -31,29 +36,30 @@
                                                 <textInputTraits key="textInputTraits" textContentType="name"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xRe-Qr-nU8">
-                                                <rect key="frame" x="0.0" y="64" width="286" height="50"/>
+                                                <rect key="frame" x="0.0" y="128" width="286" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" textContentType="family-name"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZVf-Gx-WzN">
-                                                <rect key="frame" x="0.0" y="128" width="286" height="50"/>
+                                                <rect key="frame" x="0.0" y="192" width="286" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Khw-SC-mU5">
-                                                <rect key="frame" x="0.0" y="192" width="286" height="50"/>
+                                                <rect key="frame" x="0.0" y="256" width="286" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="ZVf-Gx-WzN" firstAttribute="height" secondItem="U9c-NJ-ctm" secondAttribute="height" id="7Ok-0H-ZOF"/>
+                                            <constraint firstItem="U9c-NJ-ctm" firstAttribute="height" secondItem="6b4-AW-tSE" secondAttribute="height" id="Ccc-TW-wt9"/>
                                             <constraint firstItem="xRe-Qr-nU8" firstAttribute="height" secondItem="U9c-NJ-ctm" secondAttribute="height" id="esx-DS-vsJ"/>
                                             <constraint firstItem="Khw-SC-mU5" firstAttribute="height" secondItem="U9c-NJ-ctm" secondAttribute="height" id="l0I-b1-pJ0"/>
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLw-kN-upY">
-                                        <rect key="frame" x="0.0" y="262" width="286" height="50"/>
+                                        <rect key="frame" x="0.0" y="326" width="286" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Sign up">
                                             <color key="baseBackgroundColor" systemColor="systemRedColor"/>
@@ -88,6 +94,7 @@
                         <outlet property="lastNameTextField" destination="xRe-Qr-nU8" id="AbP-vK-4RU"/>
                         <outlet property="passwordTextField" destination="Khw-SC-mU5" id="FmR-lz-2AH"/>
                         <outlet property="signUpButton" destination="MLw-kN-upY" id="UN1-Nu-G5o"/>
+                        <outlet property="usernameTextField" destination="6b4-AW-tSE" id="3ad-zv-ZJZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IK6-N5-uGe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -275,13 +282,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="gs0-OO-Mfi">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UserCell" id="gs0-OO-Mfi" customClass="UserTableViewCell" customModule="iChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gs0-OO-Mfi" id="5EE-bS-DGm">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="385.5" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="o5t-LX-RVc" kind="show" id="fKZ-L5-ZJh"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -311,6 +321,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="o5t-LX-RVc" kind="show" id="btY-K6-lDg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -329,6 +342,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVR-YH-Bt4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4591.304347826087" y="83.705357142857139"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="XEY-hX-EFJ">
+            <objects>
+                <viewController id="o5t-LX-RVc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EXj-AA-eN6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6pg-WW-DSz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Lcp-8K-GFG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yyl-kH-uBK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6094" y="84"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HlW-8q-IZm">
@@ -385,6 +414,9 @@
             <point key="canvasLocation" x="4591" y="-603"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="btY-K6-lDg"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

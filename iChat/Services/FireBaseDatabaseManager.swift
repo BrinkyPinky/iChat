@@ -12,62 +12,49 @@ class FireBaseDatabaseManager {
     
     var db = Database.database().reference()
     
-    func createUser(email: String, name: String, surname: String) {
+    func createUser(username: String, email: String, name: String, surname: String) {
         var correctEmail = email.replacingOccurrences(of: ".", with: "-")
         correctEmail = correctEmail.replacingOccurrences(of: "@", with: "-")
         
         db.child("Users").child(correctEmail).setValue([
+            "email": email,
             "name": name,
-            "surname" : surname
+            "surname": surname,
+            "username": username,
+            "usernameForSearch": username.lowercased()
         ])
     }
     
-    func getUsers(with email: String) {
-        var correctEmail = email.replacingOccurrences(of: ".", with: "-")
-        correctEmail = correctEmail.replacingOccurrences(of: "@", with: "-")
-        correctEmail = correctEmail.lowercased()
+    func searchUser(username: String, completion: @escaping ([UserModel]) -> Void) {
+        let usernameLowered = username.lowercased()
         
-        if correctEmail == "" {
-            correctEmail = "a"
-        }
-        //
-        //        db.child("Users").queryOrderedByValue().queryStarting(atValue: correctEmail).getData { error, data in
-        //            guard let data = data else {
-        //                print(error)
-        //                return
-        //            }
-        //            print(data)
-        //        }
-        
-        
-    }
-    
-    func search(name: String) {
         let databaseRef = db.child("Users")
-        let query = databaseRef.queryOrdered(byChild: "name").queryStarting(atValue: name).queryLimited(toFirst: 5)
-        
+        let query = databaseRef.queryOrdered(byChild: "usernameForSearch").queryStarting(atValue: usernameLowered).queryLimited(toFirst: 10)
+
         query.observeSingleEvent(of: .value) { (data) in
             guard data.exists() != false else { return }
             guard let value = data.value as? [String:[String:Any]] else { return }
-            
+
             var users: [UserModel] = []
-            
+
             value.forEach { (_, value: [String : Any]) in
-                let email = value["email"] as? String
-                let name = value["name"] as? String
-                let surname = value["surname"] as? String
-                
-                let user = UserModel(email: email, name: name, surname: surname)
+                let emailValue = value["email"] as? String
+                let nameValue = value["name"] as? String
+                let surnameValue = value["surname"] as? String
+                let usernameValue = value["username"] as? String
+                let usernameForSearchValue = value["usernameForSearch"] as? String
+
+                guard usernameForSearchValue?.contains(usernameLowered) == true else {return}
+
+                let user = UserModel(
+                    email: emailValue,
+                    name: nameValue,
+                    surname: surnameValue,
+                    username: usernameValue
+                )
                 users.append(user)
             }
-            
-            var sortedUsers: [UserModel] = []
-            
-            users.forEach { userModel in
-                if userModel.name?.contains(name) == true {
-                    sortedUsers.append(userModel)
-                }
-            }
+            completion(users)
         }
     }
 }

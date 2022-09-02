@@ -11,6 +11,7 @@
 		E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556F28B77F1E002EDF83 /* LoginViewController.swift */; };
 		E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220557C28B81FD6002EDF83 /* SignUpViewController.swift */; };
 		E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */; };
+		E248CB4A28C20C1A000B9108 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */; };
 		E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348528BB57AA0041CF4F /* LoginViewModel.swift */; };
 		E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */; };
 		E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2607AF628B821B600188272 /* FireBaseAuthManager.swift */; };
@@ -50,6 +51,7 @@
 		E220556F28B77F1E002EDF83 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E220557C28B81FD6002EDF83 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDataManager.swift; sourceTree = "<group>"; };
+		E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		E24B348528BB57AA0041CF4F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDatabaseManager.swift; sourceTree = "<group>"; };
 		E2607AF628B821B600188272 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
@@ -139,13 +141,21 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		E248CB4B28C20C20000B9108 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E2607AF828B821C300188272 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E2607AF628B821B600188272 /* FireBaseAuthManager.swift */,
 				E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */,
-				E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */,
+				E2607AF628B821B600188272 /* FireBaseAuthManager.swift */,
 				E2C8934728BF193F00FC6210 /* ValidationManager.swift */,
+				E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -221,6 +231,7 @@
 			children = (
 				E265932328BEFD190039C5B4 /* Controllers */,
 				E2607AF828B821C300188272 /* Services */,
+				E248CB4B28C20C20000B9108 /* Views */,
 				E2DE9E5328C15A2200147E51 /* Models */,
 				E265932128BEFC9D0039C5B4 /* Storyboard */,
 				E265932428BEFD4D0039C5B4 /* Application */,
@@ -247,9 +258,9 @@
 				E2C4513828C0CF7D00F9C473 /* SearchUserViewController.swift */,
 				E2C4513928C0CF7D00F9C473 /* SearchUserInteractor.swift */,
 				E2C4513428C0CF7D00F9C473 /* SearchUserPresenter.swift */,
-				E2C4513528C0CF7D00F9C473 /* SearchUserConfigurator.swift */,
 				E2C4513628C0CF7D00F9C473 /* SearchUserRouter.swift */,
 				E2C4513728C0CF7D00F9C473 /* SearchUserModels.swift */,
+				E2C4513528C0CF7D00F9C473 /* SearchUserConfigurator.swift */,
 			);
 			path = SearchResults;
 			sourceTree = "<group>";
@@ -411,6 +422,7 @@
 				E2C4513A28C0CF7D00F9C473 /* SearchUserPresenter.swift in Sources */,
 				E2C4513C28C0CF7D00F9C473 /* SearchUserRouter.swift in Sources */,
 				E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */,
+				E248CB4A28C20C1A000B9108 /* UserTableViewCell.swift in Sources */,
 				E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */,
 				E2C4511428C095C900F9C473 /* MessengerRouter.swift in Sources */,
 				E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */,

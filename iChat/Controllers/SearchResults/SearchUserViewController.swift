@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SearchUserDisplayLogic: AnyObject {
-    func displaySomething(viewModel: SearchUser.Something.ViewModel)
+    func presentUsers(viewModel: SearchUser.Search.ViewModel)
 }
 
 class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
@@ -23,14 +23,14 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
     var interactor: SearchUserBusinessLogic?
     var router: (NSObjectProtocol & SearchUserRoutingLogic & SearchUserDataPassing)?
     
+    private var rows: [CellIdentifiable] = []
+    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         SearchUserConfigurator.shared.configure(view: self)
-        
-        doSomething()
-        
+                
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
     }
@@ -46,36 +46,37 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
         }
     }
     
-    // MARK: Do something
+    // MARK: Provide text in search field to interactor
     
-    func doSomething() {
-        let request = SearchUser.Something.Request()
-        interactor?.doSomething(request: request)
+    func provideSearchText(with text: String?) {
+        let request = SearchUser.Search.Request(searchText: text)
+        interactor?.getUsersData(request: request)
     }
     
-    func displaySomething(viewModel: SearchUser.Something.ViewModel) {
-
+    func presentUsers(viewModel: SearchUser.Search.ViewModel) {
+        rows = viewModel.rows
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
 extension SearchUserViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-//        FireBaseDatabaseManager.shared.getUsers(with: searchController.searchBar.text ?? "a")
-        FireBaseDatabaseManager.shared.search(name: searchController.searchBar.text ?? "a")
+        provideSearchText(with: searchController.searchBar.text)
     }
 }
 
 extension SearchUserViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        rows.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
+        let cellViewModel = rows[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath) as! UserTableViewCell
         
-        var configurator = cell.defaultContentConfiguration()
-        configurator.text = "qew"
-        cell.contentConfiguration = configurator
+        cell.cellModel = cellViewModel
         
         return cell
     }

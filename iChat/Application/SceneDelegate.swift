@@ -14,37 +14,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let launchStoryboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
-        
         guard let windowScene = scene as? UIWindowScene else { return }
         
-        let rootViewController = launchStoryboard.instantiateViewController(withIdentifier: "launchScreen")
-    
-        let email = UserLoginDataManager.shared.email
-        let password = UserLoginDataManager.shared.password
-        
-        FireBaseAuthManager.shared.login(email: email ?? "", password: password ?? "") { [unowned self] error in
-            guard let _ = error else {
-                let rootViewController = storyboard.instantiateViewController(withIdentifier: "MessengerViewController") as! UINavigationController
-                makeTransition(root: rootViewController, windowScene: windowScene)
-                return
-            }
-            let rootViewController = storyboard.instantiateViewController(withIdentifier: "NavigationControllerLogin") as! UINavigationController
-            makeTransition(root: rootViewController, windowScene: windowScene)
+        guard UserLoginDataManager.shared.email != nil else {
+            showLoginViewController()
+            return
         }
+        
+        let rootViewController = storyboard.instantiateViewController(withIdentifier: "MessengerViewController") as! UINavigationController
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         
-        guard let _ = (scene as? UIWindowScene) else { return }
+        let email = UserLoginDataManager.shared.email
+        let password = UserLoginDataManager.shared.password
+        
+        FireBaseAuthManager.shared.login(email: email!, password: password!) { error in
+            guard let error = error else { return }
+            showLoginViewController()
+        }
+        
+        func showLoginViewController() {
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "NavigationControllerLogin") as! UINavigationController
+            window = UIWindow(windowScene: windowScene)
+            window?.rootViewController = rootViewController
+            window?.makeKeyAndVisible()
+        }
     }
     
-    private func makeTransition(root: UIViewController, windowScene: UIWindowScene) {
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = root
-        window?.makeKeyAndVisible()
-    }
+    //    private func makeTransition(root: UIViewController, windowScene: UIWindowScene) {
+    //        window = UIWindow(windowScene: windowScene)
+    //        window?.rootViewController = root
+    //        window?.makeKeyAndVisible()
+    //    }
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

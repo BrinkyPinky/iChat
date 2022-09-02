@@ -13,17 +13,23 @@
 import UIKit
 
 protocol SearchUserPresentationLogic {
-    func presentSomething(response: SearchUser.Something.Response)
+    func presentUsers(response: SearchUser.Search.Response)
 }
 
 class SearchUserPresenter: SearchUserPresentationLogic {
     
     weak var viewController: SearchUserDisplayLogic?
     
-    // MARK: Do something
+    // MARK: PresentUsers
     
-    func presentSomething(response: SearchUser.Something.Response) {
-        let viewModel = SearchUser.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentUsers(response: SearchUser.Search.Response) {
+        var rows: [UserCellViewModel] = []
+        
+        response.users.forEach { userModel in
+            rows.append(UserCellViewModel(user: userModel))
+        }
+        
+        let viewModel = SearchUser.Search.ViewModel(rows: rows)
+        viewController?.presentUsers(viewModel: viewModel)
     }
 }

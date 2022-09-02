@@ -8,6 +8,7 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    @IBOutlet var usernameTextField: UITextField!
     @IBOutlet private var firstNameTextField: UITextField!
     @IBOutlet private var lastNameTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
@@ -24,6 +25,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction private func signUpButtonAction(_ sender: Any) {
         viewModel.signUpButtonTapped(
+            username: usernameTextField.text,
             name: firstNameTextField.text,
             surname: lastNameTextField.text,
             email: emailTextField.text,
@@ -53,6 +55,7 @@ class SignUpViewController: UIViewController {
             viewModel = updatedViewModel
         }
         
+        usernameTextField.underlined()
         firstNameTextField.underlined()
         lastNameTextField.underlined()
         emailTextField.underlined()

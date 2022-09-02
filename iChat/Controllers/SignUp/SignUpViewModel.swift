@@ -13,7 +13,7 @@ protocol SignUpViewModelProtocol: AnyObject {
     var emailIsValid: Bool { get }
     var viewModelDidChanged: ((SignUpViewModelProtocol) -> Void)? { get set }
     init(view: SignUpViewController)
-    func signUpButtonTapped(name: String?, surname: String?, email: String?, password: String?)
+    func signUpButtonTapped(username: String?, name: String?, surname: String?, email: String?, password: String?)
     func emailTextFieldDidChanged(email: String?)
 }
 
@@ -37,7 +37,7 @@ class SignUpViewModel: SignUpViewModelProtocol {
         emailIsValid = ValidationManager.shared.checkMailValidation(email: email ?? "")
     }
     
-    func signUpButtonTapped(name: String?, surname: String?, email: String?, password: String?) {
+    func signUpButtonTapped(username: String?, name: String?, surname: String?, email: String?, password: String?) {
         let isNameValid = ValidationManager.shared.checkNameValidation(name: name ?? "")
         let isSurnameValid = ValidationManager.shared.checkNameValidation(name: surname ?? "")
         
@@ -46,7 +46,7 @@ class SignUpViewModel: SignUpViewModelProtocol {
                 
                 guard let error = error else {
                     view.showViewController(with: "MessengerViewController")
-                    FireBaseDatabaseManager.shared.createUser(email: email ?? "", name: name ?? "", surname: surname ?? "")
+                    FireBaseDatabaseManager.shared.createUser(username: username ?? "", email: email ?? "", name: name ?? "", surname: surname ?? "")
                     UserLoginDataManager.shared.saveData(email: email ?? "", password: password ?? "")
                     return
                 }
