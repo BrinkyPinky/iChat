@@ -9,26 +9,60 @@ import UIKit
 
 class ConversationViewController: UIViewController {
     
-    @IBOutlet var inputMessageToolBar: UIToolbar!
-    let messageTextView = UITextView()
-    let button = UIButton()
-    let stackViewForToolBar = UIStackView()
+    let someExampleArray = ["Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I"]
     
+    @IBOutlet private var conversationCollectionView: UICollectionView!
+    @IBOutlet private var inputMessageToolBar: UIToolbar!
+    private let messageTextView = UITextView()
+    private let sendMessageButton = UIButton()
+    private let stackViewForToolBar = UIStackView()
+    
+    
+    // MARK: View LifeCycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupToolBar()
+        setupNavigationBarAndCollectionView()
+        
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onKeyboardWillChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupToolBar()
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
+}
+
+extension ConversationViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    @objc func onKeyboardWillChangeFrame(_ notification: NSNotification) {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        someExampleArray.count
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! ConversationCollectionViewCell
+        
+        cell.text = someExampleArray[indexPath.row]
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        0
+    }
+}
+
+// MARK: Keyboard will change frame
+extension ConversationViewController {
+    @objc private func onKeyboardWillChangeFrame(_ notification: NSNotification) {
         guard let userInfo = notification.userInfo else {return}
         guard let _ = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         
@@ -60,24 +94,7 @@ class ConversationViewController: UIViewController {
 }
 
 
-extension ConversationViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        20
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-        
-        var configurator = cell.defaultContentConfiguration()
-        configurator.text = "row: \(indexPath.row)"
-        cell.contentConfiguration = configurator
-        
-        return cell
-    }
-    
-}
-
-// MARK: TextFieldDidChange
+//MARK: TextFieldDidChange
 
 extension ConversationViewController: UITextViewDelegate {
     
@@ -116,7 +133,7 @@ extension ConversationViewController: UITextViewDelegate {
 // MARK: Setup Input Tool Bar
 
 extension ConversationViewController {
-    func setupToolBar() {
+    private func setupToolBar() {
         messageTextView.font = UIFont.systemFont(ofSize: 16)
         messageTextView.backgroundColor = .quaternarySystemFill
         messageTextView.layer.cornerRadius = 18
@@ -125,20 +142,17 @@ extension ConversationViewController {
         messageTextView.text = "Message"
         messageTextView.textColor = .lightGray
         
-        
-        
-        
-        button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
-        button.contentMode = .scaleAspectFit
-        button.contentHorizontalAlignment = .fill
-        button.contentVerticalAlignment = .fill
+        sendMessageButton.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
+        sendMessageButton.contentMode = .scaleAspectFit
+        sendMessageButton.contentHorizontalAlignment = .fill
+        sendMessageButton.contentVerticalAlignment = .fill
         
         stackViewForToolBar.axis = NSLayoutConstraint.Axis.horizontal
         stackViewForToolBar.distribution  = UIStackView.Distribution.equalSpacing
         stackViewForToolBar.alignment = UIStackView.Alignment.bottom
         stackViewForToolBar.spacing = 8
         stackViewForToolBar.addArrangedSubview(messageTextView)
-        stackViewForToolBar.addArrangedSubview(button)
+        stackViewForToolBar.addArrangedSubview(sendMessageButton)
         
         let stackViewToolBarItem = UIBarButtonItem(customView: stackViewForToolBar)
         inputMessageToolBar.items = [stackViewToolBarItem]
@@ -147,13 +161,28 @@ extension ConversationViewController {
         let size = CGSize(width: messageTextView.frame.size.width, height: .infinity)
         let estimatedSize = messageTextView.sizeThatFits(size)
         [
-            button.widthAnchor.constraint(equalToConstant: 36),
-            button.heightAnchor.constraint(equalToConstant: 36),
+            sendMessageButton.widthAnchor.constraint(equalToConstant: 36),
+            sendMessageButton.heightAnchor.constraint(equalToConstant: 36),
             messageTextView.heightAnchor.constraint(equalToConstant: estimatedSize.height),
-            messageTextView.trailingAnchor.constraint(equalTo: button.leadingAnchor, constant: -8),
+            messageTextView.trailingAnchor.constraint(equalTo: sendMessageButton.leadingAnchor, constant: -8),
             inputMessageToolBar.heightAnchor.constraint(equalToConstant: estimatedSize.height + 13)
         ].forEach({ $0.isActive = true })
+    }
+}
+
+// MARK: Nav Bar and Collection View Setup
+extension ConversationViewController {
+    private func setupNavigationBarAndCollectionView() {
+        conversationCollectionView.clipsToBounds = true
+        conversationCollectionView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        conversationCollectionView.layer.cornerRadius = 50
         
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.backgroundColor = UIColor(red: 234/255, green: 239/255, blue: 252/255, alpha: 1)
+        navigationBarAppearance.shadowColor = .clear
         
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        navigationController?.navigationBar.compactAppearance = navigationBarAppearance
     }
 }
