@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let password = UserLoginDataManager.shared.password
         
         FireBaseAuthManager.shared.login(email: email!, password: password!) { error in
-            guard let error = error else { return }
+            guard let _ = error else { return }
             showLoginViewController()
         }
         
