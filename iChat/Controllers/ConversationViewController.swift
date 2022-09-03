@@ -8,60 +8,63 @@
 import UIKit
 
 class ConversationViewController: UIViewController {
+    
     @IBOutlet var inputMessageToolBar: UIToolbar!
+    let messageTextView = UITextView()
+    let button = UIButton()
+    let stackViewForToolBar = UIStackView()
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onKeyboardWillChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupUI()
+        setupToolBar()
     }
     
-    func setupUI() {
-        let messageTextView = UITextView()
-        messageTextView.translatesAutoresizingMaskIntoConstraints = false
-        messageTextView.font = UIFont.systemFont(ofSize: 16)
-        messageTextView.backgroundColor = .quaternarySystemFill
-        messageTextView.layer.cornerRadius = 18
-        messageTextView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        messageTextView.delegate = self
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func onKeyboardWillChangeFrame(_ notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let _ = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
-        button.contentMode = .scaleAspectFit
-        button.contentHorizontalAlignment = .fill
-        button.contentVerticalAlignment = .fill
-       
-
+        guard
+            let userInfo = notification.userInfo,
+            let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else {
+            return
+        }
         
-        button.translatesAutoresizingMaskIntoConstraints = false
+        let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
+        let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
+        let intersection = safeAreaFrame.intersection(keyboardFrameInView)
         
-        let stackView = UIStackView()
-        stackView.axis = NSLayoutConstraint.Axis.horizontal
-        stackView.distribution  = UIStackView.Distribution.equalSpacing
-        stackView.alignment = UIStackView.Alignment.bottom
-        stackView.spacing = 8
-
-        stackView.addArrangedSubview(messageTextView)
-        stackView.addArrangedSubview(button)
+        let keyboardAnimationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey]
+        let animationDuration: TimeInterval = (keyboardAnimationDuration as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+        let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
         
-        let wok = UIBarButtonItem(customView: stackView)
-                
-        inputMessageToolBar.items = [wok]
-        
-        [
-            button.widthAnchor.constraint(equalToConstant: 36),
-            button.heightAnchor.constraint(equalToConstant: 36),
-            messageTextView.heightAnchor.constraint(equalToConstant: 36),
-            messageTextView.widthAnchor.constraint(equalToConstant: 600)
-        ].forEach({ $0.isActive = true })
+        UIView.animate(withDuration: animationDuration,
+                       delay: 0,
+                       options: animationCurve,
+                       animations: {
+            self.additionalSafeAreaInsets.bottom = intersection.height
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 
 
 extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        20
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
         
@@ -74,7 +77,17 @@ extension ConversationViewController: UITableViewDataSource {
     
 }
 
+// MARK: TextFieldDidChange
+
 extension ConversationViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .lightGray {
+            textView.text = ""
+            textView.textColor = .label
+        }
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         let size = CGSize(width: textView.frame.size.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
@@ -97,13 +110,50 @@ extension ConversationViewController: UITextViewDelegate {
                 constraint.constant = estimatedSize.height + 13
             }
         }
-        adjustContentSize(tv: textView)
-
     }
-    
-    func adjustContentSize(tv: UITextView){
-        let deadSpace = tv.bounds.size.height - tv.contentSize.height
-        let inset = max(0, deadSpace/2.0)
-        tv.contentInset = UIEdgeInsets(top: inset, left: tv.contentInset.left, bottom: inset, right: tv.contentInset.right)
+}
+
+// MARK: Setup Input Tool Bar
+
+extension ConversationViewController {
+    func setupToolBar() {
+        messageTextView.font = UIFont.systemFont(ofSize: 16)
+        messageTextView.backgroundColor = .quaternarySystemFill
+        messageTextView.layer.cornerRadius = 18
+        messageTextView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        messageTextView.delegate = self
+        messageTextView.text = "Message"
+        messageTextView.textColor = .lightGray
+        
+        
+        
+        
+        button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        
+        stackViewForToolBar.axis = NSLayoutConstraint.Axis.horizontal
+        stackViewForToolBar.distribution  = UIStackView.Distribution.equalSpacing
+        stackViewForToolBar.alignment = UIStackView.Alignment.bottom
+        stackViewForToolBar.spacing = 8
+        stackViewForToolBar.addArrangedSubview(messageTextView)
+        stackViewForToolBar.addArrangedSubview(button)
+        
+        let stackViewToolBarItem = UIBarButtonItem(customView: stackViewForToolBar)
+        inputMessageToolBar.items = [stackViewToolBarItem]
+        
+        
+        let size = CGSize(width: messageTextView.frame.size.width, height: .infinity)
+        let estimatedSize = messageTextView.sizeThatFits(size)
+        [
+            button.widthAnchor.constraint(equalToConstant: 36),
+            button.heightAnchor.constraint(equalToConstant: 36),
+            messageTextView.heightAnchor.constraint(equalToConstant: estimatedSize.height),
+            messageTextView.trailingAnchor.constraint(equalTo: button.leadingAnchor, constant: -8),
+            inputMessageToolBar.heightAnchor.constraint(equalToConstant: estimatedSize.height + 13)
+        ].forEach({ $0.isActive = true })
+        
+        
     }
 }
