@@ -44,7 +44,6 @@ extension ConversationViewController {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MessageHeader", for: indexPath) as! ConversationCollectionHeaderView
             
-//            headerView.backgroundColor = UIColor.blue;
             return headerView
             
         default:
@@ -69,8 +68,24 @@ extension ConversationViewController {
         return cell
     }
     
+//    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        
+////        let indexPath = IndexPath(row: 0, section: indexPath.section)
+//        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! ConversationCollectionHeaderView
+//
+//        headerView.allCorners()
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+//
+////        let indexPath = IndexPath(row: 0, section: section)
+//        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! ConversationCollectionHeaderView
+//
+////        headerView.neededCorners()
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-
+        
         // Get the view for the first header
         let indexPath = IndexPath(row: 0, section: section)
         let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! ConversationCollectionHeaderView
@@ -82,9 +97,7 @@ extension ConversationViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let cell = self.collectionView(collectionView, cellForItemAt: indexPath) as! ConversationCollectionViewCell
-        
-        collectionView.scrollTo
-        
+                
         return cell.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -122,6 +135,11 @@ extension ConversationViewController {
             self.additionalSafeAreaInsets.bottom = intersection.height
             self.view.layoutIfNeeded()
         }, completion: nil)
+        
+        self.additionalSafeAreaInsets.bottom = intersection.height
+
+        let currentScrollViewPosition = conversationCollectionView.contentOffset
+        self.conversationCollectionView.contentOffset = CGPoint(x: 0, y: currentScrollViewPosition.y + intersection.height)
     }
 }
 

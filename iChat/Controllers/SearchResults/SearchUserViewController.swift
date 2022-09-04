@@ -25,12 +25,36 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
     
     private var rows: [CellIdentifiable] = []
     
+    // MARK: Object lifecycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    func setup() {
+        let viewController = self
+        let interactor = SearchUserInteractor()
+        let presenter = SearchUserPresenter()
+        let router = SearchUserRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SearchUserConfigurator.shared.configure(view: self)
-                
+        setup()
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
     }
@@ -51,6 +75,12 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
     func provideSearchText(with text: String?) {
         let request = SearchUser.Search.Request(searchText: text)
         interactor?.getUsersData(request: request)
+    }
+    
+    func provideSelectedUser(with user: CellIdentifiable) {
+        let request = SearchUser.Selected.Request(selectedUser: user)
+        interactor?.getSelectedUser(request: request)
+        router?.routeToChats(segue: nil)
     }
     
     func presentUsers(viewModel: SearchUser.Search.ViewModel) {
@@ -79,5 +109,9 @@ extension SearchUserViewController {
         cell.cellModel = cellViewModel
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        provideSelectedUser(with: rows[indexPath.row])
     }
 }

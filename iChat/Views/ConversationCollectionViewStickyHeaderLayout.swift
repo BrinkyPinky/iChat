@@ -61,7 +61,7 @@ class ConversationCollectionViewStickyHeaderLayout: UICollectionViewFlowLayout {
         guard attributes.indexPath.section == collectionView.numberOfSections - 1 else { return }
         
         if collectionView.contentOffset.y + collectionView.bounds.size.height > collectionView.contentSize.height {
-            attributes.frame.origin.y = collectionView.contentOffset.y + collectionView.bounds.size.height - attributes.frame.size.height
+            attributes.frame.origin.y = collectionView.contentOffset.y + collectionView.bounds.size.height - attributes.frame.size.height + 100
         }
     }
     

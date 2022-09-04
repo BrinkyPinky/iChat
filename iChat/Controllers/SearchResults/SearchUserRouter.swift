@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol SearchUserRoutingLogic {
-
+    func routeToChats(segue: UIStoryboardSegue?)
 }
 
 protocol SearchUserDataPassing {
@@ -27,29 +27,29 @@ class SearchUserRouter: NSObject, SearchUserRoutingLogic, SearchUserDataPassing 
     
     // MARK: Routing
     
-    //func routeToSomewhere(segue: UIStoryboardSegue?) {
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeToChats(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! ChatsViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToChats(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "ChatsViewController") as! ChatsViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToChats(source: dataStore!, destination: &destinationDS)
+            navigateToChats(source: viewController!, destination: destinationVC)
+        }
+    }
     
     // MARK: Navigation
     
-    //func navigateToSomewhere(source: SearchUserViewController, destination: SomewhereViewController) {
-    //  source.show(destination, sender: nil)
-    //}
+    func navigateToChats(source: SearchUserViewController, destination: ChatsViewController) {
+        source.navigationController?.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: Passing data
     
-    //func passDataToSomewhere(source: SearchUserDataStore, destination: inout SomewhereDataStore) {
-    //  destination.name = source.name
-    //}
+    func passDataToChats(source: SearchUserDataStore, destination: inout ChatsDataStore) {
+                destination.selectedUserInSearchUserView = source.selectedUser
+    }
 }

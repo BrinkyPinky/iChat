@@ -14,15 +14,18 @@ import UIKit
 
 protocol SearchUserBusinessLogic {
     func getUsersData(request: SearchUser.Search.Request)
+    func getSelectedUser(request: SearchUser.Selected.Request)
 }
 
 protocol SearchUserDataStore {
-
+    var selectedUser: CellIdentifiable? { get }
 }
 
 class SearchUserInteractor: SearchUserBusinessLogic, SearchUserDataStore {
     
     var presenter: SearchUserPresentationLogic?
+    
+    var selectedUser: CellIdentifiable?
     
     // MARK: Getting List Of Users From Database
     
@@ -32,5 +35,9 @@ class SearchUserInteractor: SearchUserBusinessLogic, SearchUserDataStore {
             let response = SearchUser.Search.Response(users: users)
             presenter?.presentUsers(response: response)
         }
+    }
+    
+    func getSelectedUser(request: SearchUser.Selected.Request) {
+        selectedUser = request.selectedUser
     }
 }

@@ -49,4 +49,10 @@ enum SearchUser {
             let rows: [CellIdentifiable]
         }
     }
+    
+    enum Selected {
+        struct Request {
+            var selectedUser: CellIdentifiable
+        }
+    }
 }

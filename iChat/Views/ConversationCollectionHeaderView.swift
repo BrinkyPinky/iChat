@@ -22,7 +22,7 @@ class ConversationCollectionHeaderView: UICollectionReusableView {
     
     override func layoutSubviews() {
         dateLabel.text = "Yesterday"
-        
+    
         backgroundViewDateLabel.clipsToBounds = true
         backgroundViewDateLabel.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         backgroundViewDateLabel.layer.cornerRadius = 15

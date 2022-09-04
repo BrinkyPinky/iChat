@@ -10,8 +10,12 @@
 		E200040A28BA1108006FA2DF /* Extension + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200040928BA1108006FA2DF /* Extension + UITextField.swift */; };
 		E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556F28B77F1E002EDF83 /* LoginViewController.swift */; };
 		E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220557C28B81FD6002EDF83 /* SignUpViewController.swift */; };
+		E229B95228C55EA300F795B7 /* ChatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B94C28C55EA300F795B7 /* ChatsPresenter.swift */; };
+		E229B95428C55EA300F795B7 /* ChatsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B94E28C55EA300F795B7 /* ChatsRouter.swift */; };
+		E229B95528C55EA300F795B7 /* ChatsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B94F28C55EA300F795B7 /* ChatsModels.swift */; };
+		E229B95628C55EA300F795B7 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B95028C55EA300F795B7 /* ChatsViewController.swift */; };
+		E229B95728C55EA300F795B7 /* ChatsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B95128C55EA300F795B7 /* ChatsInteractor.swift */; };
 		E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */; };
-		E22C242028C288BC00CEB695 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = E22C241F28C288BC00CEB695 /* MessageKit */; };
 		E22C242228C28A4B00CEB695 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22C242128C28A4B00CEB695 /* ConversationViewController.swift */; };
 		E248CB4A28C20C1A000B9108 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */; };
 		E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348528BB57AA0041CF4F /* LoginViewModel.swift */; };
@@ -28,14 +32,7 @@
 		E2A1044528C49DC600890ED7 /* ConversationCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */; };
 		E2A1044928C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */; };
 		E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCell.swift */; };
-		E2C4511228C095C900F9C473 /* MessengerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4510C28C095C900F9C473 /* MessengerPresenter.swift */; };
-		E2C4511328C095C900F9C473 /* MessengerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4510D28C095C900F9C473 /* MessengerConfigurator.swift */; };
-		E2C4511428C095C900F9C473 /* MessengerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4510E28C095C900F9C473 /* MessengerRouter.swift */; };
-		E2C4511528C095C900F9C473 /* MessengerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4510F28C095C900F9C473 /* MessengerModels.swift */; };
-		E2C4511628C095C900F9C473 /* MessengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4511028C095C900F9C473 /* MessengerViewController.swift */; };
-		E2C4511728C095C900F9C473 /* MessengerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4511128C095C900F9C473 /* MessengerInteractor.swift */; };
 		E2C4513A28C0CF7D00F9C473 /* SearchUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4513428C0CF7D00F9C473 /* SearchUserPresenter.swift */; };
-		E2C4513B28C0CF7D00F9C473 /* SearchUserConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4513528C0CF7D00F9C473 /* SearchUserConfigurator.swift */; };
 		E2C4513C28C0CF7D00F9C473 /* SearchUserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4513628C0CF7D00F9C473 /* SearchUserRouter.swift */; };
 		E2C4513D28C0CF7D00F9C473 /* SearchUserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4513728C0CF7D00F9C473 /* SearchUserModels.swift */; };
 		E2C4513E28C0CF7D00F9C473 /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4513828C0CF7D00F9C473 /* SearchUserViewController.swift */; };
@@ -55,6 +52,11 @@
 		E200040928BA1108006FA2DF /* Extension + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITextField.swift"; sourceTree = "<group>"; };
 		E220556F28B77F1E002EDF83 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E220557C28B81FD6002EDF83 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		E229B94C28C55EA300F795B7 /* ChatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsPresenter.swift; sourceTree = "<group>"; };
+		E229B94E28C55EA300F795B7 /* ChatsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsRouter.swift; sourceTree = "<group>"; };
+		E229B94F28C55EA300F795B7 /* ChatsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsModels.swift; sourceTree = "<group>"; };
+		E229B95028C55EA300F795B7 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		E229B95128C55EA300F795B7 /* ChatsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsInteractor.swift; sourceTree = "<group>"; };
 		E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDataManager.swift; sourceTree = "<group>"; };
 		E22C242128C28A4B00CEB695 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -74,14 +76,7 @@
 		E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionHeaderView.swift; sourceTree = "<group>"; };
 		E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewStickyHeaderLayout.swift; sourceTree = "<group>"; };
 		E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationCollectionViewCell.swift; path = iChat/Views/ConversationCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
-		E2C4510C28C095C900F9C473 /* MessengerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerPresenter.swift; sourceTree = "<group>"; };
-		E2C4510D28C095C900F9C473 /* MessengerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerConfigurator.swift; sourceTree = "<group>"; };
-		E2C4510E28C095C900F9C473 /* MessengerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerRouter.swift; sourceTree = "<group>"; };
-		E2C4510F28C095C900F9C473 /* MessengerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerModels.swift; sourceTree = "<group>"; };
-		E2C4511028C095C900F9C473 /* MessengerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerViewController.swift; sourceTree = "<group>"; };
-		E2C4511128C095C900F9C473 /* MessengerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerInteractor.swift; sourceTree = "<group>"; };
 		E2C4513428C0CF7D00F9C473 /* SearchUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserPresenter.swift; sourceTree = "<group>"; };
-		E2C4513528C0CF7D00F9C473 /* SearchUserConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserConfigurator.swift; sourceTree = "<group>"; };
 		E2C4513628C0CF7D00F9C473 /* SearchUserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserRouter.swift; sourceTree = "<group>"; };
 		E2C4513728C0CF7D00F9C473 /* SearchUserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserModels.swift; sourceTree = "<group>"; };
 		E2C4513828C0CF7D00F9C473 /* SearchUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +94,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3D39B164F724FE238CA40FD /* Pods_iChat.framework in Frameworks */,
-				E22C242028C288BC00CEB695 /* MessageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,8 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				E2C8936628BF814B00FC6210 /* SearchResults */,
-				E2CFB51228BB7CFF00080A2F /* Messenger */,
-				E22C242128C28A4B00CEB695 /* ConversationViewController.swift */,
+				E2CFB51228BB7CFF00080A2F /* Chats */,
+				E2A1044A28C538C600890ED7 /* Conversation */,
 				E2C450F328BFEF5A00F9C473 /* Logining */,
 			);
 			path = Controllers;
@@ -255,6 +249,14 @@
 			path = iChat;
 			sourceTree = "<group>";
 		};
+		E2A1044A28C538C600890ED7 /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				E22C242128C28A4B00CEB695 /* ConversationViewController.swift */,
+			);
+			path = Conversation;
+			sourceTree = "<group>";
+		};
 		E2C450F328BFEF5A00F9C473 /* Logining */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,22 +276,20 @@
 				E2C4513428C0CF7D00F9C473 /* SearchUserPresenter.swift */,
 				E2C4513628C0CF7D00F9C473 /* SearchUserRouter.swift */,
 				E2C4513728C0CF7D00F9C473 /* SearchUserModels.swift */,
-				E2C4513528C0CF7D00F9C473 /* SearchUserConfigurator.swift */,
 			);
 			path = SearchResults;
 			sourceTree = "<group>";
 		};
-		E2CFB51228BB7CFF00080A2F /* Messenger */ = {
+		E2CFB51228BB7CFF00080A2F /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				E2C4511028C095C900F9C473 /* MessengerViewController.swift */,
-				E2C4511128C095C900F9C473 /* MessengerInteractor.swift */,
-				E2C4510C28C095C900F9C473 /* MessengerPresenter.swift */,
-				E2C4510E28C095C900F9C473 /* MessengerRouter.swift */,
-				E2C4510F28C095C900F9C473 /* MessengerModels.swift */,
-				E2C4510D28C095C900F9C473 /* MessengerConfigurator.swift */,
+				E229B95028C55EA300F795B7 /* ChatsViewController.swift */,
+				E229B95128C55EA300F795B7 /* ChatsInteractor.swift */,
+				E229B94C28C55EA300F795B7 /* ChatsPresenter.swift */,
+				E229B94E28C55EA300F795B7 /* ChatsRouter.swift */,
+				E229B94F28C55EA300F795B7 /* ChatsModels.swift */,
 			);
-			path = Messenger;
+			path = Chats;
 			sourceTree = "<group>";
 		};
 		E2DE9E5328C15A2200147E51 /* Models */ = {
@@ -319,7 +319,6 @@
 			);
 			name = iChat;
 			packageProductDependencies = (
-				E22C241F28C288BC00CEB695 /* MessageKit */,
 			);
 			productName = iChat;
 			productReference = E28F050028B777720096E22F /* iChat.app */;
@@ -350,7 +349,6 @@
 			);
 			mainGroup = E28F04F728B777720096E22F;
 			packageReferences = (
-				E22C241E28C288BC00CEB695 /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
 			productRefGroup = E28F050128B777720096E22F /* Products */;
 			projectDirPath = "";
@@ -422,6 +420,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E229B95528C55EA300F795B7 /* ChatsModels.swift in Sources */,
+				E229B95228C55EA300F795B7 /* ChatsPresenter.swift in Sources */,
 				E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */,
 				E2C4513E28C0CF7D00F9C473 /* SearchUserViewController.swift in Sources */,
 				E22C242228C28A4B00CEB695 /* ConversationViewController.swift in Sources */,
@@ -429,32 +429,28 @@
 				E28F050428B777720096E22F /* AppDelegate.swift in Sources */,
 				E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCell.swift in Sources */,
 				E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */,
-				E2C4511628C095C900F9C473 /* MessengerViewController.swift in Sources */,
 				E2C4513F28C0CF7D00F9C473 /* SearchUserInteractor.swift in Sources */,
+				E229B95728C55EA300F795B7 /* ChatsInteractor.swift in Sources */,
 				E2A1044928C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift in Sources */,
-				E2C4511228C095C900F9C473 /* MessengerPresenter.swift in Sources */,
 				E2C8934828BF193F00FC6210 /* ValidationManager.swift in Sources */,
-				E2C4511728C095C900F9C473 /* MessengerInteractor.swift in Sources */,
 				E2A1044528C49DC600890ED7 /* ConversationCollectionHeaderView.swift in Sources */,
 				E200040A28BA1108006FA2DF /* Extension + UITextField.swift in Sources */,
-				E2C4511528C095C900F9C473 /* MessengerModels.swift in Sources */,
 				E2C8934428BF191B00FC6210 /* ForgotPasswordViewController.swift in Sources */,
 				E28F050628B777720096E22F /* SceneDelegate.swift in Sources */,
 				E265932728BEFF370039C5B4 /* Extension + UIViewController.swift in Sources */,
 				E2C4513D28C0CF7D00F9C473 /* SearchUserModels.swift in Sources */,
-				E2C4513B28C0CF7D00F9C473 /* SearchUserConfigurator.swift in Sources */,
 				E2C4513A28C0CF7D00F9C473 /* SearchUserPresenter.swift in Sources */,
 				E2C4513C28C0CF7D00F9C473 /* SearchUserRouter.swift in Sources */,
 				E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */,
 				E248CB4A28C20C1A000B9108 /* UserTableViewCell.swift in Sources */,
 				E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */,
-				E2C4511428C095C900F9C473 /* MessengerRouter.swift in Sources */,
+				E229B95428C55EA300F795B7 /* ChatsRouter.swift in Sources */,
 				E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */,
 				E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */,
 				E2607AFA28B824D500188272 /* SignUpViewModel.swift in Sources */,
 				E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */,
-				E2C4511328C095C900F9C473 /* MessengerConfigurator.swift in Sources */,
 				E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */,
+				E229B95628C55EA300F795B7 /* ChatsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +527,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -586,7 +582,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -680,25 +676,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		E22C241E28C288BC00CEB695 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MessageKit/MessageKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E22C241F28C288BC00CEB695 /* MessageKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E22C241E28C288BC00CEB695 /* XCRemoteSwiftPackageReference "MessageKit" */;
-			productName = MessageKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E28F050C28B777720096E22F /* iChat.xcdatamodeld */ = {
