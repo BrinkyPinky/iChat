@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController {
+class ConversationViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    let someExampleArray = ["Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I"]
+    let someExampleArray = ["Privet kak dela epgta?ewqjeiqwjeiqwjieqwjieqwi wqjie iqw ij ieqwj qw ji jqwi", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I"]
     
     @IBOutlet private var conversationCollectionView: UICollectionView!
     @IBOutlet private var inputMessageToolBar: UIToolbar!
@@ -24,11 +24,6 @@ class ConversationViewController: UIViewController {
         super.viewDidLoad()
         setupToolBar()
         setupNavigationBarAndCollectionView()
-        
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +35,26 @@ class ConversationViewController: UIViewController {
     }
 }
 
-extension ConversationViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension ConversationViewController {
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MessageHeader", for: indexPath) as! ConversationCollectionHeaderView
+            
+//            headerView.backgroundColor = UIColor.blue;
+            return headerView
+            
+        default:
+            fatalError("Unexpected element kind")
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         someExampleArray.count
@@ -55,6 +69,24 @@ extension ConversationViewController: UICollectionViewDataSource, UICollectionVi
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+
+        // Get the view for the first header
+        let indexPath = IndexPath(row: 0, section: section)
+        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as! ConversationCollectionHeaderView
+
+        // Use this view to calculate the optimal size based on the collection view's width
+        return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let cell = self.collectionView(collectionView, cellForItemAt: indexPath) as! ConversationCollectionViewCell
+        
+        collectionView.scrollTo
+        
+        return cell.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         0
     }
@@ -72,7 +104,7 @@ extension ConversationViewController {
         else {
             return
         }
-        
+                
         let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
         let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
         let intersection = safeAreaFrame.intersection(keyboardFrameInView)

@@ -33,6 +33,8 @@ class ConversationCollectionViewCell: UICollectionViewCell {
         viewBackgroundTheMessage.clipsToBounds = true
         viewBackgroundTheMessage.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMinXMaxYCorner]
         viewBackgroundTheMessage.layer.cornerRadius = 15
+        
+        incomingMessage()
     }
     
     func incomingMessage() {

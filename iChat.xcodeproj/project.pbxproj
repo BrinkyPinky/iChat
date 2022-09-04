@@ -25,6 +25,8 @@
 		E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E28F050C28B777720096E22F /* iChat.xcdatamodeld */; };
 		E28F051028B777730096E22F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E28F050F28B777730096E22F /* Assets.xcassets */; };
 		E28F051328B777730096E22F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28F051128B777730096E22F /* LaunchScreen.storyboard */; };
+		E2A1044528C49DC600890ED7 /* ConversationCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */; };
+		E2A1044928C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */; };
 		E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCell.swift */; };
 		E2C4511228C095C900F9C473 /* MessengerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4510C28C095C900F9C473 /* MessengerPresenter.swift */; };
 		E2C4511328C095C900F9C473 /* MessengerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4510D28C095C900F9C473 /* MessengerConfigurator.swift */; };
@@ -69,6 +71,8 @@
 		E28F050F28B777730096E22F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E28F051228B777730096E22F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E28F051428B777730096E22F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionHeaderView.swift; sourceTree = "<group>"; };
+		E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewStickyHeaderLayout.swift; sourceTree = "<group>"; };
 		E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationCollectionViewCell.swift; path = iChat/Views/ConversationCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		E2C4510C28C095C900F9C473 /* MessengerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerPresenter.swift; sourceTree = "<group>"; };
 		E2C4510D28C095C900F9C473 /* MessengerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerConfigurator.swift; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 			children = (
 				E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */,
 				E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCell.swift */,
+				E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */,
+				E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -425,9 +431,11 @@
 				E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */,
 				E2C4511628C095C900F9C473 /* MessengerViewController.swift in Sources */,
 				E2C4513F28C0CF7D00F9C473 /* SearchUserInteractor.swift in Sources */,
+				E2A1044928C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift in Sources */,
 				E2C4511228C095C900F9C473 /* MessengerPresenter.swift in Sources */,
 				E2C8934828BF193F00FC6210 /* ValidationManager.swift in Sources */,
 				E2C4511728C095C900F9C473 /* MessengerInteractor.swift in Sources */,
+				E2A1044528C49DC600890ED7 /* ConversationCollectionHeaderView.swift in Sources */,
 				E200040A28BA1108006FA2DF /* Extension + UITextField.swift in Sources */,
 				E2C4511528C095C900F9C473 /* MessengerModels.swift in Sources */,
 				E2C8934428BF191B00FC6210 /* ForgotPasswordViewController.swift in Sources */,
