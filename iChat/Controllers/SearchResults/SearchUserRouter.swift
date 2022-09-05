@@ -50,6 +50,6 @@ class SearchUserRouter: NSObject, SearchUserRoutingLogic, SearchUserDataPassing 
     // MARK: Passing data
     
     func passDataToChats(source: SearchUserDataStore, destination: inout ChatsDataStore) {
-                destination.selectedUserInSearchUserView = source.selectedUser
+        destination.selectedUserInSearchUserView = (source.selectedUser as! UserCellViewModel)
     }
 }

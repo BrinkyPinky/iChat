@@ -1,5 +1,5 @@
 //
-//  ChatsTableModels.swift
+//  ConversationModels.swift
 //  iChat
 //
 //  Created by Егор Шилов on 05.09.2022.
@@ -12,7 +12,7 @@
 
 import UIKit
 
-enum Chats {
+enum Conversation {
     // MARK: Use cases
     
     enum Something {
@@ -25,13 +25,4 @@ enum Chats {
         struct ViewModel {
         }
     }
-    
-//    enum SearchUser {
-//        struct Response {
-//            
-//        }
-//        
-//        struct ViewModel {
-//        }
-//    }
 }

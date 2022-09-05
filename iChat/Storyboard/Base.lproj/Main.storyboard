@@ -327,26 +327,31 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Chats" id="Pjk-Hw-1FT">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Why-Ow-w52">
-                            <connections>
-                                <segue destination="aBx-af-yBy" kind="show" id="cci-IG-H42"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="SXm-gA-7V7">
-                            <connections>
-                                <segue destination="4Z9-qJ-6Jl" kind="presentation" identifier="" id="KIv-AT-Dvp"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="compose" id="jaP-4g-7fp">
+                                <connections>
+                                    <segue destination="4Z9-qJ-6Jl" kind="presentation" id="TRP-07-Yvb"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="sgz-Pc-caK">
+                                <connections>
+                                    <segue destination="aBx-af-yBy" kind="show" id="W5K-Xj-gaP"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <segue destination="aBx-af-yBy" kind="show" identifier="Conversation" id="tvl-8t-TKD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVR-YH-Bt4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5360" y="83"/>
+            <point key="canvasLocation" x="5360" y="82"/>
         </scene>
         <!--User Username-->
         <scene sceneID="6x2-LN-H5H">
             <objects>
-                <viewController id="aBx-af-yBy" customClass="ConversationViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConversationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aBx-af-yBy" customClass="ConversationViewController" customModule="iChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MbI-OM-4Cl">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -456,8 +461,8 @@
                                     </connections>
                                 </collectionReusableView>
                                 <connections>
-                                    <outlet property="dataSource" destination="aBx-af-yBy" id="xiw-f8-PHF"/>
-                                    <outlet property="delegate" destination="aBx-af-yBy" id="tTf-0g-q5k"/>
+                                    <outlet property="dataSource" destination="aBx-af-yBy" id="Y0k-nR-Vfl"/>
+                                    <outlet property="delegate" destination="aBx-af-yBy" id="kaR-Yh-an9"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -481,7 +486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UTW-WG-4TF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6307.6923076923076" y="81.753554502369667"/>
+            <point key="canvasLocation" x="6228" y="82"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HlW-8q-IZm">
@@ -524,7 +529,6 @@
         <!--Navigation Controller-->
         <scene sceneID="AcX-vz-spq">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eie-o7-krM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenVerticallyCompact="YES" id="4Z9-qJ-6Jl" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="lrg-4a-wLX"/>
@@ -541,10 +545,14 @@
                         <segue destination="2Vt-Gp-LXk" kind="relationship" relationship="rootViewController" id="Ihm-dJ-D7M"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eie-o7-krM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4591" y="-613"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="tvl-8t-TKD"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

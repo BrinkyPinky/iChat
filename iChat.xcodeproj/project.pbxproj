@@ -16,12 +16,20 @@
 		E229B95628C55EA300F795B7 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B95028C55EA300F795B7 /* ChatsViewController.swift */; };
 		E229B95728C55EA300F795B7 /* ChatsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B95128C55EA300F795B7 /* ChatsInteractor.swift */; };
 		E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */; };
-		E22C242228C28A4B00CEB695 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22C242128C28A4B00CEB695 /* ConversationViewController.swift */; };
 		E248CB4A28C20C1A000B9108 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */; };
 		E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348528BB57AA0041CF4F /* LoginViewModel.swift */; };
 		E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */; };
 		E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2607AF628B821B600188272 /* FireBaseAuthManager.swift */; };
 		E2607AFA28B824D500188272 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2607AF928B824D500188272 /* SignUpViewModel.swift */; };
+		E264996C28C616E000C54A51 /* Extension + Appearance of ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264996B28C616E000C54A51 /* Extension + Appearance of ConversationViewController.swift */; };
+		E264996E28C618E600C54A51 /* Extension + Keyboard of ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264996D28C618E600C54A51 /* Extension + Keyboard of ConversationViewController.swift */; };
+		E264997028C6195400C54A51 /* Extension + TextFieldDelegate of ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264996F28C6195400C54A51 /* Extension + TextFieldDelegate of ConversationViewController.swift */; };
+		E264997828C61B5E00C54A51 /* ConversationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997228C61B5E00C54A51 /* ConversationPresenter.swift */; };
+		E264997928C61B5E00C54A51 /* ConversationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997328C61B5E00C54A51 /* ConversationWorker.swift */; };
+		E264997A28C61B5E00C54A51 /* ConversationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997428C61B5E00C54A51 /* ConversationRouter.swift */; };
+		E264997B28C61B5E00C54A51 /* ConversationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997528C61B5E00C54A51 /* ConversationModels.swift */; };
+		E264997C28C61B5E00C54A51 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997628C61B5E00C54A51 /* ConversationViewController.swift */; };
+		E264997D28C61B5E00C54A51 /* ConversationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997728C61B5E00C54A51 /* ConversationInteractor.swift */; };
 		E265932728BEFF370039C5B4 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932628BEFF370039C5B4 /* Extension + UIViewController.swift */; };
 		E28F050428B777720096E22F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050328B777720096E22F /* AppDelegate.swift */; };
 		E28F050628B777720096E22F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050528B777720096E22F /* SceneDelegate.swift */; };
@@ -58,12 +66,20 @@
 		E229B95028C55EA300F795B7 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		E229B95128C55EA300F795B7 /* ChatsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsInteractor.swift; sourceTree = "<group>"; };
 		E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDataManager.swift; sourceTree = "<group>"; };
-		E22C242128C28A4B00CEB695 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		E24B348528BB57AA0041CF4F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDatabaseManager.swift; sourceTree = "<group>"; };
 		E2607AF628B821B600188272 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
 		E2607AF928B824D500188272 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		E264996B28C616E000C54A51 /* Extension + Appearance of ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Appearance of ConversationViewController.swift"; sourceTree = "<group>"; };
+		E264996D28C618E600C54A51 /* Extension + Keyboard of ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Keyboard of ConversationViewController.swift"; sourceTree = "<group>"; };
+		E264996F28C6195400C54A51 /* Extension + TextFieldDelegate of ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TextFieldDelegate of ConversationViewController.swift"; sourceTree = "<group>"; };
+		E264997228C61B5E00C54A51 /* ConversationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationPresenter.swift; sourceTree = "<group>"; };
+		E264997328C61B5E00C54A51 /* ConversationWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationWorker.swift; sourceTree = "<group>"; };
+		E264997428C61B5E00C54A51 /* ConversationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationRouter.swift; sourceTree = "<group>"; };
+		E264997528C61B5E00C54A51 /* ConversationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModels.swift; sourceTree = "<group>"; };
+		E264997628C61B5E00C54A51 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		E264997728C61B5E00C54A51 /* ConversationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationInteractor.swift; sourceTree = "<group>"; };
 		E265932628BEFF370039C5B4 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		E28F050028B777720096E22F /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28F050328B777720096E22F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +183,16 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		E264997128C61B1E00C54A51 /* Extensions for ConversationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E264996B28C616E000C54A51 /* Extension + Appearance of ConversationViewController.swift */,
+				E264996D28C618E600C54A51 /* Extension + Keyboard of ConversationViewController.swift */,
+				E264996F28C6195400C54A51 /* Extension + TextFieldDelegate of ConversationViewController.swift */,
+			);
+			path = "Extensions for ConversationViewController";
+			sourceTree = "<group>";
+		};
 		E265932128BEFC9D0039C5B4 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,7 +278,13 @@
 		E2A1044A28C538C600890ED7 /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
-				E22C242128C28A4B00CEB695 /* ConversationViewController.swift */,
+				E264997628C61B5E00C54A51 /* ConversationViewController.swift */,
+				E264997728C61B5E00C54A51 /* ConversationInteractor.swift */,
+				E264997228C61B5E00C54A51 /* ConversationPresenter.swift */,
+				E264997328C61B5E00C54A51 /* ConversationWorker.swift */,
+				E264997428C61B5E00C54A51 /* ConversationRouter.swift */,
+				E264997528C61B5E00C54A51 /* ConversationModels.swift */,
+				E264997128C61B1E00C54A51 /* Extensions for ConversationViewController */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -423,16 +455,20 @@
 				E229B95528C55EA300F795B7 /* ChatsModels.swift in Sources */,
 				E229B95228C55EA300F795B7 /* ChatsPresenter.swift in Sources */,
 				E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */,
+				E264996C28C616E000C54A51 /* Extension + Appearance of ConversationViewController.swift in Sources */,
 				E2C4513E28C0CF7D00F9C473 /* SearchUserViewController.swift in Sources */,
-				E22C242228C28A4B00CEB695 /* ConversationViewController.swift in Sources */,
 				E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */,
 				E28F050428B777720096E22F /* AppDelegate.swift in Sources */,
 				E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCell.swift in Sources */,
 				E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */,
 				E2C4513F28C0CF7D00F9C473 /* SearchUserInteractor.swift in Sources */,
+				E264997828C61B5E00C54A51 /* ConversationPresenter.swift in Sources */,
+				E264997028C6195400C54A51 /* Extension + TextFieldDelegate of ConversationViewController.swift in Sources */,
+				E264997D28C61B5E00C54A51 /* ConversationInteractor.swift in Sources */,
 				E229B95728C55EA300F795B7 /* ChatsInteractor.swift in Sources */,
 				E2A1044928C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift in Sources */,
 				E2C8934828BF193F00FC6210 /* ValidationManager.swift in Sources */,
+				E264996E28C618E600C54A51 /* Extension + Keyboard of ConversationViewController.swift in Sources */,
 				E2A1044528C49DC600890ED7 /* ConversationCollectionHeaderView.swift in Sources */,
 				E200040A28BA1108006FA2DF /* Extension + UITextField.swift in Sources */,
 				E2C8934428BF191B00FC6210 /* ForgotPasswordViewController.swift in Sources */,
@@ -440,15 +476,19 @@
 				E265932728BEFF370039C5B4 /* Extension + UIViewController.swift in Sources */,
 				E2C4513D28C0CF7D00F9C473 /* SearchUserModels.swift in Sources */,
 				E2C4513A28C0CF7D00F9C473 /* SearchUserPresenter.swift in Sources */,
+				E264997928C61B5E00C54A51 /* ConversationWorker.swift in Sources */,
 				E2C4513C28C0CF7D00F9C473 /* SearchUserRouter.swift in Sources */,
+				E264997B28C61B5E00C54A51 /* ConversationModels.swift in Sources */,
 				E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */,
 				E248CB4A28C20C1A000B9108 /* UserTableViewCell.swift in Sources */,
+				E264997C28C61B5E00C54A51 /* ConversationViewController.swift in Sources */,
 				E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */,
 				E229B95428C55EA300F795B7 /* ChatsRouter.swift in Sources */,
 				E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */,
 				E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */,
 				E2607AFA28B824D500188272 /* SignUpViewModel.swift in Sources */,
 				E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */,
+				E264997A28C61B5E00C54A51 /* ConversationRouter.swift in Sources */,
 				E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */,
 				E229B95628C55EA300F795B7 /* ChatsViewController.swift in Sources */,
 			);

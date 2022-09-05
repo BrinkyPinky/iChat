@@ -17,16 +17,20 @@ protocol ChatsBusinessLogic {
 }
 
 protocol ChatsDataStore {
-    var selectedUserInSearchUserView: CellIdentifiable? { get set }
+    var selectedUserInSearchUserView: UserCellViewModel? { get set }
 }
 
 class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
     
     var presenter: ChatsPresentationLogic?
-    var selectedUserInSearchUserView: CellIdentifiable? {
+    var selectedUserInSearchUserView: UserCellViewModel? {
         didSet {
-            print("success")
+            wasPickedUserInSearchUserView()
         }
+    }
+    
+    func wasPickedUserInSearchUserView() {
+//        let response = 
     }
     
     // MARK: Do something
