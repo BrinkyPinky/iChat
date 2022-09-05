@@ -79,20 +79,6 @@ extension ConversationViewController {
 
 // MARK: Appearance of collection view
 extension ConversationViewController {
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: "MessageHeader",
-                for: indexPath
-            ) as! ConversationCollectionHeaderView
-            
-            return headerView
-        default:
-            fatalError("Unexpected element kind")
-        }
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         

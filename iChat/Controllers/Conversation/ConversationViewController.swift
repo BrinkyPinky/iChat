@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ConversationDisplayLogic: AnyObject {
-    func displaySomething(viewModel: Conversation.Something.ViewModel)
+    func displayFullname(viewModel: Conversation.fullnameLabel.ViewModel)
 }
 
 class ConversationViewController: UIViewController, ConversationDisplayLogic {
@@ -46,7 +46,6 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI() //in file (Extension + Appearance)
-        doSomething()
     }
     
     
@@ -57,6 +56,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         ) //in file (Extension + Keyboard)
+//        conversationCollectionView.scrollToItem(at: IndexPath(item: 10, section: 0), at: .centeredVertically, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,16 +80,12 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         }
     }
     
-    // MARK: Do something
+    // MARK: Display FullName
     
-    func doSomething() {
-        let request = Conversation.Something.Request()
-        interactor?.doSomething(request: request)
+    func displayFullname(viewModel: Conversation.fullnameLabel.ViewModel) {
+        title = viewModel.fullname
     }
     
-    func displaySomething(viewModel: Conversation.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
-    }
     // MARK: Setup
     
     private func setup() {
@@ -111,6 +107,21 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
 extension ConversationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: "MessageHeader",
+                for: indexPath
+            ) as! ConversationCollectionHeaderView
+            
+            return headerView
+        default:
+            fatalError("Unexpected element kind")
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

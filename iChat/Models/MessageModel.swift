@@ -8,8 +8,8 @@
 import Foundation
 
 struct MessageModel {
-    let messageText: String
-    let date: String
-    let isRead: Bool
-    let selfSender: Bool
+    var messageText: String
+    var date: String
+    var isRead: Bool
+    var selfSender: Bool
 }

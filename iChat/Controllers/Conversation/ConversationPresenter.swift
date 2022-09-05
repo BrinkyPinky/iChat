@@ -13,17 +13,70 @@
 import UIKit
 
 protocol ConversationPresentationLogic {
-    func presentSomething(response: Conversation.Something.Response)
+    func presentUserFullname(response: Conversation.fullnameLabel.Response)
+    func presentMessages(response: Conversation.messages.Response)
 }
 
 class ConversationPresenter: ConversationPresentationLogic {
     
     weak var viewController: ConversationDisplayLogic?
     
-    // MARK: Do something
+    // MARK: presentUserFullName
     
-    func presentSomething(response: Conversation.Something.Response) {
-        let viewModel = Conversation.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentUserFullname(response: Conversation.fullnameLabel.Response) {
+        let viewModel = Conversation.fullnameLabel.ViewModel(fullname: response.fullname)
+        viewController?.displayFullname(viewModel: viewModel)
+    }
+    
+    func presentMessages(response: Conversation.messages.Response) {
+        var referenceDateToCompare: String?
+        
+        var headersDate = [String]()
+        var sortedMessages = [[MessageModel]]()
+        var firstLevelMessages = [MessageModel]()
+        
+        response.rawMessages.forEach { messageModel in
+            let timeInterval = TimeInterval(messageModel.date)
+            var convertedDateValue = Date(timeIntervalSinceReferenceDate: timeInterval ?? 0)
+            let secondsFromGMT = TimeZone.current.secondsFromGMT()
+            convertedDateValue.addTimeInterval(TimeInterval(secondsFromGMT))
+            
+            let dayOfDate = convertedDateValue.formatted(date: .numeric, time: .omitted)
+            
+            
+            if referenceDateToCompare == nil {
+                referenceDateToCompare = dayOfDate
+                headersDate.append(convertedDateValue.formatted(date: .complete, time: .omitted))
+            }
+            
+            if dayOfDate == referenceDateToCompare {
+                firstLevelMessages.append(
+                    MessageModel(
+                        messageText: messageModel.messageText,
+                        date: convertedDateValue.formatted(date: .omitted, time: .shortened),
+                        isRead: messageModel.isRead,
+                        selfSender: messageModel.selfSender
+                    )
+                )
+            } else {
+                sortedMessages.append(firstLevelMessages)
+                firstLevelMessages = []
+                referenceDateToCompare = dayOfDate
+                headersDate.append(convertedDateValue.formatted(date: .complete, time: .omitted))
+                
+                firstLevelMessages.append(
+                    MessageModel(
+                        messageText: messageModel.messageText,
+                        date: convertedDateValue.formatted(date: .omitted, time: .shortened),
+                        isRead: messageModel.isRead,
+                        selfSender: messageModel.selfSender
+                    )
+                )
+            }
+        }
+        
+        sortedMessages.append(firstLevelMessages)
+        print(sortedMessages)
+        print(headersDate)
     }
 }

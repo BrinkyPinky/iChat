@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ConversationBusinessLogic {
-    func doSomething(request: Conversation.Something.Request)
+    
 }
 
 protocol ConversationDataStore {
@@ -24,21 +24,26 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     
     var userInfo: UserCellViewModel? {
         didSet {
-//            print("ewq")
+            let response = Conversation.fullnameLabel.Response(fullname: userInfo?.fullName ?? "Unkown")
+            presenter?.presentUserFullname(response: response)
+            
+            getMessages(with: userInfo?.email ?? "")
+        }
+    }
+    
+    func getMessages(with email: String) {
+        var rawMessages: [MessageModel] = [] {
+            didSet {
+                let response = Conversation.messages.Response(rawMessages: rawMessages)
+                presenter?.presentMessages(response: response)
+            }
+        }
+        
+        FireBaseDatabaseManager.shared.getMessages(withEmail: email, andLimit: 25) { arrayOfMessages in
+            rawMessages.append(contentsOf: arrayOfMessages)
+
         }
     }
     
     var presenter: ConversationPresentationLogic?
-    var worker: ConversationWorker?
-    //var name: String = ""
-    
-    // MARK: Do something
-    
-    func doSomething(request: Conversation.Something.Request) {
-        worker = ConversationWorker()
-        worker?.doSomeWork()
-        
-        let response = Conversation.Something.Response()
-        presenter?.presentSomething(response: response)
-    }
 }

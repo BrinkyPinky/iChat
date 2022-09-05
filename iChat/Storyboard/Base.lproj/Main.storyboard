@@ -34,7 +34,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Contacts" id="i64-Nb-IAq"/>
                     <connections>
-                        <segue destination="aBx-af-yBy" kind="show" id="INc-Uo-Qjc"/>
+                        <segue destination="aBx-af-yBy" kind="show" identifier="showConversation" id="INc-Uo-Qjc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMc-iG-IfF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

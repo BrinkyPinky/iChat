@@ -70,7 +70,7 @@ class FireBaseDatabaseManager {
         let dbSelfDestination = db.child("Users").child(correctSelfEmail).child("conversations").child("conversation-with-\(correctOtherEmail)")
         let dbOtherDestination = db.child("Users").child(correctOtherEmail).child("conversations").child("conversation-with-\(correctSelfEmail)")
         
-        let specifiedDate = Date.timeIntervalSinceReferenceDate
+        let specifiedDate = String(Date.timeIntervalSinceReferenceDate)
 
         dbSelfDestination.childByAutoId().setValue([
             "date": specifiedDate,
@@ -108,7 +108,7 @@ class FireBaseDatabaseManager {
                 
                 let message = MessageModel(
                     messageText: messageTextValue ?? "No message information",
-                    date: dateValue ?? "",
+                    date: dateValue ?? "No date",
                     isRead: isReadValue ?? false,
                     selfSender: selfSenderValue ?? false
                 )

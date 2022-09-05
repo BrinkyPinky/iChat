@@ -15,14 +15,23 @@ import UIKit
 enum Conversation {
     // MARK: Use cases
     
-    enum Something {
-        struct Request {
-        }
-        
+    enum fullnameLabel {
         struct Response {
+            let fullname: String
         }
         
         struct ViewModel {
+            let fullname: String
+        }
+    }
+    
+    enum messages {
+        struct Response {
+            let rawMessages: [MessageModel]
+        }
+        
+        struct ViewModel {
+            
         }
     }
 }
