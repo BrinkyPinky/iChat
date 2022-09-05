@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol ConversationDisplayLogic: class {
+protocol ConversationDisplayLogic: AnyObject {
     func displaySomething(viewModel: Conversation.Something.ViewModel)
 }
 
@@ -22,7 +22,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     
     @IBOutlet var conversationCollectionView: UICollectionView!
     @IBOutlet var inputMessageToolBar: UIToolbar!
-    let messageTextView = UITextView()
+    let messageTextView = UITextView() //logic in file (Extension + TextFieldDelegate)
     let sendMessageButton = UIButton()
     let stackViewForToolBar = UIStackView()
     

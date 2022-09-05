@@ -39,10 +39,12 @@ enum SearchUser {
                 
                 let fullName: String
                 let username: String
+                let email: String
                 
                 init(user: UserModel) {
-                    self.fullName = "\(user.name ?? "No name") \(user.surname ?? "No surname")"
-                    self.username = user.username ?? "No username"
+                    self.fullName = "\(user.name) \(user.surname)"
+                    self.username = user.username
+                    self.email = user.email
                 }
             }
             

@@ -30,6 +30,7 @@
 		E264997B28C61B5E00C54A51 /* ConversationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997528C61B5E00C54A51 /* ConversationModels.swift */; };
 		E264997C28C61B5E00C54A51 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997628C61B5E00C54A51 /* ConversationViewController.swift */; };
 		E264997D28C61B5E00C54A51 /* ConversationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997728C61B5E00C54A51 /* ConversationInteractor.swift */; };
+		E264997F28C6378900C54A51 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997E28C6378900C54A51 /* MessageModel.swift */; };
 		E265932728BEFF370039C5B4 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932628BEFF370039C5B4 /* Extension + UIViewController.swift */; };
 		E28F050428B777720096E22F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050328B777720096E22F /* AppDelegate.swift */; };
 		E28F050628B777720096E22F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050528B777720096E22F /* SceneDelegate.swift */; };
@@ -80,6 +81,7 @@
 		E264997528C61B5E00C54A51 /* ConversationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModels.swift; sourceTree = "<group>"; };
 		E264997628C61B5E00C54A51 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		E264997728C61B5E00C54A51 /* ConversationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationInteractor.swift; sourceTree = "<group>"; };
+		E264997E28C6378900C54A51 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		E265932628BEFF370039C5B4 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		E28F050028B777720096E22F /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28F050328B777720096E22F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				E2DE9E5428C15A2F00147E51 /* UserModel.swift */,
+				E264997E28C6378900C54A51 /* MessageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */,
 				E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */,
 				E2607AFA28B824D500188272 /* SignUpViewModel.swift in Sources */,
+				E264997F28C6378900C54A51 /* MessageModel.swift in Sources */,
 				E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */,
 				E264997A28C61B5E00C54A51 /* ConversationRouter.swift in Sources */,
 				E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */,
