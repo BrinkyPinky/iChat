@@ -18,8 +18,6 @@ protocol ChatsDisplayLogic: AnyObject {
 
 class ChatsViewController: UITableViewController, ChatsDisplayLogic {
     
-    //@IBOutlet private var nameTextField: UITextField!
-    
     var interactor: ChatsBusinessLogic?
     var router: (NSObjectProtocol & ChatsRoutingLogic & ChatsDataPassing)?
     
@@ -34,9 +32,6 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
         super.init(coder: aDecoder)
         setup()
     }
-    
-    // MARK: View lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         doSomething()
@@ -59,9 +54,9 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
         let request = Chats.Something.Request()
         interactor?.doSomething(request: request)
     }
-    
+     
     func displaySomething(viewModel: Chats.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+//        nameTextField.text = viewModel.name
     }
     
     // MARK: Setup

@@ -18,15 +18,15 @@ protocol SearchUserBusinessLogic {
 }
 
 protocol SearchUserDataStore {
-    var selectedUser: CellIdentifiable? { get }
+    var selectedUser: CellIdentifiable? { get set }
 }
 
 class SearchUserInteractor: SearchUserBusinessLogic, SearchUserDataStore {
     
-    var presenter: SearchUserPresentationLogic?
-    
     var selectedUser: CellIdentifiable?
     
+    var presenter: SearchUserPresentationLogic?
+        
     // MARK: Getting List Of Users From Database
     
     func getUsersData(request: SearchUser.Search.Request) {

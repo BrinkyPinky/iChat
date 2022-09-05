@@ -25,13 +25,4 @@ enum Chats {
         struct ViewModel {
         }
     }
-    
-//    enum SearchUser {
-//        struct Response {
-//            
-//        }
-//        
-//        struct ViewModel {
-//        }
-//    }
 }

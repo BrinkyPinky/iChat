@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol SearchUserRoutingLogic {
-    func routeToChats(segue: UIStoryboardSegue?)
+    func routeToConversation(segue: UIStoryboardSegue?)
 }
 
 protocol SearchUserDataPassing {
@@ -27,29 +27,29 @@ class SearchUserRouter: NSObject, SearchUserRoutingLogic, SearchUserDataPassing 
     
     // MARK: Routing
     
-    func routeToChats(segue: UIStoryboardSegue?) {
+    func routeToConversation(segue: UIStoryboardSegue?) {
         if let segue = segue {
-            let destinationVC = segue.destination as! ChatsViewController
+            let destinationVC = segue.destination as! ConversationViewController
             var destinationDS = destinationVC.router!.dataStore!
-            passDataToChats(source: dataStore!, destination: &destinationDS)
+            passDataToConversation(source: dataStore!, destination: &destinationDS)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let destinationVC = storyboard.instantiateViewController(withIdentifier: "ChatsViewController") as! ChatsViewController
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "ConversationViewController") as! ConversationViewController
             var destinationDS = destinationVC.router!.dataStore!
-            passDataToChats(source: dataStore!, destination: &destinationDS)
-            navigateToChats(source: viewController!, destination: destinationVC)
+            passDataToConversation(source: dataStore!, destination: &destinationDS)
+            navigateToConversation(source: viewController!, destination: destinationVC)
         }
     }
     
     // MARK: Navigation
     
-    func navigateToChats(source: SearchUserViewController, destination: ChatsViewController) {
-        source.navigationController?.dismiss(animated: true, completion: nil)
+    func navigateToConversation(source: SearchUserViewController, destination: ConversationViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
     }
     
     // MARK: Passing data
     
-    func passDataToChats(source: SearchUserDataStore, destination: inout ChatsDataStore) {
-        destination.selectedUserInSearchUserView = (source.selectedUser as! UserCellViewModel)
+    func passDataToConversation(source: SearchUserDataStore, destination: inout ConversationDataStore) {
+        destination.userInfo = (source.selectedUser as! UserCellViewModel)
     }
 }

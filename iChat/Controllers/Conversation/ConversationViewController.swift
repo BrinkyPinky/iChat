@@ -65,6 +65,8 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )  //in file (Extension + Keyboard)
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: Routing

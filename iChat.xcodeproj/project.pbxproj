@@ -31,7 +31,9 @@
 		E264997C28C61B5E00C54A51 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997628C61B5E00C54A51 /* ConversationViewController.swift */; };
 		E264997D28C61B5E00C54A51 /* ConversationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997728C61B5E00C54A51 /* ConversationInteractor.swift */; };
 		E264997F28C6378900C54A51 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E264997E28C6378900C54A51 /* MessageModel.swift */; };
+		E264998128C6567400C54A51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E264998028C6567400C54A51 /* GoogleService-Info.plist */; };
 		E265932728BEFF370039C5B4 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265932628BEFF370039C5B4 /* Extension + UIViewController.swift */; };
+		E2718EF628C6956C00B5A8DC /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2718EF528C6956C00B5A8DC /* Login.storyboard */; };
 		E28F050428B777720096E22F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050328B777720096E22F /* AppDelegate.swift */; };
 		E28F050628B777720096E22F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050528B777720096E22F /* SceneDelegate.swift */; };
 		E28F050B28B777720096E22F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28F050928B777720096E22F /* Main.storyboard */; };
@@ -49,7 +51,6 @@
 		E2C8934428BF191B00FC6210 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934328BF191B00FC6210 /* ForgotPasswordViewController.swift */; };
 		E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */; };
 		E2C8934828BF193F00FC6210 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934728BF193F00FC6210 /* ValidationManager.swift */; };
-		E2CFB51128BB783E00080A2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */; };
 		E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DE9E5428C15A2F00147E51 /* UserModel.swift */; };
 		E3D39B164F724FE238CA40FD /* Pods_iChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503B25FABD625F0F8E634C10 /* Pods_iChat.framework */; };
 /* End PBXBuildFile section */
@@ -82,7 +83,9 @@
 		E264997628C61B5E00C54A51 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		E264997728C61B5E00C54A51 /* ConversationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationInteractor.swift; sourceTree = "<group>"; };
 		E264997E28C6378900C54A51 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		E264998028C6567400C54A51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E265932628BEFF370039C5B4 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
+		E2718EF528C6956C00B5A8DC /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		E28F050028B777720096E22F /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28F050328B777720096E22F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E28F050528B777720096E22F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,7 +105,6 @@
 		E2C8934328BF191B00FC6210 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		E2C8934728BF193F00FC6210 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
-		E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2DE9E5428C15A2F00147E51 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				E28F050928B777720096E22F /* Main.storyboard */,
+				E2718EF528C6956C00B5A8DC /* Login.storyboard */,
 				E28F051128B777730096E22F /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
@@ -207,7 +210,7 @@
 		E265932328BEFD190039C5B4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E2C8936628BF814B00FC6210 /* SearchResults */,
+				E2C8936628BF814B00FC6210 /* SearchUser */,
 				E2CFB51228BB7CFF00080A2F /* Chats */,
 				E2A1044A28C538C600890ED7 /* Conversation */,
 				E2C450F328BFEF5A00F9C473 /* Logining */,
@@ -222,7 +225,7 @@
 				E28F050528B777720096E22F /* SceneDelegate.swift */,
 				E28F051428B777730096E22F /* Info.plist */,
 				E28F050C28B777720096E22F /* iChat.xcdatamodeld */,
-				E2CFB51028BB783E00080A2F /* GoogleService-Info.plist */,
+				E264998028C6567400C54A51 /* GoogleService-Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -302,7 +305,7 @@
 			path = SignUp/Logining;
 			sourceTree = "<group>";
 		};
-		E2C8936628BF814B00FC6210 /* SearchResults */ = {
+		E2C8936628BF814B00FC6210 /* SearchUser */ = {
 			isa = PBXGroup;
 			children = (
 				E2C4513828C0CF7D00F9C473 /* SearchUserViewController.swift */,
@@ -311,7 +314,7 @@
 				E2C4513628C0CF7D00F9C473 /* SearchUserRouter.swift */,
 				E2C4513728C0CF7D00F9C473 /* SearchUserModels.swift */,
 			);
-			path = SearchResults;
+			path = SearchUser;
 			sourceTree = "<group>";
 		};
 		E2CFB51228BB7CFF00080A2F /* Chats */ = {
@@ -401,7 +404,8 @@
 			files = (
 				E28F051328B777730096E22F /* LaunchScreen.storyboard in Resources */,
 				E28F051028B777730096E22F /* Assets.xcassets in Resources */,
-				E2CFB51128BB783E00080A2F /* GoogleService-Info.plist in Resources */,
+				E264998128C6567400C54A51 /* GoogleService-Info.plist in Resources */,
+				E2718EF628C6956C00B5A8DC /* Login.storyboard in Resources */,
 				E28F050B28B777720096E22F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

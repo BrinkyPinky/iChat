@@ -17,24 +17,14 @@ protocol ChatsBusinessLogic {
 }
 
 protocol ChatsDataStore {
-    var selectedUserInSearchUserView: UserCellViewModel? { get set }
+    
 }
 
 class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
     
     var presenter: ChatsPresentationLogic?
-    var selectedUserInSearchUserView: UserCellViewModel? {
-        didSet {
-            wasPickedUserInSearchUserView()
-        }
-    }
-    
-    func wasPickedUserInSearchUserView() {
-//        let response = 
-    }
     
     // MARK: Do something
-    
     func doSomething(request: Chats.Something.Request) {
         
         let response = Chats.Something.Response()

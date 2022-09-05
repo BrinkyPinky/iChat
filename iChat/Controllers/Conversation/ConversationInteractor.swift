@@ -17,10 +17,16 @@ protocol ConversationBusinessLogic {
 }
 
 protocol ConversationDataStore {
-    //var name: String { get set }
+    var userInfo: UserCellViewModel? { get set }
 }
 
 class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
+    
+    var userInfo: UserCellViewModel? {
+        didSet {
+//            print("ewq")
+        }
+    }
     
     var presenter: ConversationPresentationLogic?
     var worker: ConversationWorker?

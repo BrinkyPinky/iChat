@@ -80,7 +80,7 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
     func provideSelectedUser(with user: CellIdentifiable) {
         let request = SearchUser.Selected.Request(selectedUser: user)
         interactor?.getSelectedUser(request: request)
-        router?.routeToChats(segue: nil)
+        router?.routeToConversation(segue: nil)
     }
     
     func presentUsers(viewModel: SearchUser.Search.ViewModel) {

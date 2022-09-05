@@ -70,6 +70,10 @@ extension ConversationViewController {
             .layerMinXMinYCorner
         ]
         conversationCollectionView.layer.cornerRadius = 50
+        
+        // MARK: TabBarController Setup
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
 }
 
