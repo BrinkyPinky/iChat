@@ -7,10 +7,25 @@
 
 import UIKit
 
-class ConversationCollectionHeaderView: UICollectionReusableView {
+protocol MessageHeaderCellModelRepresentable {
+    var messageHeaderCellModel: CellIdentifiable? { get set }
+}
+
+class ConversationCollectionHeaderView: UICollectionReusableView, MessageHeaderCellModelRepresentable {
     
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var backgroundViewDateLabel: UIView!
+    
+    var messageHeaderCellModel: CellIdentifiable? {
+        didSet {
+            setupHeader()
+        }
+    }
+    
+    func setupHeader() {
+        let headerCellViewModel = messageHeaderCellModel as! HeadersMessageCellViewModel
+        dateLabel.text = headerCellViewModel.date
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,9 +35,7 @@ class ConversationCollectionHeaderView: UICollectionReusableView {
         super.init(coder: aCoder)
     }
     
-    override func layoutSubviews() {
-        dateLabel.text = "Yesterday"
-    
+    override func layoutSubviews() {    
         backgroundViewDateLabel.clipsToBounds = true
         backgroundViewDateLabel.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         backgroundViewDateLabel.layer.cornerRadius = 15

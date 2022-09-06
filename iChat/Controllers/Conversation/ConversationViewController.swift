@@ -90,12 +90,11 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     // MARK: Display Messages
     
     var messagesRows: [[CellIdentifiable]] = [[]]
-    var dates: [String] = []
+    var headersDatesRows: [CellIdentifiable] = []
     
     func displayMessages(viewModel: Conversation.Messages.ViewModel) {
         messagesRows = viewModel.messagesRows
-        print(messagesRows)
-        dates = viewModel.headersDate
+        headersDatesRows = viewModel.headersDatesRows
         
         DispatchQueue.main.async {
             self.conversationCollectionView.reloadData()
@@ -122,10 +121,12 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
 
 extension ConversationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        messagesRows.count
+        headersDatesRows.count
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let messageHeaderCellModel = headersDatesRows[indexPath.section]
+        
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(
@@ -134,6 +135,8 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
                 for: indexPath
             ) as! ConversationCollectionHeaderView
             
+            headerView.messageHeaderCellModel = messageHeaderCellModel
+            
             return headerView
         default:
             fatalError("Unexpected element kind")
@@ -141,8 +144,6 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        guard messagesRows[section].count != 0 else { return 0}
-//        guard let rows = messagesRows[section].count else { return 0 }
         return messagesRows[section].count
     }
     

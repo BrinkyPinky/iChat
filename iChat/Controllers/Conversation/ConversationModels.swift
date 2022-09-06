@@ -13,6 +13,7 @@
 import UIKit
 
 typealias MessageCellViewModel = Conversation.Messages.ViewModel.MessageCellViewModel
+typealias HeadersMessageCellViewModel = Conversation.Messages.ViewModel.HeadersMessageCellViewModel
 
 enum Conversation {
     // MARK: Use cases
@@ -49,13 +50,25 @@ enum Conversation {
                     isRead = message.isRead
                     selfSender = message.selfSender
                 }
+            }
+            
+            struct HeadersMessageCellViewModel: CellIdentifiable {
+                var cellIdentifier: String {
+                    "MessageHeader"
+                }
+                
+                let date: String?
+                
+                init(date: String) {
+                    self.date = date
+                }
                 
             }
             
             let messagesRows: [[CellIdentifiable]]
             
 //            let messages: [[MessageModel]]
-            let headersDate: [String]
+            let headersDatesRows: [CellIdentifiable]
         }
     }
 }

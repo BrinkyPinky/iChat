@@ -177,7 +177,7 @@
                                     </constraints>
                                     <connections>
                                         <outlet property="backgroundViewDateLabel" destination="H2c-xA-nub" id="P8K-E6-90K"/>
-                                        <outlet property="dateLabel" destination="qbR-KR-OGY" id="9dI-qs-jy8"/>
+                                        <outlet property="dateLabel" destination="qbR-KR-OGY" id="ZbC-N4-LYT"/>
                                     </connections>
                                 </collectionReusableView>
                                 <connections>

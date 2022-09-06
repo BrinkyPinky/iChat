@@ -10,61 +10,11 @@ import Foundation
 import UIKit
 
 class ConversationPresenterWorkerMessagesSorting {
-    func sortMessages(rawMessages: [MessageModel]) -> ([[MessageCellViewModel]], [String]) {
-        //        var referenceDateToCompare: String?
-        //
-        //        var headersDate = [String]()
-        //
-        //        var sortedMessages = [[MessageCell]]()
-        //        var firstLevelMessages = [MessageModel]()
-        //
-        //        rawMessages.forEach { messageModel in
-        //            let timeInterval = TimeInterval(messageModel.date)
-        //            var convertedDateValue = Date(timeIntervalSinceReferenceDate: timeInterval ?? 0)
-        //            let secondsFromGMT = TimeZone.current.secondsFromGMT()
-        //            convertedDateValue.addTimeInterval(TimeInterval(secondsFromGMT))
-        //
-        //            let dayOfDate = convertedDateValue.formatted(date: .numeric, time: .omitted)
-        //
-        //
-        //            if referenceDateToCompare == nil {
-        //                referenceDateToCompare = dayOfDate
-        //                headersDate.append(convertedDateValue.formatted(date: .complete, time: .omitted))
-        //            }
-        //
-        //            if dayOfDate == referenceDateToCompare {
-        //                firstLevelMessages.append(
-        //                    MessageModel(
-        //                        messageText: messageModel.messageText,
-        //                        date: convertedDateValue.formatted(date: .omitted, time: .shortened),
-        //                        isRead: messageModel.isRead,
-        //                        selfSender: messageModel.selfSender
-        //                    )
-        //                )
-        //            } else {
-        //                sortedMessages.append(firstLevelMessages)
-        //                firstLevelMessages = []
-        //                referenceDateToCompare = dayOfDate
-        //                headersDate.append(convertedDateValue.formatted(date: .complete, time: .omitted))
-        //
-        //                firstLevelMessages.append(
-        //                    MessageModel(
-        //                        messageText: messageModel.messageText,
-        //                        date: convertedDateValue.formatted(date: .omitted, time: .shortened),
-        //                        isRead: messageModel.isRead,
-        //                        selfSender: messageModel.selfSender
-        //                    )
-        //                )
-        //            }
-        //        }
-        //
-        //        sortedMessages.append(firstLevelMessages)
-        //
-        //        return (sortedMessages, headersDate)
+    func sortMessages(rawMessages: [MessageModel]) -> ([[MessageCellViewModel]], [HeadersMessageCellViewModel]) {
         
         var referenceDateToCompare: String?
         
-        var headersDate = [String]()
+        var headersDatesRows = [HeadersMessageCellViewModel]()
         
         var sortedMessages = [[MessageCellViewModel]]()
         var firstLevelMessages = [MessageCellViewModel]()
@@ -80,7 +30,9 @@ class ConversationPresenterWorkerMessagesSorting {
             
             if referenceDateToCompare == nil {
                 referenceDateToCompare = dayOfDate
-                headersDate.append(convertedDateValue.formatted(date: .complete, time: .omitted))
+                headersDatesRows.append(HeadersMessageCellViewModel(
+                    date: convertedDateValue.formatted(date: .complete, time: .omitted)
+                ))
             }
             
             if dayOfDate == referenceDateToCompare {
@@ -99,7 +51,9 @@ class ConversationPresenterWorkerMessagesSorting {
                 sortedMessages.append(firstLevelMessages)
                 firstLevelMessages = []
                 referenceDateToCompare = dayOfDate
-                headersDate.append(convertedDateValue.formatted(date: .complete, time: .omitted))
+                headersDatesRows.append(HeadersMessageCellViewModel(
+                    date: convertedDateValue.formatted(date: .complete, time: .omitted)
+                ))
                 
                 firstLevelMessages.append(
                     MessageCellViewModel(
@@ -117,6 +71,6 @@ class ConversationPresenterWorkerMessagesSorting {
         
         sortedMessages.append(firstLevelMessages)
         
-        return (sortedMessages, headersDate)
+        return (sortedMessages, headersDatesRows)
     }
 }

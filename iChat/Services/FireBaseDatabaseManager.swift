@@ -94,7 +94,7 @@ class FireBaseDatabaseManager {
             "date": specifiedDate,
             "isRead": false,
             "messageText": message,
-            "selfSender": true
+            "selfSender": false
         ])
     }
     

@@ -34,14 +34,11 @@ class ConversationPresenter: ConversationPresentationLogic {
         let sortedData = worker?.sortMessages(rawMessages: response.rawMessages)
         
         let messagesRows = sortedData!.0
-        let headersDate = sortedData?.1
-        
-//        let viewModel = Conversation.Messages.ViewModel(messages: messages!, headersDate: headersDate!)
-//        viewController?.displayMessages(viewModel: viewModel)
+        let headersDatesRows = sortedData!.1
                     
         let viewModel = Conversation.Messages.ViewModel(
             messagesRows: messagesRows,
-            headersDate: headersDate!
+            headersDatesRows: headersDatesRows
         )
         viewController?.displayMessages(viewModel: viewModel)
     }
