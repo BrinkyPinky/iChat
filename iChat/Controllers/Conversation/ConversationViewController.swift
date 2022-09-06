@@ -14,6 +14,7 @@ import UIKit
 
 protocol ConversationDisplayLogic: AnyObject {
     func displayFullname(viewModel: Conversation.fullnameLabel.ViewModel)
+    func displayMessages(viewModel: Conversation.Messages.ViewModel)
 }
 
 class ConversationViewController: UIViewController, ConversationDisplayLogic {
@@ -86,6 +87,21 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         title = viewModel.fullname
     }
     
+    // MARK: Display Messages
+    
+    var messagesRows: [[CellIdentifiable]] = [[]]
+    var dates: [String] = []
+    
+    func displayMessages(viewModel: Conversation.Messages.ViewModel) {
+        messagesRows = viewModel.messagesRows
+        print(messagesRows)
+        dates = viewModel.headersDate
+        
+        DispatchQueue.main.async {
+            self.conversationCollectionView.reloadData()
+        }
+    }
+    
     // MARK: Setup
     
     private func setup() {
@@ -106,7 +122,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
 
 extension ConversationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+        messagesRows.count
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -125,13 +141,17 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        someExampleArray.count
+//        guard messagesRows[section].count != 0 else { return 0}
+//        guard let rows = messagesRows[section].count else { return 0 }
+        return messagesRows[section].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! ConversationCollectionViewCell
+        let messageCellModel = messagesRows[indexPath.section][indexPath.row]
         
-        cell.text = someExampleArray[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCell
+        
+        cell.messageCellModel = messageCellModel
         
         return cell
     }

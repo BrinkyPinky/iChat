@@ -78,7 +78,7 @@ extension ConversationViewController {
 }
 
 // MARK: Appearance of collection view
-extension ConversationViewController {
+extension ConversationViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
@@ -103,6 +103,7 @@ extension ConversationViewController {
         
         let cell = self.collectionView(collectionView, cellForItemAt: indexPath) as! ConversationCollectionViewCell
         
+//        return CGSize(width: 400, height: 2000)
         return cell.systemLayoutSizeFitting(
             CGSize(
                 width: collectionView.frame.width,

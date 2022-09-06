@@ -7,19 +7,19 @@
 
 import UIKit
 
-protocol CellModelRepresentable {
-    var cellModel: CellIdentifiable? { get set }
+protocol UserCellModelRepresentable {
+    var userCellModel: CellIdentifiable? { get set }
 }
 
-class UserTableViewCell: UITableViewCell, CellModelRepresentable {
-    var cellModel: CellIdentifiable? {
+class UserTableViewCell: UITableViewCell, UserCellModelRepresentable {
+    var userCellModel: CellIdentifiable? {
         didSet {
             updateView()
         }
     }
     
     func updateView() {
-        guard let cellModel = cellModel as? UserCellViewModel else { return }
+        guard let cellModel = userCellModel as? UserCellViewModel else { return }
         
         var content = defaultContentConfiguration()
         content.text = cellModel.username

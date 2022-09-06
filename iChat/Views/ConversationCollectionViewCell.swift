@@ -7,18 +7,28 @@
 
 import UIKit
 
-class ConversationCollectionViewCell: UICollectionViewCell {
+protocol MessageCellModelRepresentable {
+    var messageCellModel: CellIdentifiable? { get set }
+}
+
+class ConversationCollectionViewCell: UICollectionViewCell, MessageCellModelRepresentable {
+    var messageCellModel: CellIdentifiable? {
+        didSet {
+            setupMessage()
+        }
+    }
     
     @IBOutlet var viewBackgroundTheMessage: UIView!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var messageText: UILabel!
     
-    
-    
-    var text: String = "" {
-        didSet {
-            messageText.text = text
-        }
+    func setupMessage() {
+        guard let cellModel = messageCellModel as? MessageCellViewModel else { return }
+        messageText.text = cellModel.messageText
+        timeLabel.text = cellModel.messageDate
+        
+        guard cellModel.selfSender == false else { return }
+        incomingMessage()
     }
     
     override init(frame: CGRect) {
@@ -33,8 +43,6 @@ class ConversationCollectionViewCell: UICollectionViewCell {
         viewBackgroundTheMessage.clipsToBounds = true
         viewBackgroundTheMessage.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMinXMaxYCorner]
         viewBackgroundTheMessage.layer.cornerRadius = 15
-        
-        incomingMessage()
     }
     
     func incomingMessage() {

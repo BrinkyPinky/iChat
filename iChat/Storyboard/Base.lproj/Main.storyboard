@@ -102,7 +102,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n7D-XF-CNB">
                                                     <rect key="frame" x="298" y="8" width="76" height="58"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLY-eG-x5c">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLY-eG-x5c">
                                                             <rect key="frame" x="16" y="16" width="44" height="26"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -112,7 +112,6 @@
                                                     <color key="backgroundColor" red="0.36862745099999999" green="0.47450980390000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="SLY-eG-x5c" secondAttribute="trailing" constant="16" id="G6s-df-IT0"/>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="J8z-W1-RtG"/>
                                                         <constraint firstItem="SLY-eG-x5c" firstAttribute="top" secondItem="n7D-XF-CNB" secondAttribute="top" constant="16" id="L8C-Yj-JZ8"/>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="Nuf-So-Ikc"/>
                                                         <constraint firstAttribute="bottom" secondItem="SLY-eG-x5c" secondAttribute="bottom" constant="16" id="TiQ-FX-9g0"/>
@@ -272,6 +271,7 @@
                 <tabBarController storyboardIdentifier="MainTabBar" wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ea1-kX-w0D" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" id="okm-rd-wge">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

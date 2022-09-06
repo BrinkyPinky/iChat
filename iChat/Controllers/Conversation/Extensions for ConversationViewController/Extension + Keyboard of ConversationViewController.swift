@@ -41,6 +41,8 @@ extension ConversationViewController {
         }, completion: nil)
         
         let currentScrollViewPosition = conversationCollectionView.contentOffset
+        
+        guard currentScrollViewPosition.y != 0 else { return }
         self.conversationCollectionView.contentOffset = CGPoint(x: 0, y: currentScrollViewPosition.y + intersection.height)
     }
 }

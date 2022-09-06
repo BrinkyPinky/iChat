@@ -106,7 +106,7 @@ extension SearchUserViewController {
         let cellViewModel = rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath) as! UserTableViewCell
         
-        cell.cellModel = cellViewModel
+        cell.userCellModel = cellViewModel
         
         return cell
     }

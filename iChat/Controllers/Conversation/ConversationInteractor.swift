@@ -34,7 +34,7 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     func getMessages(with email: String) {
         var rawMessages: [MessageModel] = [] {
             didSet {
-                let response = Conversation.messages.Response(rawMessages: rawMessages)
+                let response = Conversation.Messages.Response(rawMessages: rawMessages)
                 presenter?.presentMessages(response: response)
             }
         }

@@ -14,7 +14,7 @@ import UIKit
 
 protocol ConversationPresentationLogic {
     func presentUserFullname(response: Conversation.fullnameLabel.Response)
-    func presentMessages(response: Conversation.messages.Response)
+    func presentMessages(response: Conversation.Messages.Response)
 }
 
 class ConversationPresenter: ConversationPresentationLogic {
@@ -29,13 +29,20 @@ class ConversationPresenter: ConversationPresentationLogic {
         viewController?.displayFullname(viewModel: viewModel)
     }
     
-    func presentMessages(response: Conversation.messages.Response) {
+    func presentMessages(response: Conversation.Messages.Response) {
         worker = ConversationPresenterWorkerMessagesSorting()
         let sortedData = worker?.sortMessages(rawMessages: response.rawMessages)
         
-        let messages = sortedData?.0
+        let messagesRows = sortedData!.0
         let headersDate = sortedData?.1
         
-        
+//        let viewModel = Conversation.Messages.ViewModel(messages: messages!, headersDate: headersDate!)
+//        viewController?.displayMessages(viewModel: viewModel)
+                    
+        let viewModel = Conversation.Messages.ViewModel(
+            messagesRows: messagesRows,
+            headersDate: headersDate!
+        )
+        viewController?.displayMessages(viewModel: viewModel)
     }
 }

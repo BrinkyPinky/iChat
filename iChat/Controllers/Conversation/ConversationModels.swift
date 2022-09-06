@@ -12,6 +12,8 @@
 
 import UIKit
 
+typealias MessageCellViewModel = Conversation.Messages.ViewModel.MessageCellViewModel
+
 enum Conversation {
     // MARK: Use cases
     
@@ -25,13 +27,35 @@ enum Conversation {
         }
     }
     
-    enum messages {
+    enum Messages {
         struct Response {
             let rawMessages: [MessageModel]
         }
         
         struct ViewModel {
+            struct MessageCellViewModel: CellIdentifiable {
+                var cellIdentifier: String {
+                    "MessageCell"
+                }
+                
+                let messageText: String?
+                let messageDate: String?
+                let isRead: Bool?
+                let selfSender: Bool?
+                
+                init(message: MessageModel) {
+                    messageText = message.messageText
+                    messageDate = message.date
+                    isRead = message.isRead
+                    selfSender = message.selfSender
+                }
+                
+            }
             
+            let messagesRows: [[CellIdentifiable]]
+            
+//            let messages: [[MessageModel]]
+            let headersDate: [String]
         }
     }
 }
