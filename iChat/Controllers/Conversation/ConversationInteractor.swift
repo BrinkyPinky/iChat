@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ConversationBusinessLogic {
-    
+    func sendMessage(request: Conversation.SendMessage.Request)
 }
 
 protocol ConversationDataStore {
@@ -21,6 +21,8 @@ protocol ConversationDataStore {
 }
 
 class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
+    
+    // MARK: Getting Needed User Information from Another View by Routing
     
     var userInfo: UserCellViewModel? {
         didSet {
@@ -31,7 +33,9 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         }
     }
     
-    func getMessages(with email: String) {
+    // MARK: Get Messages From Database
+    
+    private func getMessages(with email: String) {
         var rawMessages: [MessageModel] = [] {
             didSet {
                 let response = Conversation.Messages.Response(rawMessages: rawMessages)
@@ -40,9 +44,16 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         }
         
         FireBaseDatabaseManager.shared.getMessages(withEmail: email, andLimit: 25) { arrayOfMessages in
+            rawMessages = []
             rawMessages.append(contentsOf: arrayOfMessages)
-
         }
+    }
+    
+    // MARK: Send Message to Database
+    
+    func sendMessage(request: Conversation.SendMessage.Request) {
+        guard userInfo != nil else { return }
+        FireBaseDatabaseManager.shared.sendMessage(to: userInfo!.email, message: request.messageText)
     }
     
     var presenter: ConversationPresentationLogic?

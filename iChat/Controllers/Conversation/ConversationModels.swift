@@ -71,4 +71,10 @@ enum Conversation {
             let headersDatesRows: [CellIdentifiable]
         }
     }
+    
+    enum SendMessage {
+        struct Request {
+            let messageText: String
+        }
+    }
 }

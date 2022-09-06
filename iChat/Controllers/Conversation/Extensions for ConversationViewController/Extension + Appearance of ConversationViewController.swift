@@ -13,6 +13,10 @@ extension ConversationViewController {
     
     func setupUI() {
         
+        // MARK: Actions
+        
+        sendMessageButton.addTarget(self, action: #selector(sendMessageButtonPressed), for: .touchUpInside)
+        
         // MARK: Toolbar setup
         
         messageTextView.font = UIFont.systemFont(ofSize: 16)

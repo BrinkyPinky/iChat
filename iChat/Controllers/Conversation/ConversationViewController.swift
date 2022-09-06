@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol ConversationDisplayLogic: AnyObject {
     func displayFullname(viewModel: Conversation.fullnameLabel.ViewModel)
@@ -18,14 +19,15 @@ protocol ConversationDisplayLogic: AnyObject {
 }
 
 class ConversationViewController: UIViewController, ConversationDisplayLogic {
-        
-    let someExampleArray = ["Privet kak dela epgta?ewqjeiqwjeiqwjieqwjieqwi wqjie iqw ij ieqwj qw ji jqwi", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I", "Privet kak dela epgta?", "Hellooo!!!!", "HIIII!!!!!", "I"]
     
     @IBOutlet var conversationCollectionView: UICollectionView!
-    @IBOutlet var inputMessageToolBar: UIToolbar!
+    @IBOutlet var inputMessageToolBar: UIToolbar! //setup in file (Extension + Appearance)
     let messageTextView = UITextView() //logic in file (Extension + TextFieldDelegate)
-    let sendMessageButton = UIButton()
-    let stackViewForToolBar = UIStackView()
+    let sendMessageButton = UIButton() //setup in file (Extension + Appearance)
+    let stackViewForToolBar = UIStackView() //setup in file (Extension + Appearance)
+    
+    private var messagesRows: [[CellIdentifiable]] = [[]]
+    private var headersDatesRows: [CellIdentifiable] = []
     
     var interactor: ConversationBusinessLogic?
     var router: (NSObjectProtocol & ConversationRoutingLogic & ConversationDataPassing)?
@@ -49,7 +51,6 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         setupUI() //in file (Extension + Appearance)
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(
             self,
@@ -57,7 +58,6 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         ) //in file (Extension + Keyboard)
-//        conversationCollectionView.scrollToItem(at: IndexPath(item: 10, section: 0), at: .centeredVertically, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,16 +89,28 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     
     // MARK: Display Messages
     
-    var messagesRows: [[CellIdentifiable]] = [[]]
-    var headersDatesRows: [CellIdentifiable] = []
-    
     func displayMessages(viewModel: Conversation.Messages.ViewModel) {
         messagesRows = viewModel.messagesRows
         headersDatesRows = viewModel.headersDatesRows
         
         DispatchQueue.main.async {
-            self.conversationCollectionView.reloadData()
+            UIView.transition(
+                with: self.conversationCollectionView,
+                duration: 0.15,
+                options: .transitionCrossDissolve,
+                animations: { self.conversationCollectionView.reloadData() }
+            )
         }
+    }
+    
+    // MARK: Send Message Button Action
+    
+    @objc func sendMessageButtonPressed() {
+        guard messageTextView.text != "" && messageTextView.text != "Message" else { return }
+        
+        let request = Conversation.SendMessage.Request(messageText: messageTextView.text)
+        interactor?.sendMessage(request: request)
+        messageTextView.text = ""
     }
     
     // MARK: Setup
@@ -119,7 +131,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
 
 // MARK: Content of CollectionView
 
-extension ConversationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ConversationViewController: UICollectionViewDelegate, UICollectionViewDataSource {    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         headersDatesRows.count
     }
