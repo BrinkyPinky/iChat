@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E200040A28BA1108006FA2DF /* Extension + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200040928BA1108006FA2DF /* Extension + UITextField.swift */; };
+		E215F9A928C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E215F9A828C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift */; };
 		E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556F28B77F1E002EDF83 /* LoginViewController.swift */; };
 		E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220557C28B81FD6002EDF83 /* SignUpViewController.swift */; };
 		E229B95228C55EA300F795B7 /* ChatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B94C28C55EA300F795B7 /* ChatsPresenter.swift */; };
@@ -59,6 +60,7 @@
 		503B25FABD625F0F8E634C10 /* Pods_iChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8C1053312754B498A03CB6 /* Pods-iChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChat.release.xcconfig"; path = "Target Support Files/Pods-iChat/Pods-iChat.release.xcconfig"; sourceTree = "<group>"; };
 		E200040928BA1108006FA2DF /* Extension + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITextField.swift"; sourceTree = "<group>"; };
+		E215F9A828C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationPresenterWorkerMessagesSorting.swift; sourceTree = "<group>"; };
 		E220556F28B77F1E002EDF83 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E220557C28B81FD6002EDF83 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E229B94C28C55EA300F795B7 /* ChatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsPresenter.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				E264997628C61B5E00C54A51 /* ConversationViewController.swift */,
 				E264997728C61B5E00C54A51 /* ConversationInteractor.swift */,
 				E264997228C61B5E00C54A51 /* ConversationPresenter.swift */,
+				E215F9A828C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift */,
 				E264997428C61B5E00C54A51 /* ConversationRouter.swift */,
 				E264997528C61B5E00C54A51 /* ConversationModels.swift */,
 				E264997128C61B1E00C54A51 /* Extensions for ConversationViewController */,
@@ -462,6 +465,7 @@
 				E264996C28C616E000C54A51 /* Extension + Appearance of ConversationViewController.swift in Sources */,
 				E2C4513E28C0CF7D00F9C473 /* SearchUserViewController.swift in Sources */,
 				E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */,
+				E215F9A928C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift in Sources */,
 				E28F050428B777720096E22F /* AppDelegate.swift in Sources */,
 				E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCell.swift in Sources */,
 				E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */,

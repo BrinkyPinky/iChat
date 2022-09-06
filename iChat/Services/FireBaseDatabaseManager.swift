@@ -33,8 +33,11 @@ class FireBaseDatabaseManager {
     func searchUser(username: String, completion: @escaping ([UserModel]) -> Void) {
         let usernameLowered = username.lowercased()
         
-        let dbDestination = db.child("Users")
-        let query = dbDestination.queryOrdered(byChild: "usernameForSearch").queryStarting(atValue: usernameLowered).queryLimited(toFirst: 10)
+        let query = db
+            .child("Users")
+            .queryOrdered(byChild: "usernameForSearch")
+            .queryStarting(atValue: usernameLowered)
+            .queryLimited(toFirst: 10)
         
         query.observeSingleEvent(of: .value) { (data) in
             guard data.exists() != false else { return }
@@ -67,8 +70,16 @@ class FireBaseDatabaseManager {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: email)
         
-        let dbSelfDestination = db.child("Users").child(correctSelfEmail).child("conversations").child("conversation-with-\(correctOtherEmail)")
-        let dbOtherDestination = db.child("Users").child(correctOtherEmail).child("conversations").child("conversation-with-\(correctSelfEmail)")
+        let dbSelfDestination = db
+            .child("Users")
+            .child(correctSelfEmail)
+            .child("conversations")
+            .child("conversation-with-\(correctOtherEmail)")
+        let dbOtherDestination = db
+            .child("Users")
+            .child(correctOtherEmail)
+            .child("conversations")
+            .child("conversation-with-\(correctSelfEmail)")
         
         let specifiedDate = String(Date.timeIntervalSinceReferenceDate)
 
@@ -91,8 +102,12 @@ class FireBaseDatabaseManager {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
 
-        let dbDestination = db.child("Users").child(correctSelfEmail).child("conversations").child("conversation-with-\(correctOtherEmail)")
-        let query = dbDestination.queryLimited(toLast: UInt(andLimit))
+        let query = db
+            .child("Users")
+            .child(correctSelfEmail)
+            .child("conversations")
+            .child("conversation-with-\(correctOtherEmail)")
+            .queryLimited(toLast: UInt(andLimit))
         
         query.observe(.value) { (data) in
             guard data.exists() != false else { return }
@@ -115,8 +130,8 @@ class FireBaseDatabaseManager {
                 
                 messages.append(message)
             }
-            
-            completion(messages)
+            let sortedMessages = messages.sorted(by: {$0.date < $1.date})
+            completion(sortedMessages)
         }
     }
 }
