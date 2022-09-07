@@ -10,6 +10,7 @@
 //  see http://clean-swift.com
 //
 
+
 import UIKit
 import Alamofire
 
@@ -26,8 +27,8 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     let sendMessageButton = UIButton() //setup in file (Extension + Appearance)
     let stackViewForToolBar = UIStackView() //setup in file (Extension + Appearance)
     
-    private var messagesRows: [[CellIdentifiable]] = [[]]
-    private var headersDatesRows: [CellIdentifiable] = []
+    var messagesRows: [[CellIdentifiable]] = [[]]
+    var headersDatesRows: [CellIdentifiable] = []
     
     var interactor: ConversationBusinessLogic?
     var router: (NSObjectProtocol & ConversationRoutingLogic & ConversationDataPassing)?
@@ -159,13 +160,18 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
         return messagesRows[section].count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let messageCellModel = messagesRows[indexPath.section][indexPath.row]
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCell
-        
-        cell.messageCellModel = messageCellModel
-        
-        return cell
+                
+        if messageCellModel.cellIdentifier == "OutgoingMessage" {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellOutgoingMessage
+            cell.messageCellModel = messageCellModel
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellIncomingMessage
+            cell.messageCellModel = messageCellModel
+            return cell
+        }
     }
 }

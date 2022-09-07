@@ -84,40 +84,53 @@ extension ConversationViewController {
 // MARK: Appearance of collection view
 extension ConversationViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-        let indexPath = IndexPath(row: 0, section: section)
-        let headerView = self.collectionView(
-            collectionView,
-            viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader,
-            at: indexPath
-        ) as! ConversationCollectionHeaderView
-        
-        return headerView.systemLayoutSizeFitting(
-            CGSize(
-                width: collectionView.frame.width,
-                height: UIView.layoutFittingExpandedSize.height
-            ),
-            withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .fittingSizeLevel
-        )
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let cell = self.collectionView(conversationCollectionView, cellForItemAt: indexPath) as! ConversationCollectionViewCell
+//
+//    }
     
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        
+//        let indexPath = IndexPath(row: 0, section: section)
+//        let headerView = self.collectionView(
+//            collectionView,
+//            viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader,
+//            at: indexPath
+//        ) as! ConversationCollectionHeaderView
+//        
+//        return headerView.systemLayoutSizeFitting(
+//            CGSize(
+//                width: collectionView.frame.width,
+//                height: UIView.layoutFittingExpandedSize.height
+//            ),
+//            withHorizontalFittingPriority: .required,
+//            verticalFittingPriority: .fittingSizeLevel
+//        )
+//    }
+//    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let cell = self.collectionView(collectionView, cellForItemAt: indexPath) as! ConversationCollectionViewCell
-        
-//        return CGSize(width: 400, height: 2000)
-        return cell.systemLayoutSizeFitting(
-            CGSize(
-                width: collectionView.frame.width,
-                height: UIView.layoutFittingExpandedSize.height),
-            withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .fittingSizeLevel
-        )
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        0
+        let messageCellModel = messagesRows[indexPath.section][indexPath.row]
+                
+        if messageCellModel.cellIdentifier == "OutgoingMessage" {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellOutgoingMessage
+            cell.messageCellModel = messageCellModel
+            return cell.systemLayoutSizeFitting(
+                CGSize(
+                    width: collectionView.frame.width,
+                    height: UIView.layoutFittingExpandedSize.height),
+                withHorizontalFittingPriority: .required,
+                verticalFittingPriority: .fittingSizeLevel
+            )
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellIncomingMessage
+            cell.messageCellModel = messageCellModel
+            return cell.systemLayoutSizeFitting(
+                CGSize(
+                    width: collectionView.frame.width,
+                    height: UIView.layoutFittingExpandedSize.height),
+                withHorizontalFittingPriority: .required,
+                verticalFittingPriority: .fittingSizeLevel
+            )
+        }
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E200040A28BA1108006FA2DF /* Extension + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200040928BA1108006FA2DF /* Extension + UITextField.swift */; };
 		E215F9A928C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E215F9A828C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift */; };
+		E215F9AD28C89BB9003A64B8 /* ConversationCollectionViewCellIncomingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E215F9AC28C89BB9003A64B8 /* ConversationCollectionViewCellIncomingMessage.swift */; };
 		E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556F28B77F1E002EDF83 /* LoginViewController.swift */; };
 		E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220557C28B81FD6002EDF83 /* SignUpViewController.swift */; };
 		E229B95228C55EA300F795B7 /* ChatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B94C28C55EA300F795B7 /* ChatsPresenter.swift */; };
@@ -42,7 +43,7 @@
 		E28F051328B777730096E22F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28F051128B777730096E22F /* LaunchScreen.storyboard */; };
 		E2A1044528C49DC600890ED7 /* ConversationCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */; };
 		E2A1044928C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */; };
-		E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCell.swift */; };
+		E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCellOutgoingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCellOutgoingMessage.swift */; };
 		E2C4513A28C0CF7D00F9C473 /* SearchUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4513428C0CF7D00F9C473 /* SearchUserPresenter.swift */; };
 		E2C4513C28C0CF7D00F9C473 /* SearchUserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4513628C0CF7D00F9C473 /* SearchUserRouter.swift */; };
 		E2C4513D28C0CF7D00F9C473 /* SearchUserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4513728C0CF7D00F9C473 /* SearchUserModels.swift */; };
@@ -61,6 +62,7 @@
 		7F8C1053312754B498A03CB6 /* Pods-iChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChat.release.xcconfig"; path = "Target Support Files/Pods-iChat/Pods-iChat.release.xcconfig"; sourceTree = "<group>"; };
 		E200040928BA1108006FA2DF /* Extension + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITextField.swift"; sourceTree = "<group>"; };
 		E215F9A828C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationPresenterWorkerMessagesSorting.swift; sourceTree = "<group>"; };
+		E215F9AC28C89BB9003A64B8 /* ConversationCollectionViewCellIncomingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewCellIncomingMessage.swift; sourceTree = "<group>"; };
 		E220556F28B77F1E002EDF83 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E220557C28B81FD6002EDF83 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E229B94C28C55EA300F795B7 /* ChatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsPresenter.swift; sourceTree = "<group>"; };
@@ -96,7 +98,7 @@
 		E28F051428B777730096E22F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionHeaderView.swift; sourceTree = "<group>"; };
 		E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewStickyHeaderLayout.swift; sourceTree = "<group>"; };
-		E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationCollectionViewCell.swift; path = iChat/Views/ConversationCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCellOutgoingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationCollectionViewCellOutgoingMessage.swift; path = iChat/Views/ConversationCollectionViewCellOutgoingMessage.swift; sourceTree = SOURCE_ROOT; };
 		E2C4513428C0CF7D00F9C473 /* SearchUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserPresenter.swift; sourceTree = "<group>"; };
 		E2C4513628C0CF7D00F9C473 /* SearchUserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserRouter.swift; sourceTree = "<group>"; };
 		E2C4513728C0CF7D00F9C473 /* SearchUserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserModels.swift; sourceTree = "<group>"; };
@@ -169,7 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */,
-				E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCell.swift */,
+				E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCellOutgoingMessage.swift */,
+				E215F9AC28C89BB9003A64B8 /* ConversationCollectionViewCellIncomingMessage.swift */,
 				E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */,
 				E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */,
 			);
@@ -459,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E215F9AD28C89BB9003A64B8 /* ConversationCollectionViewCellIncomingMessage.swift in Sources */,
 				E229B95528C55EA300F795B7 /* ChatsModels.swift in Sources */,
 				E229B95228C55EA300F795B7 /* ChatsPresenter.swift in Sources */,
 				E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */,
@@ -467,7 +471,7 @@
 				E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */,
 				E215F9A928C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift in Sources */,
 				E28F050428B777720096E22F /* AppDelegate.swift in Sources */,
-				E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCell.swift in Sources */,
+				E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCellOutgoingMessage.swift in Sources */,
 				E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */,
 				E2C4513F28C0CF7D00F9C473 /* SearchUserInteractor.swift in Sources */,
 				E264997828C61B5E00C54A51 /* ConversationPresenter.swift in Sources */,
