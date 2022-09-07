@@ -22,7 +22,7 @@ protocol ConversationDisplayLogic: AnyObject {
 class ConversationViewController: UIViewController, ConversationDisplayLogic {
     
     @IBOutlet var conversationCollectionView: UICollectionView!
-    @IBOutlet var inputMessageToolBar: UIToolbar! //setup in file (Extension + Appearance)
+    @IBOutlet var MessageToolBar: UIToolbar! //setup in file (Extension + Appearance)
     let messageTextView = UITextView() //logic in file (Extension + TextFieldDelegate)
     let sendMessageButton = UIButton() //setup in file (Extension + Appearance)
     let stackViewForToolBar = UIStackView() //setup in file (Extension + Appearance)
@@ -67,7 +67,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )  //in file (Extension + Keyboard)
-        
+        interactor?.stopObservingMessages()
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -132,11 +132,14 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
 
 // MARK: Content of CollectionView
 
-extension ConversationViewController: UICollectionViewDelegate, UICollectionViewDataSource {    
+extension ConversationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    // MARK: Header content
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         headersDatesRows.count
     }
-    
+        
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let messageHeaderCellModel = headersDatesRows[indexPath.section]
         
@@ -156,6 +159,8 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
         }
     }
     
+    // MARK: Cell Content
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messagesRows[section].count
     }
@@ -163,7 +168,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let messageCellModel = messagesRows[indexPath.section][indexPath.row]
-                
+        
         if messageCellModel.cellIdentifier == "OutgoingMessage" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellOutgoingMessage
             cell.messageCellModel = messageCellModel

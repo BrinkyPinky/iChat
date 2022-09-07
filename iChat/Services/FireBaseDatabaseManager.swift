@@ -81,7 +81,7 @@ class FireBaseDatabaseManager {
             .child("conversations")
             .child("conversation-with-\(correctSelfEmail)")
         
-        let specifiedDate = String(Date.timeIntervalSinceReferenceDate)
+        let specifiedDate = String(Date().timeIntervalSince1970)
 
         dbSelfDestination.childByAutoId().setValue([
             "date": specifiedDate,
@@ -121,6 +121,8 @@ class FireBaseDatabaseManager {
                 let isReadValue = value["isRead"] as? Bool
                 let selfSenderValue = value["selfSender"] as? Bool
                 
+                print(dateValue)
+                
                 let message = MessageModel(
                     messageText: messageTextValue ?? "No message information",
                     date: dateValue ?? "No date",
@@ -133,5 +135,9 @@ class FireBaseDatabaseManager {
             let sortedMessages = messages.sorted(by: {$0.date < $1.date})
             completion(sortedMessages)
         }
+    }
+    
+    func removeObservers() {
+        db.removeAllObservers()
     }
 }

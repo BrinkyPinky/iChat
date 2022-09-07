@@ -40,9 +40,16 @@ extension ConversationViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
-        let currentScrollViewPosition = conversationCollectionView.contentOffset
+//        let currentScrollViewPosition = conversationCollectionView.contentOffset
+//
+//        guard currentScrollViewPosition.y != 0 else { return }
+//        self.conversationCollectionView.contentOffset = CGPoint(x: 0, y: currentScrollViewPosition.y + intersection.height)
         
-        guard currentScrollViewPosition.y != 0 else { return }
-        self.conversationCollectionView.contentOffset = CGPoint(x: 0, y: currentScrollViewPosition.y + intersection.height)
+        let size = conversationCollectionView.contentOffset.y + conversationCollectionView.frame.height - 3
+        
+        guard let indexPath = conversationCollectionView.indexPathForItem(at: CGPoint(x: 0, y: size)) else { return }
+        print(indexPath)
+        
+        conversationCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
     }
 }

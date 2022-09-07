@@ -14,6 +14,7 @@ import UIKit
 
 protocol ConversationBusinessLogic {
     func sendMessage(request: Conversation.SendMessage.Request)
+    func stopObservingMessages()
 }
 
 protocol ConversationDataStore {
@@ -54,6 +55,12 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     func sendMessage(request: Conversation.SendMessage.Request) {
         guard userInfo != nil else { return }
         FireBaseDatabaseManager.shared.sendMessage(to: userInfo!.email, message: request.messageText)
+    }
+    
+    // MARK: When view disappear database stops own observer for messages
+    
+    func stopObservingMessages() {
+        FireBaseDatabaseManager.shared.removeObservers()
     }
     
     var presenter: ConversationPresentationLogic?

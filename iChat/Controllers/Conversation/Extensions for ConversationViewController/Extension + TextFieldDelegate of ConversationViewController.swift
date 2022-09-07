@@ -34,7 +34,7 @@ extension ConversationViewController: UITextViewDelegate {
             }
         }
         
-        inputMessageToolBar.constraints.forEach { constraint in
+        MessageToolBar.constraints.forEach { constraint in
             if constraint.firstAttribute == .height {
                 constraint.constant = estimatedSize.height + 13
             }

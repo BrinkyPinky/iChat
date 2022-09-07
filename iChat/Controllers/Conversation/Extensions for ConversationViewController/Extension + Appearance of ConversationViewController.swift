@@ -40,7 +40,7 @@ extension ConversationViewController {
         stackViewForToolBar.addArrangedSubview(sendMessageButton)
         
         let stackViewToolBarItem = UIBarButtonItem(customView: stackViewForToolBar)
-        inputMessageToolBar.items = [stackViewToolBarItem]
+        MessageToolBar.items = [stackViewToolBarItem]
         
         let size = CGSize(width: messageTextView.frame.size.width, height: .infinity)
         let estimatedSize = messageTextView.sizeThatFits(size)
@@ -49,7 +49,7 @@ extension ConversationViewController {
             sendMessageButton.heightAnchor.constraint(equalToConstant: 36),
             messageTextView.heightAnchor.constraint(equalToConstant: estimatedSize.height),
             messageTextView.trailingAnchor.constraint(equalTo: sendMessageButton.leadingAnchor, constant: -8),
-            inputMessageToolBar.heightAnchor.constraint(equalToConstant: estimatedSize.height + 13)
+            MessageToolBar.heightAnchor.constraint(equalToConstant: estimatedSize.height + 13)
         ].forEach({ $0.isActive = true })
         
         // MARK: NavigationBar Setup

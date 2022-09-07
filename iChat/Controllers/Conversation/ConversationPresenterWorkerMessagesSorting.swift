@@ -21,9 +21,7 @@ class ConversationPresenterWorkerMessagesSorting {
         
         rawMessages.forEach { messageModel in
             let timeInterval = TimeInterval(messageModel.date)
-            var convertedDateValue = Date(timeIntervalSinceReferenceDate: timeInterval ?? 0)
-            let secondsFromGMT = TimeZone.current.secondsFromGMT()
-            convertedDateValue.addTimeInterval(TimeInterval(secondsFromGMT))
+            let convertedDateValue = Date(timeIntervalSince1970: timeInterval ?? 0)
             
             let dayOfDate = convertedDateValue.formatted(date: .numeric, time: .omitted)
             
