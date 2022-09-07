@@ -107,7 +107,17 @@ extension ConversationViewController: UICollectionViewDelegateFlowLayout {
 //            verticalFittingPriority: .fittingSizeLevel
 //        )
 //    }
-//    
+//
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        let maxYPosition = collectionView.collectionViewLayout.collectionViewContentSize.height
+        let collectionViewHeight = collectionView.bounds.height
+        
+        return CGPoint(x: 0, y: maxYPosition - collectionViewHeight)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let messageCellModel = messagesRows[indexPath.section][indexPath.row]
                 

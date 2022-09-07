@@ -39,12 +39,13 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     private func getMessages(with email: String) {
         var rawMessages: [MessageModel] = [] {
             didSet {
+                guard rawMessages.isEmpty == false else { return }
                 let response = Conversation.Messages.Response(rawMessages: rawMessages)
                 presenter?.presentMessages(response: response)
             }
         }
         
-        FireBaseDatabaseManager.shared.getMessages(withEmail: email, andLimit: 25) { arrayOfMessages in
+        FireBaseDatabaseManager.shared.getMessages(withEmail: email, andLimit: 50) { arrayOfMessages in
             rawMessages = []
             rawMessages.append(contentsOf: arrayOfMessages)
         }

@@ -25,7 +25,6 @@ class ConversationPresenterWorkerMessagesSorting {
             
             let dayOfDate = convertedDateValue.formatted(date: .numeric, time: .omitted)
             
-            
             if referenceDateToCompare == nil {
                 referenceDateToCompare = dayOfDate
                 headersDatesRows.append(HeadersMessageCellViewModel(

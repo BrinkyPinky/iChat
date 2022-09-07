@@ -25,12 +25,16 @@ extension ConversationViewController {
         let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
         let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
         let intersection = safeAreaFrame.intersection(keyboardFrameInView)
+               
+        // MARK: Animation settings
         
         let keyboardAnimationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey]
         let animationDuration: TimeInterval = (keyboardAnimationDuration as? NSNumber)?.doubleValue ?? 0
         let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
         let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
         let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
+        
+        // MARK: SafeArea when keyboard appears
         
         UIView.animate(withDuration: animationDuration,
                        delay: 0,
@@ -40,16 +44,18 @@ extension ConversationViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
-//        let currentScrollViewPosition = conversationCollectionView.contentOffset
-//
-//        guard currentScrollViewPosition.y != 0 else { return }
-//        self.conversationCollectionView.contentOffset = CGPoint(x: 0, y: currentScrollViewPosition.y + intersection.height)
+        // MARK: CollectionView when keyboard appear
         
-        let size = conversationCollectionView.contentOffset.y + conversationCollectionView.frame.height - 3
-        
+        let size = conversationCollectionView.contentOffset.y + conversationCollectionView.frame.height + intersection.height - 20
+
         guard let indexPath = conversationCollectionView.indexPathForItem(at: CGPoint(x: 0, y: size)) else { return }
-        print(indexPath)
+        guard intersection.height != 0 else { return }
         
-        conversationCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+        UIView.animate(withDuration: animationDuration,
+                       delay: 0,
+                       options: animationCurve,
+                       animations: {
+            self.conversationCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+        }, completion: nil)
     }
 }

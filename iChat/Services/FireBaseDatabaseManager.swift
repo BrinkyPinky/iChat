@@ -120,9 +120,7 @@ class FireBaseDatabaseManager {
                 let dateValue = value["date"] as? String
                 let isReadValue = value["isRead"] as? Bool
                 let selfSenderValue = value["selfSender"] as? Bool
-                
-                print(dateValue)
-                
+                                
                 let message = MessageModel(
                     messageText: messageTextValue ?? "No message information",
                     date: dateValue ?? "No date",

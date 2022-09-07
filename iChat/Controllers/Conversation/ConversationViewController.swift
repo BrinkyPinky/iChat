@@ -98,7 +98,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             UIView.transition(
                 with: self.conversationCollectionView,
                 duration: 0.15,
-                options: .transitionCrossDissolve,
+                options: [.curveEaseInOut,.transitionCrossDissolve],
                 animations: { self.conversationCollectionView.reloadData() }
             )
         }
