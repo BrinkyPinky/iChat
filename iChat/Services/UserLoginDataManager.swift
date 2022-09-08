@@ -12,6 +12,8 @@ class UserLoginDataManager {
     
     var email: String?
     var password: String?
+    var fullname: String?
+    var username: String?
     
     init() {
         fetchData()
@@ -20,6 +22,8 @@ class UserLoginDataManager {
     func fetchData() {
         email = UserDefaults.standard.string(forKey: "email")
         password = UserDefaults.standard.string(forKey: "password")
+        fullname = UserDefaults.standard.string(forKey: "fullname")
+        username = UserDefaults.standard.string(forKey: "username")
     }
     
     func saveData(email: String, password: String) {
@@ -27,8 +31,18 @@ class UserLoginDataManager {
         UserDefaults.standard.set(password, forKey: "password")
     }
     
+    func getUserInformation() {
+        FireBaseDatabaseManager.shared.getSelfUser(email: email!) { fullnameValue, usernameValue in
+            UserDefaults.standard.set(fullnameValue, forKey: "fullname")
+            UserDefaults.standard.set(usernameValue, forKey: "username")
+        }
+        fetchData()
+    }
+    
     func removeData() {
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
+        UserDefaults.standard.removeObject(forKey: "fullname")
+        UserDefaults.standard.removeObject(forKey: "username")
     }
 }

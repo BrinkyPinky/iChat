@@ -24,6 +24,7 @@ class LoginViewModel: LoginViewModelProtocol {
             guard let error = error else {
                 view.showViewController(with: "MessengerViewController")
                 UserLoginDataManager.shared.saveData(email: email ?? "", password: password ?? "")
+                UserLoginDataManager.shared.getUserInformation()
                 return
             }
             view.alert(with: error.localizedDescription)

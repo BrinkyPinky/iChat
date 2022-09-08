@@ -66,8 +66,6 @@ enum Conversation {
             }
             
             let messagesRows: [[CellIdentifiable]]
-            
-//            let messages: [[MessageModel]]
             let headersDatesRows: [CellIdentifiable]
         }
     }

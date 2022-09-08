@@ -44,6 +44,7 @@ extension ConversationViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
+        
         // MARK: CollectionView when keyboard appear
         
         let size = conversationCollectionView.contentOffset.y + conversationCollectionView.frame.height + intersection.height - 20

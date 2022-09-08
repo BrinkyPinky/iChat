@@ -12,17 +12,38 @@
 
 import UIKit
 
+typealias ChatsViewModelCell = Chats.gettingChats.ViewModel.ChatsViewModelCell
+
 enum Chats {
     // MARK: Use cases
     
-    enum Something {
-        struct Request {
-        }
+    enum gettingChats {
         
         struct Response {
+            var rawChats: [ChatModel]
         }
         
         struct ViewModel {
+            struct ChatsViewModelCell: CellIdentifiable {
+                var cellIdentifier: String {
+                    "ChatCell"
+                }
+                
+                let lastMessageDate: String
+                let lastMessageText: String
+                let username: String
+                let fullname: String
+                
+                init(chatModel: ChatModel) {
+                    lastMessageDate = chatModel.lastMessageDate ?? "Unknown"
+                    lastMessageText = chatModel.lastMessageText ?? "No message"
+                    username = chatModel.username ?? "Unknown"
+                    fullname = chatModel.fullname ?? "Unknown"
+                }
+                
+            }
+            
+            var rows: [CellIdentifiable]
         }
     }
 }

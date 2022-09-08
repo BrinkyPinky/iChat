@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ChatsBusinessLogic {
-    func doSomething(request: Chats.Something.Request)
+    func getChats()
 }
 
 protocol ChatsDataStore {
@@ -24,10 +24,24 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
     
     var presenter: ChatsPresentationLogic?
     
-    // MARK: Do something
-    func doSomething(request: Chats.Something.Request) {
-        
-        let response = Chats.Something.Response()
-        presenter?.presentSomething(response: response)
+    var rawChats = [ChatModel]() {
+        didSet {
+            guard rawChats.isEmpty == false else { return }
+            provideChats()
+        }
+    }
+
+    
+    // MARK: Get raw list of chats
+    func getChats() {
+        FireBaseDatabaseManager.shared.getChats { [unowned self] chats in
+            rawChats = []
+            rawChats.append(contentsOf: chats)
+        }
+    }
+    
+    func provideChats() {
+        let response = Chats.gettingChats.Response(rawChats: rawChats)
+        presenter?.presentChats(response: response)
     }
 }

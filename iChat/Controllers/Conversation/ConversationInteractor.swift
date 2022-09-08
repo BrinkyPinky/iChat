@@ -55,7 +55,7 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     
     func sendMessage(request: Conversation.SendMessage.Request) {
         guard userInfo != nil else { return }
-        FireBaseDatabaseManager.shared.sendMessage(to: userInfo!.email, message: request.messageText)
+        FireBaseDatabaseManager.shared.sendMessage(to: userInfo!.email, withName: userInfo!.fullName, andUsername: userInfo!.username, message: request.messageText)
     }
     
     // MARK: When view disappear database stops own observer for messages

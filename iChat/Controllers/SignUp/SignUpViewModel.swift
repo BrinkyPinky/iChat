@@ -48,6 +48,7 @@ class SignUpViewModel: SignUpViewModelProtocol {
                     view.showViewController(with: "MessengerViewController")
                     FireBaseDatabaseManager.shared.createUser(username: username ?? "", email: email ?? "", name: name ?? "", surname: surname ?? "")
                     UserLoginDataManager.shared.saveData(email: email ?? "", password: password ?? "")
+                    UserLoginDataManager.shared.getUserInformation()
                     return
                 }
                 

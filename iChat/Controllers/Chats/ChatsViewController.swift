@@ -13,13 +13,15 @@
 import UIKit
 
 protocol ChatsDisplayLogic: AnyObject {
-    func displaySomething(viewModel: Chats.Something.ViewModel)
+    func displayChats(viewModel: Chats.gettingChats.ViewModel)
 }
 
 class ChatsViewController: UITableViewController, ChatsDisplayLogic {
     
     var interactor: ChatsBusinessLogic?
     var router: (NSObjectProtocol & ChatsRoutingLogic & ChatsDataPassing)?
+    
+    private var chatsRows = [CellIdentifiable]()
     
     // MARK: Object lifecycle
     
@@ -34,7 +36,7 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        interactor?.getChats()
     }
     
     // MARK: Routing
@@ -47,16 +49,11 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
             }
         }
     }
-    
-    // MARK: Do something
-    
-    func doSomething() {
-        let request = Chats.Something.Request()
-        interactor?.doSomething(request: request)
-    }
      
-    func displaySomething(viewModel: Chats.Something.ViewModel) {
-//        nameTextField.text = viewModel.name
+    func displayChats(viewModel: Chats.gettingChats.ViewModel) {
+        chatsRows = viewModel.rows
+        
+        tableView.reloadData()
     }
     
     // MARK: Setup
@@ -72,5 +69,25 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
+    }
+}
+
+extension ChatsViewController {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        chatsRows.count
+    }
+ 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let chatViewModelCell = chatsRows[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: chatViewModelCell.cellIdentifier, for: indexPath) as! ChatsTableViewCell
+        
+        cell.chatsViewModelCell = chatViewModelCell
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 110
     }
 }

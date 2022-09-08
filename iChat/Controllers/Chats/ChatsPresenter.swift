@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ChatsPresentationLogic {
-    func presentSomething(response: Chats.Something.Response)
+    func presentChats(response: Chats.gettingChats.Response)
 }
 
 class ChatsPresenter: ChatsPresentationLogic {
@@ -22,8 +22,27 @@ class ChatsPresenter: ChatsPresentationLogic {
     
     // MARK: Do something
     
-    func presentSomething(response: Chats.Something.Response) {
-        let viewModel = Chats.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentChats(response: Chats.gettingChats.Response) {
+        var chatsViewModelCell = [ChatsViewModelCell]()
+        
+        response.rawChats.forEach { chatModel in
+            let rawDate = Date(timeIntervalSince1970: Double(chatModel.lastMessageDate!)!)
+            let convertedDate = rawDate.formatted(date: .omitted, time: .shortened)
+            
+            chatsViewModelCell.append(
+                ChatsViewModelCell(
+                    chatModel: ChatModel(
+                        email: chatModel.email,
+                        fullname: chatModel.fullname,
+                        lastMessageDate: convertedDate,
+                        lastMessageText: chatModel.lastMessageText,
+                        username: chatModel.username
+                    )
+                )
+            )
+        }
+        
+        let viewModel = Chats.gettingChats.ViewModel(rows: chatsViewModelCell)
+        viewController?.displayChats(viewModel: viewModel)
     }
 }

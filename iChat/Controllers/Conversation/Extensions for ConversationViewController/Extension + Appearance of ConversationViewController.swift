@@ -83,41 +83,6 @@ extension ConversationViewController {
 
 // MARK: Appearance of collection view
 extension ConversationViewController: UICollectionViewDelegateFlowLayout {
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let cell = self.collectionView(conversationCollectionView, cellForItemAt: indexPath) as! ConversationCollectionViewCell
-//
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        
-//        let indexPath = IndexPath(row: 0, section: section)
-//        let headerView = self.collectionView(
-//            collectionView,
-//            viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader,
-//            at: indexPath
-//        ) as! ConversationCollectionHeaderView
-//        
-//        return headerView.systemLayoutSizeFitting(
-//            CGSize(
-//                width: collectionView.frame.width,
-//                height: UIView.layoutFittingExpandedSize.height
-//            ),
-//            withHorizontalFittingPriority: .required,
-//            verticalFittingPriority: .fittingSizeLevel
-//        )
-//    }
-//
-    
-    
-    
-    func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        let maxYPosition = collectionView.collectionViewLayout.collectionViewContentSize.height
-        let collectionViewHeight = collectionView.bounds.height
-        
-        return CGPoint(x: 0, y: maxYPosition - collectionViewHeight)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let messageCellModel = messagesRows[indexPath.section][indexPath.row]
                 
