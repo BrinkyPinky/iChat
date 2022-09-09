@@ -7,9 +7,10 @@ target 'iChat' do
 
   # Pods for iChat
 
-pod 'Alamofire'
-pod 'FirebaseAuth'
-pod 'FirebaseFirestore'
-pod 'FirebaseDatabase'
+# pod 'Alamofire'
+# pod 'FirebaseAuth'
+# pod 'FirebaseFirestore'
+# pod 'FirebaseDatabase'
+# pod 'FirebaseStorage'
 
 end

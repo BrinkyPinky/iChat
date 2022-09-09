@@ -12,7 +12,6 @@
 
 
 import UIKit
-import Alamofire
 
 protocol ConversationDisplayLogic: AnyObject {
     func displayFullname(viewModel: Conversation.fullnameLabel.ViewModel)

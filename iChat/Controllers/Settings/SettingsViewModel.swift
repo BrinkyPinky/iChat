@@ -80,6 +80,10 @@ class SettingsViewModel: SettingsViewModelProtocol {
     }
     
     func pickedImage(with image: UIImage?) {
-        
+        guard let data = image?.jpegData(compressionQuality: 0.4) else {
+            view.showAlert(with: "Something went wrong with uploading the image to the server")
+            return
+        }
+        FireBaseStorageManager.shared.uploadUserImage(with: data)
     }
 }

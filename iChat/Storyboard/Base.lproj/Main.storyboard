@@ -345,24 +345,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="YSU-l5-MNj">
-                            <rect key="frame" x="0.0" y="0.0" width="390" height="174"/>
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="190"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.trianglebadge.exclamationmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ioF-fL-ryz">
-                                    <rect key="frame" x="132.66666666666666" y="-1" width="126.99999999999997" height="125.66666666666667"/>
+                                    <rect key="frame" x="132.66666666666666" y="15.000000000000007" width="126.99999999999997" height="125.66666666666669"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ioF-fL-ryz" secondAttribute="height" multiplier="1:1" id="LVv-kO-9vt"/>
                                         <constraint firstAttribute="height" constant="125" id="Yyv-ar-NdM"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Egor Shilov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S79-Q8-IYl">
-                                    <rect key="frame" x="152" y="133" width="86" height="21"/>
+                                    <rect key="frame" x="152" y="149" width="86" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c25-Gk-Pq1">
-                                    <rect key="frame" x="174" y="154" width="42" height="14.333333333333343"/>
+                                    <rect key="frame" x="174" y="170" width="42" height="14.333333333333343"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" systemColor="secondaryLabelColor"/>
                                     <nil key="highlightedColor"/>
@@ -371,7 +371,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="S79-Q8-IYl" firstAttribute="centerX" secondItem="YSU-l5-MNj" secondAttribute="centerX" id="A2l-qd-rJV"/>
-                                <constraint firstItem="ioF-fL-ryz" firstAttribute="top" secondItem="YSU-l5-MNj" secondAttribute="top" id="Guu-On-fNU"/>
+                                <constraint firstItem="ioF-fL-ryz" firstAttribute="top" secondItem="YSU-l5-MNj" secondAttribute="top" constant="16" id="Guu-On-fNU"/>
                                 <constraint firstItem="ioF-fL-ryz" firstAttribute="centerX" secondItem="YSU-l5-MNj" secondAttribute="centerX" id="UwR-9y-0JC"/>
                                 <constraint firstItem="c25-Gk-Pq1" firstAttribute="top" secondItem="S79-Q8-IYl" secondAttribute="bottom" id="aBq-xQ-pqn"/>
                                 <constraint firstItem="c25-Gk-Pq1" firstAttribute="centerX" secondItem="YSU-l5-MNj" secondAttribute="centerX" id="erX-8F-PaQ"/>
@@ -380,7 +380,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingCell" rowHeight="55" id="CUn-71-CWG" customClass="SettingsTableViewCell" customModule="iChat" customModuleProvider="target">
-                                <rect key="frame" x="20" y="223" width="350" height="55"/>
+                                <rect key="frame" x="20" y="239" width="350" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CUn-71-CWG" id="Xhm-of-qCt">
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="55"/>

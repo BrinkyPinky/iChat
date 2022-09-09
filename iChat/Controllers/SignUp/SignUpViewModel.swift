@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import Alamofire
 
 protocol SignUpViewModelProtocol: AnyObject {
     var emailIsValid: Bool { get }

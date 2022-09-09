@@ -1,0 +1,30 @@
+//
+//  FireBaseStorageManager.swift
+//  iChat
+//
+//  Created by Егор Шилов on 09.09.2022.
+//
+
+import Foundation
+import FirebaseStorage
+
+class FireBaseStorageManager {
+    static let shared = FireBaseStorageManager()
+    let storageRef = Storage.storage().reference()
+
+    
+    func uploadUserImage(with data: Data) {
+        var selfEmail = UserLoginDataManager.shared.email
+        selfEmail = selfEmail!.replacingOccurrences(of: ".", with: "-")
+        selfEmail = selfEmail!.replacingOccurrences(of: "@", with: "-")
+        
+        storageRef.child("UsersImages/\(selfEmail ?? "unknown").jpg").putData(data, metadata: nil) { result in
+            switch result {
+            case .success(let data):
+                FireBaseDatabaseManager.shared.updateUserImagePath(path: data.path)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+}

@@ -7,17 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		359663619AA4110FD62DCBF0 /* Pods_iChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CCFD489C7E6767C647FB2D3 /* Pods_iChat.framework */; };
 		E200040A28BA1108006FA2DF /* Extension + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200040928BA1108006FA2DF /* Extension + UITextField.swift */; };
 		E215F9A928C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E215F9A828C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift */; };
 		E215F9AD28C89BB9003A64B8 /* ConversationCollectionViewCellIncomingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E215F9AC28C89BB9003A64B8 /* ConversationCollectionViewCellIncomingMessage.swift */; };
 		E220557528B77F1E002EDF83 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220556F28B77F1E002EDF83 /* LoginViewController.swift */; };
 		E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220557C28B81FD6002EDF83 /* SignUpViewController.swift */; };
+		E22682E328CB5E470001BB84 /* FireBaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22682E228CB5E470001BB84 /* FireBaseStorageManager.swift */; };
 		E229B95228C55EA300F795B7 /* ChatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B94C28C55EA300F795B7 /* ChatsPresenter.swift */; };
 		E229B95428C55EA300F795B7 /* ChatsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B94E28C55EA300F795B7 /* ChatsRouter.swift */; };
 		E229B95528C55EA300F795B7 /* ChatsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B94F28C55EA300F795B7 /* ChatsModels.swift */; };
 		E229B95628C55EA300F795B7 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B95028C55EA300F795B7 /* ChatsViewController.swift */; };
 		E229B95728C55EA300F795B7 /* ChatsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229B95128C55EA300F795B7 /* ChatsInteractor.swift */; };
 		E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */; };
+		E248C16E28CBDF800010BDA2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E248C16D28CBDF800010BDA2 /* FirebaseAuth */; };
+		E248C17028CBDF800010BDA2 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E248C16F28CBDF800010BDA2 /* FirebaseAuthCombine-Community */; };
+		E248C17228CBDF800010BDA2 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E248C17128CBDF800010BDA2 /* FirebaseDatabase */; };
+		E248C17428CBDF800010BDA2 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E248C17328CBDF800010BDA2 /* FirebaseDatabaseSwift */; };
+		E248C17628CBDF800010BDA2 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E248C17528CBDF800010BDA2 /* FirebaseStorage */; };
+		E248C17828CBDF800010BDA2 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E248C17728CBDF800010BDA2 /* FirebaseStorageCombine-Community */; };
 		E248CB4A28C20C1A000B9108 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */; };
 		E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348528BB57AA0041CF4F /* LoginViewModel.swift */; };
 		E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */; };
@@ -57,18 +65,18 @@
 		E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */; };
 		E2C8934828BF193F00FC6210 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8934728BF193F00FC6210 /* ValidationManager.swift */; };
 		E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DE9E5428C15A2F00147E51 /* UserModel.swift */; };
-		E3D39B164F724FE238CA40FD /* Pods_iChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503B25FABD625F0F8E634C10 /* Pods_iChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F26E7FAE0CE6D3DD8D3115D /* Pods-iChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChat.debug.xcconfig"; path = "Target Support Files/Pods-iChat/Pods-iChat.debug.xcconfig"; sourceTree = "<group>"; };
-		503B25FABD625F0F8E634C10 /* Pods_iChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F8C1053312754B498A03CB6 /* Pods-iChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChat.release.xcconfig"; path = "Target Support Files/Pods-iChat/Pods-iChat.release.xcconfig"; sourceTree = "<group>"; };
+		2CCFD489C7E6767C647FB2D3 /* Pods_iChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E1C7DE8B3C9FAB854545F16 /* Pods-iChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChat.debug.xcconfig"; path = "Target Support Files/Pods-iChat/Pods-iChat.debug.xcconfig"; sourceTree = "<group>"; };
+		D489EBC4E0015826CD431DC2 /* Pods-iChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iChat.release.xcconfig"; path = "Target Support Files/Pods-iChat/Pods-iChat.release.xcconfig"; sourceTree = "<group>"; };
 		E200040928BA1108006FA2DF /* Extension + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITextField.swift"; sourceTree = "<group>"; };
 		E215F9A828C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationPresenterWorkerMessagesSorting.swift; sourceTree = "<group>"; };
 		E215F9AC28C89BB9003A64B8 /* ConversationCollectionViewCellIncomingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewCellIncomingMessage.swift; sourceTree = "<group>"; };
 		E220556F28B77F1E002EDF83 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E220557C28B81FD6002EDF83 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		E22682E228CB5E470001BB84 /* FireBaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseStorageManager.swift; sourceTree = "<group>"; };
 		E229B94C28C55EA300F795B7 /* ChatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsPresenter.swift; sourceTree = "<group>"; };
 		E229B94E28C55EA300F795B7 /* ChatsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsRouter.swift; sourceTree = "<group>"; };
 		E229B94F28C55EA300F795B7 /* ChatsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsModels.swift; sourceTree = "<group>"; };
@@ -97,7 +105,6 @@
 		E264998028C6567400C54A51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E265932628BEFF370039C5B4 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		E2718EF528C6956C00B5A8DC /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		E28F050028B777720096E22F /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28F050328B777720096E22F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E28F050528B777720096E22F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E28F050A28B777720096E22F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -115,6 +122,7 @@
 		E2C8934328BF191B00FC6210 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		E2C8934728BF193F00FC6210 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
+		E2D7A43628CBDB570058C2C9 /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = iChat.app; path = "/Users/egorsilov/Developer/iChat/build/Debug-iphoneos/iChat.app"; sourceTree = "<absolute>"; };
 		E2DE9E5428C15A2F00147E51 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,28 +131,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3D39B164F724FE238CA40FD /* Pods_iChat.framework in Frameworks */,
+				E248C17428CBDF800010BDA2 /* FirebaseDatabaseSwift in Frameworks */,
+				E248C17828CBDF800010BDA2 /* FirebaseStorageCombine-Community in Frameworks */,
+				359663619AA4110FD62DCBF0 /* Pods_iChat.framework in Frameworks */,
+				E248C17028CBDF800010BDA2 /* FirebaseAuthCombine-Community in Frameworks */,
+				E248C17228CBDF800010BDA2 /* FirebaseDatabase in Frameworks */,
+				E248C16E28CBDF800010BDA2 /* FirebaseAuth in Frameworks */,
+				E248C17628CBDF800010BDA2 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4901B647993D19F51ECB3D22 /* Frameworks */ = {
+		D68E666973F5EAD5252E911F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				503B25FABD625F0F8E634C10 /* Pods_iChat.framework */,
+				2CCFD489C7E6767C647FB2D3 /* Pods_iChat.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A752ACF9616F7632F8702E2F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3F26E7FAE0CE6D3DD8D3115D /* Pods-iChat.debug.xcconfig */,
-				7F8C1053312754B498A03CB6 /* Pods-iChat.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		E200040B28BA113B006FA2DF /* Extensions */ = {
@@ -203,6 +208,7 @@
 			children = (
 				E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */,
 				E2607AF628B821B600188272 /* FireBaseAuthManager.swift */,
+				E22682E228CB5E470001BB84 /* FireBaseStorageManager.swift */,
 				E2C8934728BF193F00FC6210 /* ValidationManager.swift */,
 				E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */,
 			);
@@ -273,18 +279,9 @@
 			isa = PBXGroup;
 			children = (
 				E28F050228B777720096E22F /* iChat */,
-				E28F050128B777720096E22F /* Products */,
-				A752ACF9616F7632F8702E2F /* Pods */,
-				4901B647993D19F51ECB3D22 /* Frameworks */,
+				F4E9BF59FCFBE04362DB2533 /* Pods */,
+				D68E666973F5EAD5252E911F /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		E28F050128B777720096E22F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E28F050028B777720096E22F /* iChat.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E28F050228B777720096E22F /* iChat */ = {
@@ -361,6 +358,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F4E9BF59FCFBE04362DB2533 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5E1C7DE8B3C9FAB854545F16 /* Pods-iChat.debug.xcconfig */,
+				D489EBC4E0015826CD431DC2 /* Pods-iChat.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -372,7 +378,6 @@
 				E28F04FC28B777720096E22F /* Sources */,
 				E28F04FD28B777720096E22F /* Frameworks */,
 				E28F04FE28B777720096E22F /* Resources */,
-				4034F2DBA9AD62C90B53B6A9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -380,9 +385,15 @@
 			);
 			name = iChat;
 			packageProductDependencies = (
+				E248C16D28CBDF800010BDA2 /* FirebaseAuth */,
+				E248C16F28CBDF800010BDA2 /* FirebaseAuthCombine-Community */,
+				E248C17128CBDF800010BDA2 /* FirebaseDatabase */,
+				E248C17328CBDF800010BDA2 /* FirebaseDatabaseSwift */,
+				E248C17528CBDF800010BDA2 /* FirebaseStorage */,
+				E248C17728CBDF800010BDA2 /* FirebaseStorageCombine-Community */,
 			);
 			productName = iChat;
-			productReference = E28F050028B777720096E22F /* iChat.app */;
+			productReference = E2D7A43628CBDB570058C2C9 /* iChat.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -410,8 +421,9 @@
 			);
 			mainGroup = E28F04F728B777720096E22F;
 			packageReferences = (
+				E248C16C28CBDF800010BDA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
-			productRefGroup = E28F050128B777720096E22F /* Products */;
+			productRefGroup = E28F04F728B777720096E22F;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -457,23 +469,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4034F2DBA9AD62C90B53B6A9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iChat/Pods-iChat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iChat/Pods-iChat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iChat/Pods-iChat-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -491,6 +486,7 @@
 				E215F9A928C76879003A64B8 /* ConversationPresenterWorkerMessagesSorting.swift in Sources */,
 				E28F050428B777720096E22F /* AppDelegate.swift in Sources */,
 				E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCellOutgoingMessage.swift in Sources */,
+				E22682E328CB5E470001BB84 /* FireBaseStorageManager.swift in Sources */,
 				E253FA2B28CA290D003F6564 /* ChatsTableViewCell.swift in Sources */,
 				E220558228B81FD6002EDF83 /* SignUpViewController.swift in Sources */,
 				E2C4513F28C0CF7D00F9C473 /* SearchUserInteractor.swift in Sources */,
@@ -662,7 +658,7 @@
 		};
 		E28F051828B777730096E22F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F26E7FAE0CE6D3DD8D3115D /* Pods-iChat.debug.xcconfig */;
+			baseConfigurationReference = 5E1C7DE8B3C9FAB854545F16 /* Pods-iChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -693,7 +689,7 @@
 		};
 		E28F051928B777730096E22F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F8C1053312754B498A03CB6 /* Pods-iChat.release.xcconfig */;
+			baseConfigurationReference = D489EBC4E0015826CD431DC2 /* Pods-iChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -744,6 +740,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E248C16C28CBDF800010BDA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E248C16D28CBDF800010BDA2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E248C16C28CBDF800010BDA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		E248C16F28CBDF800010BDA2 /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E248C16C28CBDF800010BDA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		E248C17128CBDF800010BDA2 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E248C16C28CBDF800010BDA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		E248C17328CBDF800010BDA2 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E248C16C28CBDF800010BDA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		E248C17528CBDF800010BDA2 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E248C16C28CBDF800010BDA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		E248C17728CBDF800010BDA2 /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E248C16C28CBDF800010BDA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageCombine-Community";
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E28F050C28B777720096E22F /* iChat.xcdatamodeld */ = {

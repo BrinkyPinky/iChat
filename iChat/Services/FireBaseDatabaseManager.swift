@@ -205,6 +205,10 @@ class FireBaseDatabaseManager {
         }
     }
     
+    func updateUserImagePath(path: String?) {
+        
+    }
+    
     func removeObservers() {
         db.removeAllObservers()
     }

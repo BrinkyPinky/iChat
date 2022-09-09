@@ -5,6 +5,9 @@
       location = "group:iChat.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:../../Library/Developer/Xcode/DerivedData/iChat-elufciozpwdxdtewtfcuynriwzxq/Build/Products/Debug-iphonesimulator/iChat.app">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

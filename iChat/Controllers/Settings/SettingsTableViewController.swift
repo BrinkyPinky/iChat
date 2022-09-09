@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class SettingsTableViewController: UITableViewController {
     
     @IBOutlet var userImage: UIImageView!
@@ -60,7 +59,7 @@ extension SettingsTableViewController: UIImagePickerControllerDelegate, UINaviga
         let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage
         userImage.image = image
         viewModel.pickedImage(with: image)
-                
+        
         picker.dismiss(animated: true, completion: nil)
     }
     

@@ -6,7 +6,6 @@
 //
 
 import FirebaseAuth
-import Alamofire
 
 class FireBaseAuthManager {
     static let shared = FireBaseAuthManager()
