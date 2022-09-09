@@ -45,7 +45,6 @@
 		E28F050B28B777720096E22F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28F050928B777720096E22F /* Main.storyboard */; };
 		E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E28F050C28B777720096E22F /* iChat.xcdatamodeld */; };
 		E28F051028B777730096E22F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E28F050F28B777730096E22F /* Assets.xcassets */; };
-		E28F051328B777730096E22F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28F051128B777730096E22F /* LaunchScreen.storyboard */; };
 		E2A1044528C49DC600890ED7 /* ConversationCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */; };
 		E2A1044928C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */; };
 		E2A9A73128C3ED030026DAE8 /* ConversationCollectionViewCellOutgoingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9A73028C3ED030026DAE8 /* ConversationCollectionViewCellOutgoingMessage.swift */; };
@@ -104,7 +103,6 @@
 		E28F050A28B777720096E22F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E28F050D28B777720096E22F /* iChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iChat.xcdatamodel; sourceTree = "<group>"; };
 		E28F050F28B777730096E22F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E28F051228B777730096E22F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E28F051428B777730096E22F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionHeaderView.swift; sourceTree = "<group>"; };
 		E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionViewStickyHeaderLayout.swift; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 			children = (
 				E28F050928B777720096E22F /* Main.storyboard */,
 				E2718EF528C6956C00B5A8DC /* Login.storyboard */,
-				E28F051128B777730096E22F /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -428,7 +425,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E28F051328B777730096E22F /* LaunchScreen.storyboard in Resources */,
 				E28F051028B777730096E22F /* Assets.xcassets in Resources */,
 				E264998128C6567400C54A51 /* GoogleService-Info.plist in Resources */,
 				E2718EF628C6956C00B5A8DC /* Login.storyboard in Resources */,
@@ -543,14 +539,6 @@
 				E28F050A28B777720096E22F /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E28F051128B777730096E22F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E28F051228B777730096E22F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

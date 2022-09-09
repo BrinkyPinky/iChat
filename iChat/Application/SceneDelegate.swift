@@ -13,8 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let windowScene = scene as? UIWindowScene else { return }
         
@@ -23,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         
-        let rootViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBar") as! UITabBarController
+        let rootViewController = storyboard.instantiateViewController(withIdentifier: "MainTabBar") as! UITabBarController
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = rootViewController
@@ -38,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         func showLoginViewController() {
-            let rootViewController = loginStoryboard.instantiateViewController(withIdentifier: "NavigationControllerLogin") as! UINavigationController
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "NavigationControllerLogin") as! UINavigationController
             window = UIWindow(windowScene: windowScene)
             window?.rootViewController = rootViewController
             window?.makeKeyAndVisible()

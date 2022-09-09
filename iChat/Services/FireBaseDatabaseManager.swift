@@ -201,7 +201,6 @@ class FireBaseDatabaseManager {
             }
             
             let sortedChats = chats.sorted(by: { Double($0.lastMessageDate ?? "0")! < Double($1.lastMessageDate ?? "0")! })
-            print(sortedChats)
             completion(sortedChats)
         }
     }
