@@ -124,12 +124,15 @@ class FireBaseDatabaseManager {
                 "username": username
         ])
         
-        db.child("Users/\(correctOtherEmail)/listOfConversations/\(correctSelfEmail)").setValue([
+        db.child("Users/\(correctOtherEmail)/listOfConversations/\(correctSelfEmail)").updateChildValues([
                 "email": correctSelfEmail,
                 "fullName": UserLoginDataManager.shared.fullname ?? "unknown",
                 "lastMessageDate": specifiedDate,
                 "lastMessageText": message,
                 "username": UserLoginDataManager.shared.username ?? "unknown"
+        ])
+        db.child("Users/\(correctOtherEmail)/listOfConversations/\(correctSelfEmail)/unreadedMessages").childByAutoId().setValue([
+            "123": "123321"
         ])
     }
     
@@ -154,7 +157,7 @@ class FireBaseDatabaseManager {
                 let dateValue = value["date"] as? String
                 let isReadValue = value["isRead"] as? Bool
                 let selfSenderValue = value["selfSender"] as? Bool
-                                
+                
                 let message = MessageModel(
                     messageText: messageTextValue ?? "No message information",
                     date: dateValue ?? "No date",
@@ -187,24 +190,31 @@ class FireBaseDatabaseManager {
                 let lastMessageTextValue = value["lastMessageText"] as? String
                 let lastMessageDateValue = value["lastMessageDate"] as? String
                 
+                let unreadedMessagesValue = value["unreadedMessages"] as? [String:Any]
+                let unreadedMessagesCount = unreadedMessagesValue?.count
+                
                 let chat = ChatModel(
                     email: emailValue,
                     fullname: fullnameValue,
                     lastMessageDate: lastMessageDateValue,
                     lastMessageText: lastMessageTextValue,
-                    username: usernameValue
+                    username: usernameValue,
+                    unreadedMessagesCount: unreadedMessagesCount ?? 0
                 )
                 
                 chats.append(chat)
             }
             
-            let sortedChats = chats.sorted(by: { Double($0.lastMessageDate ?? "0")! < Double($1.lastMessageDate ?? "0")! })
+            let sortedChats = chats.sorted(by: { Double($0.lastMessageDate ?? "0")! > Double($1.lastMessageDate ?? "0")! })
             completion(sortedChats)
         }
     }
     
+    
     func updateUserImagePath(path: String?) {
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         
+        db.child("Users/\(correctSelfEmail)/imagePath").setValue(path)
     }
     
     func removeObservers() {

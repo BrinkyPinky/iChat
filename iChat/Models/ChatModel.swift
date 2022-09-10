@@ -13,4 +13,5 @@ struct ChatModel {
     let lastMessageDate: String?
     let lastMessageText: String?
     let username: String?
+    var unreadedMessagesCount: Int
 }

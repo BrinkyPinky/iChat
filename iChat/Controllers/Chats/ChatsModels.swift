@@ -33,12 +33,16 @@ enum Chats {
                 let lastMessageText: String
                 let username: String
                 let fullname: String
+                let email: String
+                let unreadedMessagesCount: Int
                 
                 init(chatModel: ChatModel) {
                     lastMessageDate = chatModel.lastMessageDate ?? "Unknown"
                     lastMessageText = chatModel.lastMessageText ?? "No message"
                     username = chatModel.username ?? "Unknown"
                     fullname = chatModel.fullname ?? "Unknown"
+                    email = chatModel.email ?? "No email"
+                    unreadedMessagesCount = chatModel.unreadedMessagesCount
                 }
                 
             }

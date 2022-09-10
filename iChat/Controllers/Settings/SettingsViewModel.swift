@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 enum SettingType {
     case simple, logout
@@ -26,7 +25,8 @@ struct SettingCellViewModel: CellIdentifiable {
 protocol SettingsViewModelProtocol {
     var rows: [[CellIdentifiable]] { get }
     init(view: SettingsTableViewController)
-    func pickedImage(with image: UIImage?)
+    func viewLoad()
+    func pickedImage(with image: Data?)
 }
 
 class SettingsViewModel: SettingsViewModelProtocol {
@@ -39,11 +39,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
                 text: "Add or update profile photo",
                 imagename: "square.and.arrow.down",
                 handler: {
-                    let vc = UIImagePickerController()
-                    vc.sourceType = .photoLibrary
-                    vc.delegate = self.view
-                    vc.allowsEditing = true
-                    self.view.present(vc, animated: true, completion: nil)
+                    self.view.present(self.view.imagePickerController, animated: true, completion: nil)
                 }
             ),
             SettingCellViewModel(
@@ -54,10 +50,10 @@ class SettingsViewModel: SettingsViewModelProtocol {
                     let email = UserLoginDataManager.shared.email
                     FireBaseAuthManager.shared.recoverPassword(email: email ?? "") { error in
                         guard let error = error else {
-                            self.view.showAlert(with: "Instructions have been sent to your e-mail")
+                            self.view.showAlert(title: "Check your E-Mail", message: "Instructions have been sent to your e-mail")
                             return
                         }
-                        self.view.showAlert(with: error.localizedDescription)
+                        self.view.showAlert(title: "Error", message: error.localizedDescription)
                     }
                 }
             )
@@ -79,11 +75,26 @@ class SettingsViewModel: SettingsViewModelProtocol {
         self.view = view
     }
     
-    func pickedImage(with image: UIImage?) {
-        guard let data = image?.jpegData(compressionQuality: 0.4) else {
-            view.showAlert(with: "Something went wrong with uploading the image to the server")
-            return
+    private var imageData: Data? {
+        didSet {
+            guard let imageData = imageData else {
+                return
+            }
+            view.displayUserImage(with: imageData)
         }
-        FireBaseStorageManager.shared.uploadUserImage(with: data)
+    }
+
+    func viewLoad() {
+        view.displayFullname(with: UserLoginDataManager.shared.fullname ?? "Unknown")
+        view.displayUsername(with: "@\(UserLoginDataManager.shared.username ?? "Unknown")")
+        
+        FireBaseStorageManager.shared.getUserImage(emailIfOtherUser: nil) { [unowned self] imageData in
+            self.imageData = imageData
+        }
+        
+    }
+    
+    func pickedImage(with image: Data?) {
+        FireBaseStorageManager.shared.uploadUserImage(with: image!)
     }
 }

@@ -37,7 +37,6 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.getChats()
-//        UserLoginDataManager.shared.getUserInformation()
     }
     
     // MARK: Routing

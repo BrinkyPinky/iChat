@@ -27,4 +27,19 @@ class FireBaseStorageManager {
             }
         }
     }
+    
+    func getUserImage(emailIfOtherUser email: String?, completion: @escaping (Data?) -> Void) {
+        var selfEmail = UserLoginDataManager.shared.email
+        selfEmail = selfEmail!.replacingOccurrences(of: ".", with: "-")
+        selfEmail = selfEmail!.replacingOccurrences(of: "@", with: "-")
+
+        storageRef.child("UsersImages/\(email ?? (selfEmail ?? "Unknown")).jpg").getData(maxSize: 3 * 1024 * 1024) { result in
+            switch result {
+            case .success(let data):
+                completion(data)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }

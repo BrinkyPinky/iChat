@@ -24,6 +24,15 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         }
     }
     
+    var imageData: Data? {
+        didSet {
+            guard let imageData = imageData else {
+                return
+            }
+            personImage.image = UIImage(data: imageData)
+        }
+    }
+    
     func setup() {
         let chatsViewModelCell = chatsViewModelCell as? ChatsViewModelCell
         
@@ -31,6 +40,12 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         username.text = chatsViewModelCell?.username
         messageText.text = chatsViewModelCell?.lastMessageText
         messageDate.text = chatsViewModelCell?.lastMessageDate
+        personImage.layer.cornerRadius = personImage.frame.width/2
+
+
+        FireBaseStorageManager.shared.getUserImage(emailIfOtherUser: chatsViewModelCell?.email) { [unowned self] data in
+            imageData = data
+        }
     }
     
     override func awakeFromNib() {
