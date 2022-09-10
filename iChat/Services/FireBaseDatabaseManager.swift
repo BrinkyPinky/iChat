@@ -13,8 +13,6 @@ class FireBaseDatabaseManager {
     
     var db = Database.database().reference()
     
-    let selfEmail = UserLoginDataManager.shared.email!
-    
     private func convertToCorrectEmail(email: String) -> String {
             var correctEmail = email.replacingOccurrences(of: ".", with: "-")
             correctEmail = correctEmail.replacingOccurrences(of: "@", with: "-")
@@ -86,7 +84,7 @@ class FireBaseDatabaseManager {
     }
     
     func sendMessage(to email: String, withName name: String, andUsername username: String, message: String) {
-        let correctSelfEmail = convertToCorrectEmail(email: selfEmail)
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: email)
                 
         let dbSelfDestination = db
@@ -136,7 +134,7 @@ class FireBaseDatabaseManager {
     }
     
     func getMessages(withEmail otherEmail: String, andLimit limit: Int, completion: @escaping ([MessageModel]) -> Void) {
-        let correctSelfEmail = convertToCorrectEmail(email: selfEmail)
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
         
         let query = db
@@ -172,7 +170,7 @@ class FireBaseDatabaseManager {
     }
     
     func getChats(completion: @escaping ([ChatModel]) -> Void ) {
-        let correctSelfEmail = convertToCorrectEmail(email: selfEmail)
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         
         let query = db.child("Users/\(correctSelfEmail)/listOfConversations").queryLimited(toFirst: 25)
         

@@ -19,6 +19,8 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         viewModel = SettingsViewModel(view: self)
         userImage.layer.cornerRadius = userImage.frame.size.width/2
+        userFullname.text = UserLoginDataManager.shared.fullname
+        userUsername.text = "@\(UserLoginDataManager.shared.username ?? "Unknown")"
     }
     
     func showAlert(with message: String) {

@@ -324,6 +324,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PtD-85-h2l">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" systemColor="systemRedColor"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dmE-ex-nVE">
                         <rect key="frame" x="0.0" y="712" width="390" height="49"/>
@@ -345,18 +346,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="YSU-l5-MNj">
-                            <rect key="frame" x="0.0" y="0.0" width="390" height="190"/>
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="204"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.trianglebadge.exclamationmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ioF-fL-ryz">
-                                    <rect key="frame" x="132.66666666666666" y="15.000000000000007" width="126.99999999999997" height="125.66666666666669"/>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ioF-fL-ryz">
+                                    <rect key="frame" x="132.66666666666666" y="17.000000000000007" width="124.99999999999997" height="123.66666666666669"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ioF-fL-ryz" secondAttribute="height" multiplier="1:1" id="LVv-kO-9vt"/>
                                         <constraint firstAttribute="height" constant="125" id="Yyv-ar-NdM"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Egor Shilov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S79-Q8-IYl">
-                                    <rect key="frame" x="152" y="149" width="86" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Surname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S79-Q8-IYl">
+                                    <rect key="frame" x="136" y="149" width="118" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -380,7 +381,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingCell" rowHeight="55" id="CUn-71-CWG" customClass="SettingsTableViewCell" customModule="iChat" customModuleProvider="target">
-                                <rect key="frame" x="20" y="239" width="350" height="55"/>
+                                <rect key="frame" x="20" y="253" width="350" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CUn-71-CWG" id="Xhm-of-qCt">
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="55"/>
@@ -434,6 +435,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LlB-TG-3cb">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" systemColor="systemRedColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8TY-f8-uRK">
@@ -756,7 +758,7 @@
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="square.and.arrow.up.trianglebadge.exclamationmark" catalog="system" width="128" height="128"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

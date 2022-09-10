@@ -29,10 +29,11 @@ class UserLoginDataManager {
     func saveData(email: String, password: String) {
         UserDefaults.standard.set(email, forKey: "email")
         UserDefaults.standard.set(password, forKey: "password")
+        fetchData()
     }
     
-    func getUserInformation() {
-        FireBaseDatabaseManager.shared.getSelfUser(email: email!) { fullnameValue, usernameValue in
+    func getUserInformation(email: String) {
+        FireBaseDatabaseManager.shared.getSelfUser(email: email) { fullnameValue, usernameValue in
             UserDefaults.standard.set(fullnameValue, forKey: "fullname")
             UserDefaults.standard.set(usernameValue, forKey: "username")
         }

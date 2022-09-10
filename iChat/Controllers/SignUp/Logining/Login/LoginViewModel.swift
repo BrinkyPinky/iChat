@@ -22,9 +22,9 @@ class LoginViewModel: LoginViewModelProtocol {
     func loginButtonTapped(email: String?, password: String?) {
         FireBaseAuthManager.shared.login(email: email ?? "", password: password ?? "") { [unowned self] error in
             guard let error = error else {
-                view.showViewController(with: "MessengerViewController")
                 UserLoginDataManager.shared.saveData(email: email ?? "", password: password ?? "")
-                UserLoginDataManager.shared.getUserInformation()
+                UserLoginDataManager.shared.getUserInformation(email: email ?? "")
+                view.showViewController(with: "MainTabBar")
                 return
             }
             view.alert(with: error.localizedDescription)
