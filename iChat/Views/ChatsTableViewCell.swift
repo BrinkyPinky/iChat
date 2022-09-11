@@ -17,6 +17,8 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
     @IBOutlet private var messageText: UILabel!
     @IBOutlet private var personImage: UIImageView!
     @IBOutlet var messageDate: UILabel!
+    @IBOutlet var viewBackgroundMessagesCount: UIView!
+    @IBOutlet var messagesCountLabel: UILabel!
     
     var chatsViewModelCell: CellIdentifiable? {
         didSet {
@@ -41,7 +43,14 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         messageText.text = chatsViewModelCell?.lastMessageText
         messageDate.text = chatsViewModelCell?.lastMessageDate
         personImage.layer.cornerRadius = personImage.frame.width/2
-
+        viewBackgroundMessagesCount.layer.cornerRadius = viewBackgroundMessagesCount.frame.width/2
+        
+        if chatsViewModelCell?.unreadedMessagesCount != 0 {
+            messagesCountLabel.text = "\(chatsViewModelCell?.unreadedMessagesCount ?? 0)"
+        } else {
+            viewBackgroundMessagesCount.isHidden = true
+            messagesCountLabel.isHidden = true
+        }
 
         FireBaseStorageManager.shared.getUserImage(emailIfOtherUser: chatsViewModelCell?.email) { [unowned self] data in
             imageData = data

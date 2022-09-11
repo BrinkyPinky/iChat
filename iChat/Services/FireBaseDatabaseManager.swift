@@ -150,6 +150,8 @@ class FireBaseDatabaseManager {
             guard data.exists() != false else { return }
             guard let value = data.value as? [String:[String:Any]] else { return }
             
+            self.db.child("Users/\(correctSelfEmail)/listOfConversations/\(correctOtherEmail)/unreadedMessages").removeValue()
+            
             var messages = [MessageModel]()
             
             value.forEach { (_, value: [String : Any]) in
