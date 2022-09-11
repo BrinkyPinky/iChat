@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol ChatsRoutingLogic {
-//    func routeToConversation(segue: UIStoryboardSegue?)
+    func routeToConversation(segue: UIStoryboardSegue?)
 }
 
 protocol ChatsDataPassing {
@@ -27,28 +27,29 @@ class ChatsRouter: NSObject, ChatsRoutingLogic, ChatsDataPassing {
     
     // MARK: Routing
     
-//    func routeToConversation(segue: UIStoryboardSegue?) {
-//        if let segue = segue {
-//            let destinationVC = segue.destination as! ConversationViewController
-//            var destinationDS = destinationVC.router!.dataStore!
-//            passDataToConversation(source: dataStore!, destination: &destinationDS)
-//        } else {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let destinationVC = storyboard.instantiateViewController(withIdentifier: "ConversationViewController") as! ConversationViewController
-//            var destinationDS = destinationVC.router!.dataStore!
-//            passDataToConversation(source: dataStore!, destination: &destinationDS)
-//            navigateToConversation(source: viewController!, destination: destinationVC)
-//        }
-//    }
+    func routeToConversation(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! ConversationViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToConversation(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "ConversationViewController") as! ConversationViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToConversation(source: dataStore!, destination: &destinationDS)
+            navigateToConversation(source: viewController!, destination: destinationVC)
+        }
+    }
     
     // MARK: Navigation
     
-//    func navigateToConversation(source: ChatsViewController, destination: ConversationViewController) {
-//        source.performSegue(withIdentifier: "showConversation", sender: nil)
-//    }
+    func navigateToConversation(source: ChatsViewController, destination: ConversationViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
     
     // MARK: Passing data
     
-//    func passDataToConversation(source: ChatsDataStore, destination: inout ConversationDataStore) {
-//    }
+    func passDataToConversation(source: ChatsDataStore, destination: inout ConversationDataStore) {
+        destination.userInfo = source.userInfo
+    }
 }

@@ -68,6 +68,12 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         )  //in file (Extension + Keyboard)
         interactor?.stopObservingMessages()
         self.tabBarController?.tabBar.isHidden = false
+        
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.backgroundColor = .clear
+        navigationController?.navigationBar.scrollEdgeAppearance = nil
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        navigationController?.navigationBar.compactAppearance = nil
     }
     
     // MARK: Routing
@@ -92,14 +98,22 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     func displayMessages(viewModel: Conversation.Messages.ViewModel) {
         messagesRows = viewModel.messagesRows
         headersDatesRows = viewModel.headersDatesRows
-        
         DispatchQueue.main.async {
             UIView.transition(
                 with: self.conversationCollectionView,
                 duration: 0.15,
-                options: [.curveEaseInOut,.transitionCrossDissolve],
-                animations: { self.conversationCollectionView.reloadData() }
+                options: [.transitionCrossDissolve, .curveEaseInOut],
+                animations: {}
             )
+            
+            self.conversationCollectionView.reloadData()
+            self.conversationCollectionView.layoutIfNeeded()
+            
+            let heightOfContentSize = self.conversationCollectionView.contentSize.height
+            let heightOfCollectionView = self.conversationCollectionView.frame.height
+            let targetYPosition = heightOfContentSize - heightOfCollectionView
+            
+            self.conversationCollectionView.contentOffset.y = targetYPosition
         }
     }
     

@@ -90,4 +90,10 @@ extension ChatsViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let chatViewModelCell = chatsRows[indexPath.row]
+        interactor?.selectedRow(row: chatViewModelCell)
+        router?.routeToConversation(segue: nil)
+    }
 }

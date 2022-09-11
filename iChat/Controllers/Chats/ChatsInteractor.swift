@@ -14,15 +14,18 @@ import UIKit
 
 protocol ChatsBusinessLogic {
     func getChats()
+    func selectedRow(row: CellIdentifiable)
 }
 
 protocol ChatsDataStore {
-    
+    var userInfo: ConversationUserModel? { get set }
 }
 
 class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
     
     var presenter: ChatsPresentationLogic?
+    
+    var userInfo: ConversationUserModel?
     
     var rawChats = [ChatModel]() {
         didSet {
@@ -43,5 +46,14 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
     func provideChats() {
         let response = Chats.gettingChats.Response(rawChats: rawChats)
         presenter?.presentChats(response: response)
+    }
+    
+    func selectedRow(row: CellIdentifiable) {
+        guard let rowViewModel = row as? ChatsViewModelCell else { return }
+        userInfo = ConversationUserModel(
+            fullName: rowViewModel.fullname,
+            email: rowViewModel.email,
+            username: rowViewModel.username
+        )
     }
 }

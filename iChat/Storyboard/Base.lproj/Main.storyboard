@@ -87,10 +87,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MrK-oJ-7nQ">
-                                            <rect key="frame" x="311.66666666666669" y="57.666666666666664" width="22.333333333333314" height="22.333333333333336"/>
+                                            <rect key="frame" x="312" y="57.666666666666657" width="22" height="22"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5X6-SW-mwt">
-                                                    <rect key="frame" x="4.0000000000000009" y="4.0000000000000009" width="14.333333333333336" height="14.333333333333336"/>
+                                                    <rect key="frame" x="4" y="4" width="14" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
@@ -103,6 +103,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="5X6-SW-mwt" secondAttribute="trailing" constant="4" id="BHP-Kh-9fO"/>
                                                 <constraint firstItem="5X6-SW-mwt" firstAttribute="leading" secondItem="MrK-oJ-7nQ" secondAttribute="leading" constant="4" id="KxW-yb-OFx"/>
                                                 <constraint firstAttribute="width" secondItem="MrK-oJ-7nQ" secondAttribute="height" multiplier="1:1" id="Ro0-Hc-wix"/>
+                                                <constraint firstAttribute="height" constant="22" id="b1C-6B-pcU"/>
+                                                <constraint firstAttribute="width" constant="22" id="r4m-2L-OPG"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -143,7 +145,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Chats" id="Pjk-Hw-1FT"/>
                     <connections>
-                        <segue destination="aBx-af-yBy" kind="show" id="SuM-zk-5Fw"/>
+                        <segue destination="aBx-af-yBy" kind="show" identifier="showConversation" id="SuM-zk-5Fw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVR-YH-Bt4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

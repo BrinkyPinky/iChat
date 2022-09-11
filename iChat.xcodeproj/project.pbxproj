@@ -27,6 +27,7 @@
 		E248C17628CBDF800010BDA2 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E248C17528CBDF800010BDA2 /* FirebaseStorage */; };
 		E248C17828CBDF800010BDA2 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E248C17728CBDF800010BDA2 /* FirebaseStorageCombine-Community */; };
 		E248CB4A28C20C1A000B9108 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */; };
+		E24ABB6828CE8F8C0089A88E /* ConversationUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24ABB6728CE8F8C0089A88E /* ConversationUserModel.swift */; };
 		E24B348628BB57AA0041CF4F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348528BB57AA0041CF4F /* LoginViewModel.swift */; };
 		E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */; };
 		E253FA2928CA1122003F6564 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E253FA2828CA1122003F6564 /* ChatModel.swift */; };
@@ -84,6 +85,8 @@
 		E229B95128C55EA300F795B7 /* ChatsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsInteractor.swift; sourceTree = "<group>"; };
 		E22A3D9A28BB969E004AE357 /* UserLoginDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginDataManager.swift; sourceTree = "<group>"; };
 		E248CB4928C20C1A000B9108 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		E24ABB6628CE8CE30089A88E /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E24ABB6728CE8F8C0089A88E /* ConversationUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationUserModel.swift; sourceTree = "<group>"; };
 		E24B348528BB57AA0041CF4F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E24B348728BB69F10041CF4F /* FireBaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDatabaseManager.swift; sourceTree = "<group>"; };
 		E253FA2828CA1122003F6564 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
@@ -122,7 +125,6 @@
 		E2C8934328BF191B00FC6210 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		E2C8934728BF193F00FC6210 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
-		E2D7A43628CBDB570058C2C9 /* iChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = iChat.app; path = "/Users/egorsilov/Developer/iChat/build/Debug-iphoneos/iChat.app"; sourceTree = "<absolute>"; };
 		E2DE9E5428C15A2F00147E51 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -281,6 +283,7 @@
 				E28F050228B777720096E22F /* iChat */,
 				F4E9BF59FCFBE04362DB2533 /* Pods */,
 				D68E666973F5EAD5252E911F /* Frameworks */,
+				E24ABB6628CE8CE30089A88E /* iChat.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -352,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				E2DE9E5428C15A2F00147E51 /* UserModel.swift */,
+				E24ABB6728CE8F8C0089A88E /* ConversationUserModel.swift */,
 				E264997E28C6378900C54A51 /* MessageModel.swift */,
 				E253FA2828CA1122003F6564 /* ChatModel.swift */,
 			);
@@ -393,7 +397,7 @@
 				E248C17728CBDF800010BDA2 /* FirebaseStorageCombine-Community */,
 			);
 			productName = iChat;
-			productReference = E2D7A43628CBDB570058C2C9 /* iChat.app */;
+			productReference = E24ABB6628CE8CE30089A88E /* iChat.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -477,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E215F9AD28C89BB9003A64B8 /* ConversationCollectionViewCellIncomingMessage.swift in Sources */,
+				E24ABB6828CE8F8C0089A88E /* ConversationUserModel.swift in Sources */,
 				E229B95528C55EA300F795B7 /* ChatsModels.swift in Sources */,
 				E229B95228C55EA300F795B7 /* ChatsPresenter.swift in Sources */,
 				E2607AF728B821B600188272 /* FireBaseAuthManager.swift in Sources */,

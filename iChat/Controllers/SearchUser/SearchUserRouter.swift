@@ -50,6 +50,11 @@ class SearchUserRouter: NSObject, SearchUserRoutingLogic, SearchUserDataPassing 
     // MARK: Passing data
     
     func passDataToConversation(source: SearchUserDataStore, destination: inout ConversationDataStore) {
-        destination.userInfo = (source.selectedUser as! UserCellViewModel)
+        let selectedUser = source.selectedUser as! UserCellViewModel
+        destination.userInfo = ConversationUserModel(
+            fullName: selectedUser.fullName,
+            email: selectedUser.email,
+            username: selectedUser.username
+        )
     }
 }

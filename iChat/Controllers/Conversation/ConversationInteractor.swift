@@ -18,14 +18,14 @@ protocol ConversationBusinessLogic {
 }
 
 protocol ConversationDataStore {
-    var userInfo: UserCellViewModel? { get set }
+    var userInfo: ConversationUserModel? { get set }
 }
 
 class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     
     // MARK: Getting Needed User Information from Another View by Routing
     
-    var userInfo: UserCellViewModel? {
+    var userInfo: ConversationUserModel? {
         didSet {
             let response = Conversation.fullnameLabel.Response(fullname: userInfo?.fullName ?? "Unkown")
             presenter?.presentUserFullname(response: response)

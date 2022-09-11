@@ -139,6 +139,8 @@ class FireBaseDatabaseManager {
     func getMessages(withEmail otherEmail: String, andLimit limit: Int, completion: @escaping ([MessageModel]) -> Void) {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
+                
+        self.db.child("Users/\(correctSelfEmail)/listOfConversations/\(correctOtherEmail)/unreadedMessages").removeValue()
         
         let query = db
             .child("Conversations")
@@ -149,8 +151,6 @@ class FireBaseDatabaseManager {
         query.observe(.value) { data in
             guard data.exists() != false else { return }
             guard let value = data.value as? [String:[String:Any]] else { return }
-            
-            self.db.child("Users/\(correctSelfEmail)/listOfConversations/\(correctOtherEmail)/unreadedMessages").removeValue()
             
             var messages = [MessageModel]()
             

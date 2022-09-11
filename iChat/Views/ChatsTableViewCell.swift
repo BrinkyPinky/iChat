@@ -46,6 +46,8 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         viewBackgroundMessagesCount.layer.cornerRadius = viewBackgroundMessagesCount.frame.width/2
         
         if chatsViewModelCell?.unreadedMessagesCount != 0 {
+            viewBackgroundMessagesCount.isHidden = false
+            messagesCountLabel.isHidden = false
             messagesCountLabel.text = "\(chatsViewModelCell?.unreadedMessagesCount ?? 0)"
         } else {
             viewBackgroundMessagesCount.isHidden = true
