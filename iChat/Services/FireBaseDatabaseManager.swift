@@ -99,21 +99,24 @@ class FireBaseDatabaseManager {
             .child("conversation-with-\(correctSelfEmail)")
         
         let specifiedDate = String(Date().timeIntervalSince1970)
+        let messageID = specifiedDate.replacingOccurrences(of: ".", with: "-")
         
         // MARK: Send Messages To Database Conversations
         
-        dbSelfDestination.childByAutoId().setValue([
+        dbSelfDestination.child(messageID).setValue([
             "date": specifiedDate,
             "isRead": false,
             "messageText": message,
-            "selfSender": true
+            "selfSender": true,
+            "messageID": messageID
         ])
         
-        dbOtherDestination.childByAutoId().setValue([
+        dbOtherDestination.child(messageID).setValue([
             "date": specifiedDate,
             "isRead": false,
             "messageText": message,
-            "selfSender": false
+            "selfSender": false,
+            "messageID": messageID
         ])
         
         // MARK: Send last messages to users/USERID/listofconversations
@@ -158,17 +161,19 @@ class FireBaseDatabaseManager {
             
             var messages = [MessageModel]()
             
-            value.forEach { (key: String, value: [String : Any]) in
+            value.forEach { (_, value: [String : Any]) in
                 let messageTextValue = value["messageText"] as? String
                 let dateValue = value["date"] as? String
                 let isReadValue = value["isRead"] as? Bool
                 let selfSenderValue = value["selfSender"] as? Bool
+                let messageValue = value["messageID"] as? String
                 
                 let message = MessageModel(
                     messageText: messageTextValue ?? "No message information",
                     date: dateValue ?? "No date",
                     isRead: isReadValue ?? false,
-                    selfSender: selfSenderValue ?? false
+                    selfSender: selfSenderValue ?? false,
+                    messageID: messageValue ?? ""
                 )
                 
                 messages.append(message)
@@ -218,6 +223,20 @@ class FireBaseDatabaseManager {
         }
     }
     
+    func deleteMessageForYourself(messageID: String, otherEmail: String) {
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
+        let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
+        
+        db.child("Conversations/\(correctSelfEmail)/conversation-with-\(correctOtherEmail)/\(messageID)").removeValue()
+    }
+    
+    func deleteMessageForAll(messageID: String, otherEmail: String) {
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
+        let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
+        
+        db.child("Conversations/\(correctSelfEmail)/conversation-with-\(correctOtherEmail)/\(messageID)").removeValue()
+        db.child("Conversations/\(correctOtherEmail)/conversation-with-\(correctSelfEmail)/\(messageID)").removeValue()
+    }
     
     func updateUserImagePath(path: String?) {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
@@ -228,7 +247,7 @@ class FireBaseDatabaseManager {
     func removeConversationsObserver(with email: String) {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: email)
-
+        
         db.child("Conversations").child(correctSelfEmail).child("conversation-with-\(correctOtherEmail)").removeAllObservers()
     }
 }

@@ -43,12 +43,14 @@ enum Conversation {
                 let messageDate: String?
                 let isRead: Bool?
                 let selfSender: Bool?
+                let messageID: String
                 
                 init(message: MessageModel) {
                     messageText = message.messageText
                     messageDate = message.date
                     isRead = message.isRead
                     selfSender = message.selfSender
+                    messageID = message.messageID
                 }
             }
             

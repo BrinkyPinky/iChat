@@ -238,9 +238,9 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let cellViewModel = messagesRows[indexPath.section][indexPath.row]
         
         let config = UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
-            
             let deleteForYourself = UIAction(
                 title: "Delete for yourself",
                 image: UIImage(systemName: "xmark.bin"),
@@ -249,7 +249,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
                 attributes: .destructive,
                 state: .off
             ) { _ in
-                print("delete for yourself")
+                self.interactor?.deleteMessageForYourself(cellViewModel: cellViewModel)
             }
             
             let deleteForAll = UIAction(
@@ -260,7 +260,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
                 attributes: .destructive,
                 state: .off
             ) { _ in
-                print("delete for all")
+                self.interactor?.deleteMessageForAll(cellViewModel: cellViewModel)
             }
             
             return UIMenu(

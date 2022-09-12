@@ -12,4 +12,5 @@ struct MessageModel {
     var date: String
     var isRead: Bool
     var selfSender: Bool
+    var messageID: String
 }

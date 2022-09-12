@@ -40,7 +40,8 @@ class ConversationPresenterWorkerMessagesSorting {
                                 messageText: messageModel.messageText,
                                 date: convertedDateValue.formatted(date: .omitted, time: .shortened),
                                 isRead: messageModel.isRead,
-                                selfSender: messageModel.selfSender
+                                selfSender: messageModel.selfSender,
+                                messageID: messageModel.messageID
                             )
                     )
                 )
@@ -59,7 +60,8 @@ class ConversationPresenterWorkerMessagesSorting {
                                 messageText: messageModel.messageText,
                                 date: convertedDateValue.formatted(date: .omitted, time: .shortened),
                                 isRead: messageModel.isRead,
-                                selfSender: messageModel.selfSender
+                                selfSender: messageModel.selfSender,
+                                messageID: messageModel.messageID
                             )
                     )
                 )

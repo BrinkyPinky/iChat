@@ -15,6 +15,8 @@ import UIKit
 protocol ConversationBusinessLogic {
     func sendMessage(request: Conversation.SendMessage.Request)
     func getMessages(isNeedToUpLimit: Bool)
+    func deleteMessageForYourself(cellViewModel: CellIdentifiable)
+    func deleteMessageForAll(cellViewModel: CellIdentifiable)
     func stopObservingMessages()
 }
 
@@ -67,6 +69,20 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         FireBaseDatabaseManager.shared.removeConversationsObserver(with: userInfo?.email ?? "")
         FireBaseDatabaseManager.shared.sendMessage(to: userInfo!.email, withName: userInfo!.fullName, andUsername: userInfo!.username, message: request.messageText)
         getMessages(isNeedToUpLimit: false)
+    }
+    
+    // MARK: Deleting Messages
+    
+    func deleteMessageForAll(cellViewModel: CellIdentifiable) {
+        guard let cellViewModel = cellViewModel as? MessageCellViewModel else { return }
+        
+        FireBaseDatabaseManager.shared.deleteMessageForAll(messageID: cellViewModel.messageID, otherEmail: userInfo?.email ?? "")
+    }
+    
+    func deleteMessageForYourself(cellViewModel: CellIdentifiable) {
+        guard let cellViewModel = cellViewModel as? MessageCellViewModel else { return }
+
+        FireBaseDatabaseManager.shared.deleteMessageForYourself(messageID: cellViewModel.messageID, otherEmail: userInfo?.email ?? "")
     }
     
     // MARK: When view disappear database stops the observer for messages
