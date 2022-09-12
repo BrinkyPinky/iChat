@@ -113,18 +113,18 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             
             self.conversationCollectionView.reloadData()
             self.conversationCollectionView.layoutIfNeeded()
-                    
+            
             // scroll to bottom if the messages are displayed for the first time else stay in the same place
             if isItFirstDisplayingMessages {
                 let heightOfContentSize = self.conversationCollectionView.contentSize.height
                 let heightOfCollectionView = self.conversationCollectionView.frame.height
                 let targetYPosition = heightOfContentSize - heightOfCollectionView
-
+                
                 self.conversationCollectionView.contentOffset.y = targetYPosition
             } else if currentOffset == 0 {
                 let heightOfContentSize = self.conversationCollectionView.contentSize.height
                 let targetYPosition = heightOfContentSize - currentContentSize
-
+                
                 self.conversationCollectionView.contentOffset.y = targetYPosition
             }
         }
@@ -208,5 +208,43 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
             cell.messageCellModel = messageCellModel
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            
+            let deleteForYourself = UIAction(
+                title: "Delete for yourself",
+                image: UIImage(systemName: "xmark.bin"),
+                identifier: nil,
+                discoverabilityTitle: nil,
+                attributes: .destructive,
+                state: .off
+            ) { _ in
+                print("delete for yourself")
+            }
+            
+            let deleteForAll = UIAction(
+                title: "Delete for all",
+                image: UIImage(systemName: "xmark.bin"),
+                identifier: nil,
+                discoverabilityTitle: nil,
+                attributes: .destructive,
+                state: .off
+            ) { _ in
+                print("delete for all")
+            }
+            
+            
+            return UIMenu(
+                title: "",
+                image: nil,
+                identifier: nil,
+                options: .displayInline,
+                children: [deleteForYourself, deleteForAll]
+            )
+        }
+        
+        return config
     }
 }
