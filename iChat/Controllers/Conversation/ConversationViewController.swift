@@ -210,8 +210,36 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let indexPath = configuration.identifier as? IndexPath,
+              let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellOutgoingMessage
+              else
+        {
+            return nil
+        }
+        
+        let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
+        targetedPreview.parameters.backgroundColor = .clear
+        return targetedPreview
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview?
+    {
+        guard let indexPath = configuration.identifier as? IndexPath,
+              let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellOutgoingMessage
+              else
+        {
+            return nil
+        }
+        
+        let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
+        targetedPreview.parameters.backgroundColor = .clear
+        return targetedPreview
+    }
+    
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+        
+        let config = UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
             
             let deleteForYourself = UIAction(
                 title: "Delete for yourself",
@@ -235,7 +263,6 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
                 print("delete for all")
             }
             
-            
             return UIMenu(
                 title: "",
                 image: nil,
@@ -244,6 +271,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
                 children: [deleteForYourself, deleteForAll]
             )
         }
+        
         
         return config
     }

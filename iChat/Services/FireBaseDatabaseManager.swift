@@ -158,7 +158,7 @@ class FireBaseDatabaseManager {
             
             var messages = [MessageModel]()
             
-            value.forEach { (_, value: [String : Any]) in
+            value.forEach { (key: String, value: [String : Any]) in
                 let messageTextValue = value["messageText"] as? String
                 let dateValue = value["date"] as? String
                 let isReadValue = value["isRead"] as? Bool
@@ -229,8 +229,6 @@ class FireBaseDatabaseManager {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: email)
 
-        
         db.child("Conversations").child(correctSelfEmail).child("conversation-with-\(correctOtherEmail)").removeAllObservers()
-        
     }
 }
