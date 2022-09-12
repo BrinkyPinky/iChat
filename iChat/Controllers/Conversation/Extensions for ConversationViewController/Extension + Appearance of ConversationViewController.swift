@@ -85,9 +85,9 @@ extension ConversationViewController {
 extension ConversationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let messageCellModel = messagesRows[indexPath.section][indexPath.row]
-                
+        
         if messageCellModel.cellIdentifier == "OutgoingMessage" {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellOutgoingMessage
+            let cell = conversationCollectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellOutgoingMessage
             cell.messageCellModel = messageCellModel
             return cell.systemLayoutSizeFitting(
                 CGSize(
@@ -97,7 +97,7 @@ extension ConversationViewController: UICollectionViewDelegateFlowLayout {
                 verticalFittingPriority: .fittingSizeLevel
             )
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellIncomingMessage
+            let cell = conversationCollectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellIncomingMessage
             cell.messageCellModel = messageCellModel
             return cell.systemLayoutSizeFitting(
                 CGSize(
@@ -107,5 +107,6 @@ extension ConversationViewController: UICollectionViewDelegateFlowLayout {
                 verticalFittingPriority: .fittingSizeLevel
             )
         }
-    }
+    }    
 }
+

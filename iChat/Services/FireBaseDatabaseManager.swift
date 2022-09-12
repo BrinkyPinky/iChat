@@ -11,6 +11,8 @@ import Foundation
 class FireBaseDatabaseManager {
     static let shared = FireBaseDatabaseManager()
     
+    var isPaginating = false
+    
     var db = Database.database().reference()
     
     private func convertToCorrectEmail(email: String) -> String {
@@ -137,6 +139,8 @@ class FireBaseDatabaseManager {
     }
     
     func getMessages(withEmail otherEmail: String, andLimit limit: Int, completion: @escaping ([MessageModel]) -> Void) {
+        self.isPaginating = true
+        
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
                 
@@ -171,6 +175,8 @@ class FireBaseDatabaseManager {
             }
             let sortedMessages = messages.sorted(by: {$0.date < $1.date})
             completion(sortedMessages)
+            
+            self.isPaginating = false
         }
     }
     

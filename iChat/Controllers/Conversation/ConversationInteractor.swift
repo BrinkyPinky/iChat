@@ -14,6 +14,7 @@ import UIKit
 
 protocol ConversationBusinessLogic {
     func sendMessage(request: Conversation.SendMessage.Request)
+    func getMessages(isNeedToUpLimit: Bool)
     func stopObservingMessages()
 }
 
@@ -23,6 +24,8 @@ protocol ConversationDataStore {
 
 class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     
+    private var limitOfMessages = 25 // limit on the number of messages we need
+    
     // MARK: Getting Needed User Information from Another View by Routing
     
     var userInfo: ConversationUserModel? {
@@ -30,13 +33,19 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
             let response = Conversation.fullnameLabel.Response(fullname: userInfo?.fullName ?? "Unkown")
             presenter?.presentUserFullname(response: response)
             
-            getMessages(with: userInfo?.email ?? "")
+            getMessages(isNeedToUpLimit: false)
         }
     }
     
     // MARK: Get Messages From Database
     
-    private func getMessages(with email: String) {
+    func getMessages(isNeedToUpLimit: Bool) {
+        guard FireBaseDatabaseManager.shared.isPaginating == false else { return }
+        print(limitOfMessages)
+            if isNeedToUpLimit == true {
+                limitOfMessages += 25 // Its needed when user scrolls to top of collection view
+            }
+        
         var rawMessages: [MessageModel] = [] {
             didSet {
                 guard rawMessages.isEmpty == false else { return }
@@ -45,7 +54,7 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
             }
         }
         
-        FireBaseDatabaseManager.shared.getMessages(withEmail: email, andLimit: 50) { arrayOfMessages in
+        FireBaseDatabaseManager.shared.getMessages(withEmail: userInfo?.email ?? "", andLimit: limitOfMessages) { arrayOfMessages in
             rawMessages = []
             rawMessages.append(contentsOf: arrayOfMessages)
         }

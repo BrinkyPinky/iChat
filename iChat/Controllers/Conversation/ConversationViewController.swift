@@ -44,6 +44,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         setup()
     }
     
+    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
@@ -107,13 +108,13 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             )
             
             self.conversationCollectionView.reloadData()
-            self.conversationCollectionView.layoutIfNeeded()
-            
-            let heightOfContentSize = self.conversationCollectionView.contentSize.height
-            let heightOfCollectionView = self.conversationCollectionView.frame.height
-            let targetYPosition = heightOfContentSize - heightOfCollectionView
-            
-            self.conversationCollectionView.contentOffset.y = targetYPosition
+//            self.conversationCollectionView.layoutIfNeeded()
+//            
+//            let heightOfContentSize = self.conversationCollectionView.contentSize.height
+//            let heightOfCollectionView = self.conversationCollectionView.frame.height
+//            let targetYPosition = heightOfContentSize - heightOfCollectionView
+//            
+//            self.conversationCollectionView.contentOffset.y = targetYPosition
         }
     }
     
@@ -141,6 +142,12 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         router.viewController = viewController
         router.dataStore = interactor
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y == 0 {
+            interactor?.getMessages(isNeedToUpLimit: true)
+       }
+     }
 }
 
 // MARK: Content of CollectionView
@@ -152,7 +159,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         headersDatesRows.count
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let messageHeaderCellModel = headersDatesRows[indexPath.section]
         

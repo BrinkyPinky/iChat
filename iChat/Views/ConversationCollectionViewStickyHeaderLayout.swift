@@ -8,7 +8,7 @@
 import UIKit
 
 class ConversationCollectionViewStickyHeaderLayout: UICollectionViewFlowLayout  {
-
+    
     override init() {
         super.init()
         self.sectionFootersPinToVisibleBounds = true
