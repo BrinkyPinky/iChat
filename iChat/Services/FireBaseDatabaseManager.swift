@@ -225,7 +225,12 @@ class FireBaseDatabaseManager {
         db.child("Users/\(correctSelfEmail)/imagePath").setValue(path)
     }
     
-    func removeObservers() {
-        db.removeAllObservers()
+    func removeConversationsObserver(with email: String) {
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
+        let correctOtherEmail = convertToCorrectEmail(email: email)
+
+        
+        db.child("Conversations").child(correctSelfEmail).child("conversation-with-\(correctOtherEmail)").removeAllObservers()
+        
     }
 }

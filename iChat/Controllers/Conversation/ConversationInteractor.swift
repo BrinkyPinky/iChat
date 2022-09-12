@@ -41,7 +41,6 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     
     func getMessages(isNeedToUpLimit: Bool) {
         guard FireBaseDatabaseManager.shared.isPaginating == false else { return }
-        print(limitOfMessages)
             if isNeedToUpLimit == true {
                 limitOfMessages += 25 // Its needed when user scrolls to top of collection view
             }
@@ -53,7 +52,7 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
                 presenter?.presentMessages(response: response)
             }
         }
-        
+                
         FireBaseDatabaseManager.shared.getMessages(withEmail: userInfo?.email ?? "", andLimit: limitOfMessages) { arrayOfMessages in
             rawMessages = []
             rawMessages.append(contentsOf: arrayOfMessages)
@@ -64,13 +63,16 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     
     func sendMessage(request: Conversation.SendMessage.Request) {
         guard userInfo != nil else { return }
+        guard request.messageText != "" && request.messageText != "Message" else { return }
+        FireBaseDatabaseManager.shared.removeConversationsObserver(with: userInfo?.email ?? "")
         FireBaseDatabaseManager.shared.sendMessage(to: userInfo!.email, withName: userInfo!.fullName, andUsername: userInfo!.username, message: request.messageText)
+        getMessages(isNeedToUpLimit: false)
     }
     
-    // MARK: When view disappear database stops own observer for messages
+    // MARK: When view disappear database stops the observer for messages
     
     func stopObservingMessages() {
-        FireBaseDatabaseManager.shared.removeObservers()
+        FireBaseDatabaseManager.shared.removeConversationsObserver(with: userInfo?.email ?? "")
     }
     
     var presenter: ConversationPresentationLogic?

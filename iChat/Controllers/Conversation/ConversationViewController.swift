@@ -97,6 +97,10 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     // MARK: Display Messages
     
     func displayMessages(viewModel: Conversation.Messages.ViewModel) {
+        let isItFirstDisplayingMessages = headersDatesRows.isEmpty
+        let currentContentSize = self.conversationCollectionView.contentSize.height // before reloadData()
+        let currentOffset = conversationCollectionView.contentOffset.y
+        
         messagesRows = viewModel.messagesRows
         headersDatesRows = viewModel.headersDatesRows
         DispatchQueue.main.async {
@@ -108,21 +112,27 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             )
             
             self.conversationCollectionView.reloadData()
-//            self.conversationCollectionView.layoutIfNeeded()
-//            
-//            let heightOfContentSize = self.conversationCollectionView.contentSize.height
-//            let heightOfCollectionView = self.conversationCollectionView.frame.height
-//            let targetYPosition = heightOfContentSize - heightOfCollectionView
-//            
-//            self.conversationCollectionView.contentOffset.y = targetYPosition
+            self.conversationCollectionView.layoutIfNeeded()
+                    
+            // scroll to bottom if the messages are displayed for the first time else stay in the same place
+            if isItFirstDisplayingMessages {
+                let heightOfContentSize = self.conversationCollectionView.contentSize.height
+                let heightOfCollectionView = self.conversationCollectionView.frame.height
+                let targetYPosition = heightOfContentSize - heightOfCollectionView
+
+                self.conversationCollectionView.contentOffset.y = targetYPosition
+            } else if currentOffset == 0 {
+                let heightOfContentSize = self.conversationCollectionView.contentSize.height
+                let targetYPosition = heightOfContentSize - currentContentSize
+
+                self.conversationCollectionView.contentOffset.y = targetYPosition
+            }
         }
     }
     
     // MARK: Send Message Button Action
     
     @objc func sendMessageButtonPressed() {
-        guard messageTextView.text != "" && messageTextView.text != "Message" else { return }
-        
         let request = Conversation.SendMessage.Request(messageText: messageTextView.text)
         interactor?.sendMessage(request: request)
         messageTextView.text = ""
@@ -146,8 +156,8 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y == 0 {
             interactor?.getMessages(isNeedToUpLimit: true)
-       }
-     }
+        }
+    }
 }
 
 // MARK: Content of CollectionView
