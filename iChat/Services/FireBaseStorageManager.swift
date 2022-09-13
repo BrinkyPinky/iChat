@@ -20,8 +20,8 @@ class FireBaseStorageManager {
         
         storageRef.child("UsersImages/\(selfEmail ?? "unknown").jpg").putData(data, metadata: nil) { result in
             switch result {
-            case .success(let data):
-                FireBaseDatabaseManager.shared.updateUserImagePath(path: data.path)
+            case .success(_):
+                print("success")
             case .failure(let error):
                 print(error.localizedDescription)
             }

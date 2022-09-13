@@ -75,23 +75,21 @@ class SettingsViewModel: SettingsViewModelProtocol {
         self.view = view
     }
     
-    private var imageData: Data? {
-        didSet {
-            guard let imageData = imageData else {
-                return
-            }
-            view.displayUserImage(with: imageData)
-        }
-    }
-
     func viewLoad() {
         UserLoginDataManager.shared.fetchData()
         
         view.displayFullname(with: UserLoginDataManager.shared.fullname ?? "Unknown")
         view.displayUsername(with: "@\(UserLoginDataManager.shared.username ?? "Unknown")")
         
+        if let userImageData = RealmDataManager.shared.getUserImage(email: UserLoginDataManager.shared.email ?? "") {
+            view.displayUserImage(with: userImageData)
+        }
+        
         FireBaseStorageManager.shared.getUserImage(emailIfOtherUser: nil) { [unowned self] imageData in
-            self.imageData = imageData
+            guard let imageData = imageData else { return }
+            view.displayUserImage(with: imageData)
+            
+            RealmDataManager.shared.saveUserImage(imageData: imageData, email: UserLoginDataManager.shared.email ?? "")
         }
         
     }

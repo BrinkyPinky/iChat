@@ -31,12 +31,14 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
         didSet {
             guard rawChats.isEmpty == false else { return }
             provideChats()
+            RealmDataManager.shared.writeLastChats(chatModel: rawChats)
         }
     }
 
-    
     // MARK: Get raw list of chats
     func getChats() {
+        rawChats = RealmDataManager.shared.getLastChats()
+        
         FireBaseDatabaseManager.shared.getChats { [unowned self] chats in
             rawChats = []
             rawChats.append(contentsOf: chats)

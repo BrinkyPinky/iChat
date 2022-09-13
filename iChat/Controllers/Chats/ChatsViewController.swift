@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol ChatsDisplayLogic: AnyObject {
     func displayChats(viewModel: Chats.gettingChats.ViewModel)
@@ -37,6 +38,7 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.getChats()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
     // MARK: Routing
@@ -53,7 +55,9 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
     func displayChats(viewModel: Chats.gettingChats.ViewModel) {
         chatsRows = viewModel.rows
         
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: Setup

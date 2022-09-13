@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol ChatsViewModelCellRepresentable {
     var chatsViewModelCell: CellIdentifiable? { get set }
@@ -23,15 +24,6 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
     var chatsViewModelCell: CellIdentifiable? {
         didSet {
             setup()
-        }
-    }
-    
-    var imageData: Data? {
-        didSet {
-            guard let imageData = imageData else {
-                return
-            }
-            personImage.image = UIImage(data: imageData)
         }
     }
     
@@ -53,9 +45,15 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
             viewBackgroundMessagesCount.isHidden = true
             messagesCountLabel.isHidden = true
         }
-
-        FireBaseStorageManager.shared.getUserImage(emailIfOtherUser: chatsViewModelCell?.email) { [unowned self] data in
-            imageData = data
+        
+        if let imageData = RealmDataManager.shared.getUserImage(email: chatsViewModelCell?.email ?? "") {
+            personImage.image = UIImage(data: imageData)
+        }
+        
+        FireBaseStorageManager.shared.getUserImage(emailIfOtherUser: chatsViewModelCell?.email) { [unowned self] imageData in
+                guard let imageData = imageData else { return }
+                personImage.image = UIImage(data: imageData)
+            RealmDataManager.shared.saveUserImage(imageData: imageData, email: chatsViewModelCell?.email ?? "")
         }
     }
     
