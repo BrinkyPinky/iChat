@@ -8,15 +8,30 @@
 import UIKit
 
 extension UIViewController {
-  private func resetWindow(with vc: UIViewController?) {
-    guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
-      fatalError("could not get scene delegate ")
+    
+    // MARK: show another view controller
+    
+    private func resetWindow(with vc: UIViewController?) {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            fatalError("could not get scene delegate ")
+        }
+        sceneDelegate.window?.rootViewController = vc
     }
-    sceneDelegate.window?.rootViewController = vc
-  }
-  
-  func showViewController(with id: String) {
-    let vc = storyboard?.instantiateViewController(identifier: id)
-    resetWindow(with: vc)
-  }
+    
+    func showViewController(with id: String) {
+        let vc = storyboard?.instantiateViewController(identifier: id)
+        resetWindow(with: vc)
+    }
+    
+    // MARK: hide keyboard
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

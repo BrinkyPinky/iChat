@@ -54,6 +54,7 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         setup()
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self

@@ -34,6 +34,8 @@ class LoginViewController: UIViewController {
     }
     
     private func setupUI() {
+        self.hideKeyboardWhenTappedAround()
+        
         emailTextField.underlined()
         passwordTextField.underlined()
         passwordTextField.isSecureTextEntry = true

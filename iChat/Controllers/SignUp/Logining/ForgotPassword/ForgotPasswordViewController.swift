@@ -24,6 +24,8 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     private func setupUI() {
+        self.hideKeyboardWhenTappedAround()
+        
         emailTextField.underlined()
         sendEmailButton.configuration?.cornerStyle = .capsule
         viewModel = ForgotPasswordViewModel(self)

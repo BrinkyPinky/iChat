@@ -12,6 +12,7 @@ import UIKit
 extension ConversationViewController {
     
     func setupUI() {
+        self.hideKeyboardWhenTappedAround()
         
         // MARK: Actions
         
