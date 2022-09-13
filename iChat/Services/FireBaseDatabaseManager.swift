@@ -7,6 +7,7 @@
 
 import FirebaseDatabase
 import Foundation
+import SwiftUI
 
 class FireBaseDatabaseManager {
     static let shared = FireBaseDatabaseManager()
@@ -19,6 +20,24 @@ class FireBaseDatabaseManager {
             var correctEmail = email.replacingOccurrences(of: ".", with: "-")
             correctEmail = correctEmail.replacingOccurrences(of: "@", with: "-")
             return correctEmail
+    }
+    
+    func checkIfUserNameIsFree(username: String, completion: @escaping (Bool) -> Void) {
+        let usernameForSearch = username.lowercased()
+        
+        let query = db
+            .child("Users")
+            .queryOrdered(byChild: "usernameForSearch")
+            .queryEqual(toValue: usernameForSearch)
+            .queryLimited(toFirst: 1)
+                
+        query.observeSingleEvent(of: .value) { Data in
+            guard Data.exists() else {
+                completion(true)
+                return
+            }
+            completion(false)
+        }
     }
     
     func createUser(username: String, email: String, name: String, surname: String) {
@@ -156,7 +175,10 @@ class FireBaseDatabaseManager {
             .queryLimited(toLast: UInt(limit))
         
         query.observe(.value) { data in
-            guard data.exists() != false else { return }
+            guard data.exists() != false else {
+                self.isPaginating = false
+                return
+            }
             guard let value = data.value as? [String:[String:Any]] else { return }
             
             var messages = [MessageModel]()

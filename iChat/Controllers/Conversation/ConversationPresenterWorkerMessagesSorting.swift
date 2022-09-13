@@ -67,7 +67,6 @@ class ConversationPresenterWorkerMessagesSorting {
                 )
             }
         }
-        
         sortedMessages.append(firstLevelMessages)
         
         return (sortedMessages, headersDatesRows)

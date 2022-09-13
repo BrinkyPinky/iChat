@@ -85,6 +85,8 @@ class SettingsViewModel: SettingsViewModelProtocol {
     }
 
     func viewLoad() {
+        UserLoginDataManager.shared.fetchData()
+        
         view.displayFullname(with: UserLoginDataManager.shared.fullname ?? "Unknown")
         view.displayUsername(with: "@\(UserLoginDataManager.shared.username ?? "Unknown")")
         

@@ -29,7 +29,7 @@ class SignUpViewModel: SignUpViewModelProtocol {
             viewModelDidChanged?(self)
         }
     }
-        
+    
     var viewModelDidChanged: ((SignUpViewModelProtocol) -> Void)?
     
     func emailTextFieldDidChanged(email: String?) {
@@ -37,10 +37,37 @@ class SignUpViewModel: SignUpViewModelProtocol {
     }
     
     func signUpButtonTapped(username: String?, name: String?, surname: String?, email: String?, password: String?) {
-        let isNameValid = ValidationManager.shared.checkNameValidation(name: name ?? "")
-        let isSurnameValid = ValidationManager.shared.checkNameValidation(name: surname ?? "")
+        guard ValidationManager.shared.checkNameValidation(name: username ?? "") else {
+            view.alert(message: "Invalid Username")
+            return
+        }
         
-        if isNameValid == true && isSurnameValid == true {
+        var usernameIsFree: Bool? {
+            didSet {
+                guard usernameIsFree ?? false else {
+                    view.alert(message: "This username is already in use")
+                    return
+                }
+                continueSignUp()
+            }
+        }
+        
+        FireBaseDatabaseManager.shared.checkIfUserNameIsFree(username: username ?? "") { isFree in
+            usernameIsFree = isFree
+        }
+
+        func continueSignUp() {
+            
+            guard ValidationManager.shared.checkNameValidation(name: name ?? "") else {
+                view.alert(message: "Invalid name")
+                return
+            }
+            
+            guard ValidationManager.shared.checkNameValidation(name: surname ?? "") else {
+                view.alert(message: "Invalid surname")
+                return
+            }
+            
             FireBaseAuthManager.shared.signUp(email: email ?? "", password: password ?? "") { [unowned self] error in
                 
                 guard let error = error else {
@@ -53,8 +80,6 @@ class SignUpViewModel: SignUpViewModelProtocol {
                 
                 view.alert(message: error.localizedDescription)
             }
-        } else {
-            view.alert(message: "Invalid Name or Username")
         }
     }
 }

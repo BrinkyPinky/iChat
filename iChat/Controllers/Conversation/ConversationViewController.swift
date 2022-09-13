@@ -98,7 +98,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     
     func displayMessages(viewModel: Conversation.Messages.ViewModel) {
         let isItFirstDisplayingMessages = headersDatesRows.isEmpty
-        let currentContentSize = self.conversationCollectionView.contentSize.height // before reloadData()
+        let currentContentSize = conversationCollectionView.contentSize.height // before reloadData()
         let currentOffset = conversationCollectionView.contentOffset.y
         
         messagesRows = viewModel.messagesRows
@@ -115,17 +115,24 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             self.conversationCollectionView.layoutIfNeeded()
             
             // scroll to bottom if the messages are displayed for the first time else stay in the same place
-            if isItFirstDisplayingMessages {
-                let heightOfContentSize = self.conversationCollectionView.contentSize.height
-                let heightOfCollectionView = self.conversationCollectionView.frame.height
+            let heightOfContentSize = self.conversationCollectionView.contentSize.height
+            let heightOfCollectionView = self.conversationCollectionView.frame.height
+            
+            if heightOfContentSize <= heightOfCollectionView + 50 {
+                print("first")
+            } else if isItFirstDisplayingMessages {
                 let targetYPosition = heightOfContentSize - heightOfCollectionView
-                
                 self.conversationCollectionView.contentOffset.y = targetYPosition
+                print("second")
             } else if currentOffset == 0 {
-                let heightOfContentSize = self.conversationCollectionView.contentSize.height
                 let targetYPosition = heightOfContentSize - currentContentSize
-                
                 self.conversationCollectionView.contentOffset.y = targetYPosition
+                print("third")
+            } else {
+                let targetYPosition = heightOfContentSize - heightOfCollectionView
+                self.conversationCollectionView.contentOffset.y = targetYPosition
+
+                print("four")
             }
         }
     }
@@ -223,8 +230,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
         return targetedPreview
     }
     
-    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview?
-    {
+    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         guard let indexPath = configuration.identifier as? IndexPath,
               let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellOutgoingMessage
               else
@@ -241,13 +247,17 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
         let cellViewModel = messagesRows[indexPath.section][indexPath.row]
         
         let config = UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
+            let copyText = UIAction(
+                title: "Copy message",
+                image: UIImage(systemName: "doc.on.doc")
+            ) { _ in
+                print("smth")
+            }
+            
             let deleteForYourself = UIAction(
                 title: "Delete for yourself",
                 image: UIImage(systemName: "xmark.bin"),
-                identifier: nil,
-                discoverabilityTitle: nil,
-                attributes: .destructive,
-                state: .off
+                attributes: .destructive
             ) { _ in
                 self.interactor?.deleteMessageForYourself(cellViewModel: cellViewModel)
             }
@@ -255,10 +265,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
             let deleteForAll = UIAction(
                 title: "Delete for all",
                 image: UIImage(systemName: "xmark.bin"),
-                identifier: nil,
-                discoverabilityTitle: nil,
-                attributes: .destructive,
-                state: .off
+                attributes: .destructive
             ) { _ in
                 self.interactor?.deleteMessageForAll(cellViewModel: cellViewModel)
             }
@@ -268,7 +275,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
                 image: nil,
                 identifier: nil,
                 options: .displayInline,
-                children: [deleteForYourself, deleteForAll]
+                children: [copyText, deleteForYourself, deleteForAll]
             )
         }
         

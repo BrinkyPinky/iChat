@@ -10,7 +10,7 @@ import Foundation
 class UserLoginDataManager {
     static let shared = UserLoginDataManager()
     
-    var email: String?
+    var email: String? 
     var password: String?
     var fullname: String?
     var username: String?
@@ -37,7 +37,6 @@ class UserLoginDataManager {
             UserDefaults.standard.set(fullnameValue, forKey: "fullname")
             UserDefaults.standard.set(usernameValue, forKey: "username")
         }
-        fetchData()
     }
     
     func removeData() {
