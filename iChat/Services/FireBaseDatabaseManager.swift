@@ -224,6 +224,7 @@ class FireBaseDatabaseManager {
                 let emailValue = value["email"] as? String
                 let lastMessageTextValue = value["lastMessageText"] as? String
                 let lastMessageDateValue = value["lastMessageDate"] as? String
+                let isOnlineValue = value["isOnline"] as? Bool
                 
                 let unreadedMessagesValue = value["unreadedMessages"] as? [String:Any]
                 let unreadedMessagesCount = unreadedMessagesValue?.count
@@ -234,7 +235,8 @@ class FireBaseDatabaseManager {
                     lastMessageDate: lastMessageDateValue,
                     lastMessageText: lastMessageTextValue,
                     username: usernameValue,
-                    unreadedMessagesCount: unreadedMessagesCount ?? 0
+                    unreadedMessagesCount: unreadedMessagesCount ?? 0,
+                    isOnline: isOnlineValue
                 )
                 
                 chats.append(chat)
@@ -260,16 +262,34 @@ class FireBaseDatabaseManager {
         db.child("Conversations/\(correctOtherEmail)/conversation-with-\(correctSelfEmail)/\(messageID)").removeValue()
     }
     
-    func updateUserImagePath(path: String?) {
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
-        
-        db.child("Users/\(correctSelfEmail)/imagePath").setValue(path)
+    func userOnline() {
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email ?? "")
+
+        db.child("Users/\(correctSelfEmail)/isOnline").setValue(true)
     }
     
-    func removeConversationsObserver(with email: String) {
+    func userOffline() {
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email ?? "")
+        
+        db.child("Users/\(correctSelfEmail)/isOnline").setValue(false)
+    }
+    
+    func checkUserStatus(otherEmail: String, completion: @escaping (Bool) -> Void) {
+        let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
+        
+        db.child("Users/\(correctOtherEmail)/isOnline").observe(.value) { data in
+            guard data.exists() else { return }
+            guard let isOnline = data.value as? Bool else { return }
+            completion(isOnline)
+        }
+    }
+    
+    func removeConversationObservers(with email: String, withOnlineStatus: Bool) {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: email)
         
         db.child("Conversations").child(correctSelfEmail).child("conversation-with-\(correctOtherEmail)").removeAllObservers()
+        guard withOnlineStatus else { return }
+        db.child("Users/\(correctOtherEmail)/isOnline").removeAllObservers()
     }
 }

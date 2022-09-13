@@ -14,6 +14,7 @@ class ChatModel: Object {
     @Persisted var lastMessageText: String?
     @Persisted var username: String?
     @Persisted var unreadedMessagesCount: Int
+    @Persisted var isOnline: Bool?
     
     convenience init(
         email: String?,
@@ -21,7 +22,8 @@ class ChatModel: Object {
         lastMessageDate: String?,
         lastMessageText: String?,
         username: String?,
-        unreadedMessagesCount: Int
+        unreadedMessagesCount: Int,
+        isOnline: Bool?
     ) {
         self.init()
         self.email = email
@@ -30,5 +32,6 @@ class ChatModel: Object {
         self.lastMessageText = lastMessageText
         self.username = username
         self.unreadedMessagesCount = unreadedMessagesCount
+        self.isOnline = isOnline
     }
 }

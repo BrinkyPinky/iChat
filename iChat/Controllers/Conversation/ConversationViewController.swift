@@ -14,7 +14,7 @@
 import UIKit
 
 protocol ConversationDisplayLogic: AnyObject {
-    func displayFullname(viewModel: Conversation.fullnameLabel.ViewModel)
+    func displayTitle(viewModel: Conversation.userTitleLabel.ViewModel)
     func displayMessages(viewModel: Conversation.Messages.ViewModel)
 }
 
@@ -90,8 +90,8 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     
     // MARK: Display FullName
     
-    func displayFullname(viewModel: Conversation.fullnameLabel.ViewModel) {
-        title = viewModel.fullname
+    func displayTitle(viewModel: Conversation.userTitleLabel.ViewModel) {
+        self.navigationItem.titleView = setTitle(title: viewModel.fullname, isActive: viewModel.isOnline)
     }
     
     // MARK: Display Messages
@@ -294,5 +294,9 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
         }
         
         return config
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
     }
 }

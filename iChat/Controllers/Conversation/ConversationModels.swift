@@ -18,13 +18,15 @@ typealias HeadersMessageCellViewModel = Conversation.Messages.ViewModel.HeadersM
 enum Conversation {
     // MARK: Use cases
     
-    enum fullnameLabel {
+    enum userTitleLabel {
         struct Response {
             let fullname: String
+            let isOnline: Bool
         }
         
         struct ViewModel {
             let fullname: String
+            let isOnline: Bool
         }
     }
     

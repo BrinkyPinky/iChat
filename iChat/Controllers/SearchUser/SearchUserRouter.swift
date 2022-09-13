@@ -54,7 +54,8 @@ class SearchUserRouter: NSObject, SearchUserRoutingLogic, SearchUserDataPassing 
         destination.userInfo = ConversationUserModel(
             fullName: selectedUser.fullName,
             email: selectedUser.email,
-            username: selectedUser.username
+            username: selectedUser.username,
+            isOnline: false
         )
     }
 }

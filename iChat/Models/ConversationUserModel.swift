@@ -11,4 +11,5 @@ struct ConversationUserModel {
     var fullName: String
     var email: String
     var username: String
+    var isOnline: Bool
 }

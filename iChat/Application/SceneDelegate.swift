@@ -54,10 +54,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
+        FireBaseDatabaseManager.shared.userOnline()
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        FireBaseDatabaseManager.shared.userOffline()
     }
     
     

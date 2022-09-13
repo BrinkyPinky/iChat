@@ -35,6 +35,7 @@ enum Chats {
                 let fullname: String
                 let email: String
                 let unreadedMessagesCount: Int
+                let isOnline: Bool
                 
                 init(chatModel: ChatModel) {
                     lastMessageDate = chatModel.lastMessageDate ?? "Unknown"
@@ -43,6 +44,7 @@ enum Chats {
                     fullname = chatModel.fullname ?? "Unknown"
                     email = chatModel.email ?? "No email"
                     unreadedMessagesCount = chatModel.unreadedMessagesCount
+                    isOnline = chatModel.isOnline ?? false
                 }
                 
             }

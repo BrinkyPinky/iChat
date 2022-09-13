@@ -15,6 +15,7 @@ class ConversationCollectionViewCellOutgoingMessage: UICollectionViewCell, Outgo
     @IBOutlet var viewBackgroundTheMessage: UIView!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var messageText: UILabel!
+    @IBOutlet var isReadLabel: UIImageView!
     
     var messageCellModel: CellIdentifiable? {
         didSet {
@@ -26,6 +27,7 @@ class ConversationCollectionViewCellOutgoingMessage: UICollectionViewCell, Outgo
         guard let cellModel = messageCellModel as? MessageCellViewModel else { return }
         messageText.text = cellModel.messageText
         timeLabel.text = cellModel.messageDate
+        isReadLabel.image = cellModel.isRead ?? false ? UIImage(systemName: "arrowshape.turn.up.left.2.fill") : UIImage(systemName: "arrowshape.turn.up.left.2")
         
         viewBackgroundTheMessage.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMinXMaxYCorner]
         viewBackgroundTheMessage.layer.cornerRadius = 15

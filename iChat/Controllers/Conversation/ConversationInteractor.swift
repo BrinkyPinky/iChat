@@ -33,8 +33,13 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     
     var userInfo: ConversationUserModel? {
         didSet {
-            let response = Conversation.fullnameLabel.Response(fullname: userInfo?.fullName ?? "Unkown")
-            presenter?.presentUserFullname(response: response)
+            FireBaseDatabaseManager.shared.checkUserStatus(otherEmail: userInfo?.email ?? "") { [unowned self] isOnline in
+                let response = Conversation.userTitleLabel.Response(fullname: userInfo?.fullName ?? "Unknown", isOnline: isOnline)
+                presenter?.presentTitle(response: response)
+            }
+            
+            let response = Conversation.userTitleLabel.Response(fullname: userInfo?.fullName ?? "Unknown", isOnline: userInfo?.isOnline ?? false)
+            presenter?.presentTitle(response: response)
             
             getMessages(isNeedToUpLimit: false)
         }
@@ -67,7 +72,7 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     func sendMessage(request: Conversation.SendMessage.Request) {
         guard userInfo != nil else { return }
         guard request.messageText != "" && request.messageText != "Message" else { return }
-        FireBaseDatabaseManager.shared.removeConversationsObserver(with: userInfo?.email ?? "")
+        FireBaseDatabaseManager.shared.removeConversationObservers(with: userInfo?.email ?? "", withOnlineStatus: false)
         FireBaseDatabaseManager.shared.sendMessage(to: userInfo!.email, withName: userInfo!.fullName, andUsername: userInfo!.username, message: request.messageText)
         getMessages(isNeedToUpLimit: false)
     }
@@ -95,7 +100,7 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     // MARK: When view disappear database stops the observer for messages
     
     func stopObservingMessages() {
-        FireBaseDatabaseManager.shared.removeConversationsObserver(with: userInfo?.email ?? "")
+        FireBaseDatabaseManager.shared.removeConversationObservers(with: userInfo?.email ?? "", withOnlineStatus: true)
     }
     
     var presenter: ConversationPresentationLogic?

@@ -56,7 +56,6 @@
 		E28F050428B777720096E22F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050328B777720096E22F /* AppDelegate.swift */; };
 		E28F050628B777720096E22F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F050528B777720096E22F /* SceneDelegate.swift */; };
 		E28F050B28B777720096E22F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28F050928B777720096E22F /* Main.storyboard */; };
-		E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E28F050C28B777720096E22F /* iChat.xcdatamodeld */; };
 		E28F051028B777730096E22F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E28F050F28B777730096E22F /* Assets.xcassets */; };
 		E2A1044528C49DC600890ED7 /* ConversationCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */; };
 		E2A1044928C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1044828C4BAB700890ED7 /* ConversationCollectionViewStickyHeaderLayout.swift */; };
@@ -117,7 +116,6 @@
 		E28F050328B777720096E22F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E28F050528B777720096E22F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E28F050A28B777720096E22F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E28F050D28B777720096E22F /* iChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iChat.xcdatamodel; sourceTree = "<group>"; };
 		E28F050F28B777730096E22F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E28F051428B777730096E22F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2A1044428C49DC600890ED7 /* ConversationCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -263,7 +261,6 @@
 				E28F050328B777720096E22F /* AppDelegate.swift */,
 				E28F050528B777720096E22F /* SceneDelegate.swift */,
 				E28F051428B777730096E22F /* Info.plist */,
-				E28F050C28B777720096E22F /* iChat.xcdatamodeld */,
 				E264998028C6567400C54A51 /* GoogleService-Info.plist */,
 			);
 			path = Application;
@@ -532,7 +529,6 @@
 				E22A3D9B28BB969E004AE357 /* UserLoginDataManager.swift in Sources */,
 				E248CB4A28C20C1A000B9108 /* UserTableViewCell.swift in Sources */,
 				E264997C28C61B5E00C54A51 /* ConversationViewController.swift in Sources */,
-				E28F050E28B777720096E22F /* iChat.xcdatamodeld in Sources */,
 				E229B95428C55EA300F795B7 /* ChatsRouter.swift in Sources */,
 				E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */,
 				E2C8934628BF192300FC6210 /* ForgotPasswordViewModel.swift in Sources */,
@@ -822,19 +818,6 @@
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		E28F050C28B777720096E22F /* iChat.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E28F050D28B777720096E22F /* iChat.xcdatamodel */,
-			);
-			currentVersion = E28F050D28B777720096E22F /* iChat.xcdatamodel */;
-			path = iChat.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E28F04F828B777720096E22F /* Project object */;
 }

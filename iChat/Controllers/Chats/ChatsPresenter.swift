@@ -37,7 +37,8 @@ class ChatsPresenter: ChatsPresentationLogic {
                         lastMessageDate: convertedDate,
                         lastMessageText: chatModel.lastMessageText,
                         username: chatModel.username,
-                        unreadedMessagesCount: chatModel.unreadedMessagesCount
+                        unreadedMessagesCount: chatModel.unreadedMessagesCount,
+                        isOnline: chatModel.isOnline
                     )
                 )
             )

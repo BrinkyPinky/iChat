@@ -55,7 +55,8 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
         userInfo = ConversationUserModel(
             fullName: rowViewModel.fullname,
             email: rowViewModel.email,
-            username: rowViewModel.username
+            username: rowViewModel.username,
+            isOnline: rowViewModel.isOnline
         )
     }
 }

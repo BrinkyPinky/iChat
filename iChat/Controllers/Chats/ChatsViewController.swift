@@ -39,6 +39,7 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
         super.viewDidLoad()
         interactor?.getChats()
         print(Realm.Configuration.defaultConfiguration.fileURL!)
+        FireBaseDatabaseManager.shared.userOnline()
     }
     
     // MARK: Routing

@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ConversationPresentationLogic {
-    func presentUserFullname(response: Conversation.fullnameLabel.Response)
+    func presentTitle(response: Conversation.userTitleLabel.Response)
     func presentMessages(response: Conversation.Messages.Response)
 }
 
@@ -24,9 +24,9 @@ class ConversationPresenter: ConversationPresentationLogic {
 
     // MARK: presentUserFullName
     
-    func presentUserFullname(response: Conversation.fullnameLabel.Response) {
-        let viewModel = Conversation.fullnameLabel.ViewModel(fullname: response.fullname)
-        viewController?.displayFullname(viewModel: viewModel)
+    func presentTitle(response: Conversation.userTitleLabel.Response) {
+        let viewModel = Conversation.userTitleLabel.ViewModel(fullname: response.fullname, isOnline: response.isOnline)
+        viewController?.displayTitle(viewModel: viewModel)
     }
     
     func presentMessages(response: Conversation.Messages.Response) {
