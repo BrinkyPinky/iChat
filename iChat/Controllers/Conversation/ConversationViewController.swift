@@ -251,7 +251,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
                 title: "Copy message",
                 image: UIImage(systemName: "doc.on.doc")
             ) { _ in
-                print("smth")
+                self.interactor?.copyMessageToClipboard(cellViewModel: cellViewModel)
             }
             
             let deleteForYourself = UIAction(
@@ -270,15 +270,22 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
                 self.interactor?.deleteMessageForAll(cellViewModel: cellViewModel)
             }
             
+            let subMenu = UIMenu(
+                title: "",
+                image: nil,
+                identifier: nil,
+                options: .displayInline,
+                children: [copyText]
+            )
+            
             return UIMenu(
                 title: "",
                 image: nil,
                 identifier: nil,
                 options: .displayInline,
-                children: [copyText, deleteForYourself, deleteForAll]
+                children: [subMenu, deleteForYourself, deleteForAll]
             )
         }
-        
         
         return config
     }

@@ -17,6 +17,7 @@ protocol ConversationBusinessLogic {
     func getMessages(isNeedToUpLimit: Bool)
     func deleteMessageForYourself(cellViewModel: CellIdentifiable)
     func deleteMessageForAll(cellViewModel: CellIdentifiable)
+    func copyMessageToClipboard(cellViewModel: CellIdentifiable)
     func stopObservingMessages()
 }
 
@@ -71,7 +72,7 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         getMessages(isNeedToUpLimit: false)
     }
     
-    // MARK: Deleting Messages
+    // MARK: Context Menu Actions
     
     func deleteMessageForAll(cellViewModel: CellIdentifiable) {
         guard let cellViewModel = cellViewModel as? MessageCellViewModel else { return }
@@ -83,6 +84,12 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         guard let cellViewModel = cellViewModel as? MessageCellViewModel else { return }
 
         FireBaseDatabaseManager.shared.deleteMessageForYourself(messageID: cellViewModel.messageID, otherEmail: userInfo?.email ?? "")
+    }
+    
+    func copyMessageToClipboard(cellViewModel: CellIdentifiable) {
+        guard let cellViewModel = cellViewModel as? MessageCellViewModel else { return }
+
+        UIPasteboard.general.string = cellViewModel.messageText
     }
     
     // MARK: When view disappear database stops the observer for messages
