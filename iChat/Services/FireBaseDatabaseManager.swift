@@ -207,6 +207,13 @@ class FireBaseDatabaseManager {
         }
     }
     
+    func readMessage(messageID: String, otherEmail: String) {
+        let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
+
+        db.child("Conversations/\(correctOtherEmail)/conversation-with-\(correctSelfEmail)/\(messageID)/isRead").setValue(true)
+    }
+    
     func getChats(completion: @escaping ([ChatModel]) -> Void ) {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         
@@ -225,6 +232,7 @@ class FireBaseDatabaseManager {
                 let lastMessageTextValue = value["lastMessageText"] as? String
                 let lastMessageDateValue = value["lastMessageDate"] as? String
                 let isOnlineValue = value["isOnline"] as? Bool
+                print(isOnlineValue)
                 
                 let unreadedMessagesValue = value["unreadedMessages"] as? [String:Any]
                 let unreadedMessagesCount = unreadedMessagesValue?.count

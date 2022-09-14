@@ -116,7 +116,9 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             let section = conversationCollectionView.numberOfSections - 1
             let row = conversationCollectionView.numberOfItems(inSection: section) - 1
             
-            if isItFirstDisplayingMessages {
+            if heightOfContentSize <= heightOfCollectionView + 50 {
+                
+            } else if isItFirstDisplayingMessages {
                 conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: false)
             } else if currentOffset <= 50 {
                 let targetYPosition = heightOfContentSize - currentContentSize
@@ -294,6 +296,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
+        let request = Conversation.ReadMessage.Request(displayingCell: messagesRows[indexPath.section][indexPath.row])
+        interactor?.readMessage(request: request)
     }
 }

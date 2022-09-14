@@ -79,4 +79,10 @@ enum Conversation {
             let messageText: String
         }
     }
+    
+    enum ReadMessage {
+        struct Request {
+            let displayingCell: CellIdentifiable
+        }
+    }
 }

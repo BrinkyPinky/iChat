@@ -21,6 +21,9 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
     @IBOutlet var viewBackgroundMessagesCount: UIView!
     @IBOutlet var messagesCountLabel: UILabel!
     
+    @IBOutlet var onlineStatusView: UIView!
+    @IBOutlet var backgroundOnlineStatusView: UIView!
+    
     var chatsViewModelCell: CellIdentifiable? {
         didSet {
             setup()
@@ -34,8 +37,16 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         username.text = chatsViewModelCell?.username
         messageText.text = chatsViewModelCell?.lastMessageText
         messageDate.text = chatsViewModelCell?.lastMessageDate
-        personImage.layer.cornerRadius = personImage.frame.width/2
-        viewBackgroundMessagesCount.layer.cornerRadius = viewBackgroundMessagesCount.frame.width/2
+        personImage.layer.cornerRadius = personImage.frame.width / 2
+        viewBackgroundMessagesCount.layer.cornerRadius = viewBackgroundMessagesCount.frame.width / 2
+        onlineStatusView.layer.cornerRadius = onlineStatusView.frame.width / 2
+        backgroundOnlineStatusView.layer.cornerRadius = backgroundOnlineStatusView.frame.width / 2
+        
+        if ((chatsViewModelCell?.isOnline) != nil) {
+            onlineStatusView.backgroundColor = .systemGreen
+        } else {
+            onlineStatusView.backgroundColor = .opaqueSeparator
+        }
         
         if chatsViewModelCell?.unreadedMessagesCount != 0 {
             viewBackgroundMessagesCount.isHidden = false

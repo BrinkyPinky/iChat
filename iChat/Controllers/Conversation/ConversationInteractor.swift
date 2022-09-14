@@ -15,6 +15,7 @@ import UIKit
 protocol ConversationBusinessLogic {
     func sendMessage(request: Conversation.SendMessage.Request)
     func getMessages(isNeedToUpLimit: Bool)
+    func readMessage(request: Conversation.ReadMessage.Request)
     func deleteMessageForYourself(cellViewModel: CellIdentifiable)
     func deleteMessageForAll(cellViewModel: CellIdentifiable)
     func copyMessageToClipboard(cellViewModel: CellIdentifiable)
@@ -45,7 +46,7 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         }
     }
     
-    // MARK: Get Messages From Database
+    // MARK: Messages interaction
     
     func getMessages(isNeedToUpLimit: Bool) {
         guard FireBaseDatabaseManager.shared.isPaginating == false else { return }
@@ -67,8 +68,6 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         }
     }
     
-    // MARK: Send Message to Database
-    
     func sendMessage(request: Conversation.SendMessage.Request) {
         guard userInfo != nil else { return }
         guard request.messageText != "" && request.messageText != "Message" else { return }
@@ -77,6 +76,13 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         getMessages(isNeedToUpLimit: false)
     }
     
+    func readMessage(request: Conversation.ReadMessage.Request) {
+        guard request.displayingCell.cellIdentifier == "IncomingMessage" else { return }
+        guard let message = request.displayingCell as? MessageCellViewModel else { return }
+        guard message.isRead == false else { return }
+        FireBaseDatabaseManager.shared.readMessage(messageID: message.messageID, otherEmail: userInfo?.email ?? "")
+    }
+        
     // MARK: Context Menu Actions
     
     func deleteMessageForAll(cellViewModel: CellIdentifiable) {
