@@ -115,32 +115,17 @@ extension ConversationViewController {
     }
 }
 
-// MARK: Appearance of collection view
+// MARK: Height of collection view
 extension ConversationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let messageCellModel = messagesRows[indexPath.section][indexPath.row]
+        let messageCellModel = messagesRows[indexPath.section][indexPath.row] as! MessageCellViewModel
+                
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 243, height: 368))
+        label.text = messageCellModel.messageText
+        label.numberOfLines = 0
+        label.sizeToFit()
         
-        if messageCellModel.cellIdentifier == "OutgoingMessage" {
-            let cell = conversationCollectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellOutgoingMessage
-            cell.messageCellModel = messageCellModel
-            return cell.systemLayoutSizeFitting(
-                CGSize(
-                    width: collectionView.frame.width,
-                    height: UIView.layoutFittingExpandedSize.height),
-                withHorizontalFittingPriority: .required,
-                verticalFittingPriority: .fittingSizeLevel
-            )
-        } else {
-            let cell = conversationCollectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellIncomingMessage
-            cell.messageCellModel = messageCellModel
-            return cell.systemLayoutSizeFitting(
-                CGSize(
-                    width: collectionView.frame.width,
-                    height: UIView.layoutFittingExpandedSize.height),
-                withHorizontalFittingPriority: .required,
-                verticalFittingPriority: .fittingSizeLevel
-            )
-        }
-    }    
+        return CGSize(width: view.frame.width, height: label.frame.height + 59)
+    }
 }
 
