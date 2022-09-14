@@ -17,9 +17,9 @@ class FireBaseDatabaseManager {
     var db = Database.database().reference()
     
     private func convertToCorrectEmail(email: String) -> String {
-            var correctEmail = email.replacingOccurrences(of: ".", with: "-")
-            correctEmail = correctEmail.replacingOccurrences(of: "@", with: "-")
-            return correctEmail
+        var correctEmail = email.replacingOccurrences(of: ".", with: "-")
+        correctEmail = correctEmail.replacingOccurrences(of: "@", with: "-")
+        return correctEmail
     }
     
     func checkIfUserNameIsFree(username: String, completion: @escaping (Bool) -> Void) {
@@ -30,7 +30,7 @@ class FireBaseDatabaseManager {
             .queryOrdered(byChild: "usernameForSearch")
             .queryEqual(toValue: usernameForSearch)
             .queryLimited(toFirst: 1)
-                
+        
         query.observeSingleEvent(of: .value) { Data in
             guard Data.exists() else {
                 completion(true)
@@ -63,7 +63,7 @@ class FireBaseDatabaseManager {
             let surname = value["surname"] as? String
             let username = value["username"] as? String
             let fullname = "\(name ?? "unknown") \(surname ?? "unknown")"
-                        
+            
             completion(fullname, username ?? "unknown")
         }
     }
@@ -107,7 +107,7 @@ class FireBaseDatabaseManager {
     func sendMessage(to email: String, withName name: String, andUsername username: String, message: String) {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: email)
-                
+        
         let dbSelfDestination = db
             .child("Conversations")
             .child(correctSelfEmail)
@@ -120,8 +120,6 @@ class FireBaseDatabaseManager {
         let specifiedDate = String(Date().timeIntervalSince1970)
         let messageID = specifiedDate.replacingOccurrences(of: ".", with: "-")
         
-        // MARK: Send Messages To Database Conversations
-        
         dbSelfDestination.child(messageID).setValue([
             "date": specifiedDate,
             "isRead": false,
@@ -129,35 +127,15 @@ class FireBaseDatabaseManager {
             "selfSender": true,
             "messageID": messageID
         ])
-        
         dbOtherDestination.child(messageID).setValue([
             "date": specifiedDate,
-            "isRead": false,
+            "isRead": true,
             "messageText": message,
             "selfSender": false,
             "messageID": messageID
         ])
         
-        // MARK: Send last messages to users/USERID/listofconversations
-        
-        db.child("Users/\(correctSelfEmail)/listOfConversations/\(correctOtherEmail)").setValue([
-                "email": correctOtherEmail,
-                "fullName": name,
-                "lastMessageDate": specifiedDate,
-                "lastMessageText": message,
-                "username": username
-        ])
-        
-        db.child("Users/\(correctOtherEmail)/listOfConversations/\(correctSelfEmail)").updateChildValues([
-                "email": correctSelfEmail,
-                "fullName": UserLoginDataManager.shared.fullname ?? "unknown",
-                "lastMessageDate": specifiedDate,
-                "lastMessageText": message,
-                "username": UserLoginDataManager.shared.username ?? "unknown"
-        ])
-        db.child("Users/\(correctOtherEmail)/listOfConversations/\(correctSelfEmail)/unreadedMessages").childByAutoId().setValue([
-            "123": "123321"
-        ])
+        db.child("Chats/\(correctSelfEmail)/\(correctOtherEmail)")
     }
     
     func getMessages(withEmail otherEmail: String, andLimit limit: Int, completion: @escaping ([MessageModel]) -> Void) {
@@ -165,8 +143,6 @@ class FireBaseDatabaseManager {
         
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
-                
-        self.db.child("Users/\(correctSelfEmail)/listOfConversations/\(correctOtherEmail)/unreadedMessages").removeValue()
         
         let query = db
             .child("Conversations")
@@ -210,49 +186,46 @@ class FireBaseDatabaseManager {
     func readMessage(messageID: String, otherEmail: String) {
         let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
-
+        
         db.child("Conversations/\(correctOtherEmail)/conversation-with-\(correctSelfEmail)/\(messageID)/isRead").setValue(true)
     }
     
     func getChats(completion: @escaping ([ChatModel]) -> Void ) {
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
-        
-        let query = db.child("Users/\(correctSelfEmail)/listOfConversations").queryLimited(toFirst: 25)
-        
-        query.observe(.value) { data in
-            guard data.exists() != false else { return }
-            guard let chatsValues = data.value as? [String:[String:Any]] else { return }
-            
-            var chats = [ChatModel]()
-            
-            chatsValues.forEach { (_, value: [String : Any]) in
-                let usernameValue = value["username"] as? String
-                let fullnameValue = value["fullName"] as? String
-                let emailValue = value["email"] as? String
-                let lastMessageTextValue = value["lastMessageText"] as? String
-                let lastMessageDateValue = value["lastMessageDate"] as? String
-                let isOnlineValue = value["isOnline"] as? Bool
-                print(isOnlineValue)
-                
-                let unreadedMessagesValue = value["unreadedMessages"] as? [String:Any]
-                let unreadedMessagesCount = unreadedMessagesValue?.count
-                
-                let chat = ChatModel(
-                    email: emailValue,
-                    fullname: fullnameValue,
-                    lastMessageDate: lastMessageDateValue,
-                    lastMessageText: lastMessageTextValue,
-                    username: usernameValue,
-                    unreadedMessagesCount: unreadedMessagesCount ?? 0,
-                    isOnline: isOnlineValue
-                )
-                
-                chats.append(chat)
-            }
-            
-            let sortedChats = chats.sorted(by: { Double($0.lastMessageDate ?? "0")! > Double($1.lastMessageDate ?? "0")! })
-            completion(sortedChats)
-        }
+        //        let query = db.child("Users/\(correctSelfEmail)/listOfConversations").queryLimited(toFirst: 25)
+        //
+        //        query.observe(.value) { data in
+        //            guard data.exists() != false else { return }
+        //            guard let chatsValues = data.value as? [String:[String:Any]] else { return }
+        //
+        //            var chats = [ChatModel]()
+        //
+        //            chatsValues.forEach { (_, value: [String : Any]) in
+        //                let usernameValue = value["username"] as? String
+        //                let fullnameValue = value["fullName"] as? String
+        //                let emailValue = value["email"] as? String
+        //                let lastMessageTextValue = value["lastMessageText"] as? String
+        //                let lastMessageDateValue = value["lastMessageDate"] as? String
+        //                let isOnlineValue = value["isOnline"] as? Bool
+        //
+        //                let unreadedMessagesValue = value["unreadedMessages"] as? [String:Any]
+        //                let unreadedMessagesCount = unreadedMessagesValue?.count
+        //
+        //                let chat = ChatModel(
+        //                    email: emailValue,
+        //                    fullname: fullnameValue,
+        //                    lastMessageDate: lastMessageDateValue,
+        //                    lastMessageText: lastMessageTextValue,
+        //                    username: usernameValue,
+        //                    unreadedMessagesCount: unreadedMessagesCount ?? 0,
+        //                    isOnline: isOnlineValue
+        //                )
+        //
+        //                chats.append(chat)
+        //            }
+        //
+        //            let sortedChats = chats.sorted(by: { Double($0.lastMessageDate ?? "0")! > Double($1.lastMessageDate ?? "0")! })
+        //            completion(sortedChats)
+        //        }
     }
     
     func deleteMessageForYourself(messageID: String, otherEmail: String) {
@@ -272,7 +245,7 @@ class FireBaseDatabaseManager {
     
     func userOnline() {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email ?? "")
-
+        
         db.child("Users/\(correctSelfEmail)/isOnline").setValue(true)
     }
     

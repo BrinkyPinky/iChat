@@ -35,6 +35,7 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
         super.init(coder: aDecoder)
         setup()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.getChats()
