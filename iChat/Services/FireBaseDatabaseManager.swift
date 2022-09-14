@@ -5,7 +5,7 @@
 //  Created by Егор Шилов on 28.08.2022.
 //
 
-import FirebaseDatabase
+import FirebaseFirestore
 import Foundation
 import SwiftUI
 
@@ -14,25 +14,31 @@ class FireBaseDatabaseManager {
     
     var isPaginating = false
     
-    var db = Database.database().reference()
+    var db = Firestore.firestore()
     
-    private func convertToCorrectEmail(email: String) -> String {
-        var correctEmail = email.replacingOccurrences(of: ".", with: "-")
-        correctEmail = correctEmail.replacingOccurrences(of: "@", with: "-")
-        return correctEmail
+    var messagesListener: ListenerRegistration?
+    var userStatusListener: ListenerRegistration?
+    
+    // MARK: Registration
+    
+    func createUser(username: String, email: String, name: String, surname: String) {
+        db.collection("Users").document("\(email)").setData([
+            "email": email,
+            "name": name,
+            "surname": surname,
+            "username": username,
+            "usernameForSearch": username.lowercased(),
+            "isOnline": true
+        ])
     }
     
     func checkIfUserNameIsFree(username: String, completion: @escaping (Bool) -> Void) {
         let usernameForSearch = username.lowercased()
         
-        let query = db
-            .child("Users")
-            .queryOrdered(byChild: "usernameForSearch")
-            .queryEqual(toValue: usernameForSearch)
-            .queryLimited(toFirst: 1)
-        
-        query.observeSingleEvent(of: .value) { Data in
-            guard Data.exists() else {
+        db.collection("Users").whereField("usernameForSearch", isEqualTo: usernameForSearch).limit(to: 1).getDocuments { querySnapshot, error in
+            guard let querySnapshot = querySnapshot else { return }
+            
+            guard querySnapshot.documents.first != nil else {
                 completion(true)
                 return
             }
@@ -40,57 +46,41 @@ class FireBaseDatabaseManager {
         }
     }
     
-    func createUser(username: String, email: String, name: String, surname: String) {
-        let correctEmail = convertToCorrectEmail(email: email)
-        
-        db.child("Users").child(correctEmail).setValue([
-            "email": email,
-            "name": name,
-            "surname": surname,
-            "username": username,
-            "usernameForSearch": username.lowercased()
-        ])
-    }
-    
     func getSelfUser(email: String, completion: @escaping (String, String) -> Void) {
-        let correctSelfEmail = convertToCorrectEmail(email: email)
-        
-        db.child("Users/\(correctSelfEmail)").observeSingleEvent(of: .value) { data in
-            guard data.exists() != false else { return }
-            guard let value = data.value as? [String:Any] else { return }
+        db.collection("Users").document(email).getDocument { documentSnapshot, error in
+            guard let documentSnapshot = documentSnapshot?.data() else { return }
             
-            let name = value["name"] as? String
-            let surname = value["surname"] as? String
-            let username = value["username"] as? String
-            let fullname = "\(name ?? "unknown") \(surname ?? "unknown")"
+            let nameValue = documentSnapshot["name"] as? String
+            let surnameValue = documentSnapshot["surname"] as? String
+            let usernameValue = documentSnapshot["username"] as? String
             
-            completion(fullname, username ?? "unknown")
+            completion("\(nameValue ?? "unknown") \(surnameValue ?? "unknown")", usernameValue ?? "unknown")
         }
     }
+    
+    // MARK: SearchUser
     
     func searchUser(username: String, completion: @escaping ([UserModel]) -> Void) {
         let usernameLowered = username.lowercased()
         
         let query = db
-            .child("Users")
-            .queryOrdered(byChild: "usernameForSearch")
-            .queryStarting(atValue: usernameLowered)
-            .queryLimited(toFirst: 10)
+            .collection("Users")
+            .order(by: "usernameForSearch")
+            .start(at: [usernameLowered])
+            .limit(to: 20)
         
-        query.observeSingleEvent(of: .value) { (data) in
-            guard data.exists() != false else { return }
-            guard let value = data.value as? [String:[String:Any]] else { return }
+        query.getDocuments { querySnapshot, error in
+            guard let querySnapshot = querySnapshot?.documents else { return }
             
             var users: [UserModel] = []
             
-            value.forEach { (_, value: [String : Any]) in
-                let emailValue = value["email"] as? String
-                let nameValue = value["name"] as? String
-                let surnameValue = value["surname"] as? String
-                let usernameValue = value["username"] as? String
-                let usernameForSearchValue = value["usernameForSearch"] as? String
+            querySnapshot.forEach { dataRaw in
+                let data = dataRaw.data()
                 
-                guard usernameForSearchValue?.contains(usernameLowered) == true else {return}
+                let emailValue = data["email"] as? String
+                let nameValue = data["name"] as? String
+                let surnameValue = data["surname"] as? String
+                let usernameValue = data["username"] as? String
                 
                 let user = UserModel(
                     email: emailValue ?? "No email",
@@ -98,73 +88,82 @@ class FireBaseDatabaseManager {
                     surname: surnameValue ?? "No surname",
                     username: usernameValue ?? "No username"
                 )
+                
                 users.append(user)
             }
+            
             completion(users)
         }
     }
     
+    // MARK: MessagesInteraction
+    
     func sendMessage(to email: String, withName name: String, andUsername username: String, message: String) {
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
-        let correctOtherEmail = convertToCorrectEmail(email: email)
+        let selfEmail = UserLoginDataManager.shared.email!
+        let otherEmail = email
         
-        let dbSelfDestination = db
-            .child("Conversations")
-            .child(correctSelfEmail)
-            .child("conversation-with-\(correctOtherEmail)")
-        let dbOtherDestination = db
-            .child("Conversations")
-            .child(correctOtherEmail)
-            .child("conversation-with-\(correctSelfEmail)")
+        let batch = db.batch()
         
         let specifiedDate = String(Date().timeIntervalSince1970)
-        let messageID = specifiedDate.replacingOccurrences(of: ".", with: "-")
         
-        dbSelfDestination.child(messageID).setValue([
+        let dbSelfDestination = db
+            .collection("Conversations")
+            .document(selfEmail)
+            .collection(otherEmail)
+            .document(specifiedDate)
+        batch.setData([
             "date": specifiedDate,
             "isRead": false,
             "messageText": message,
             "selfSender": true,
-            "messageID": messageID
-        ])
-        dbOtherDestination.child(messageID).setValue([
+            "messageID": specifiedDate
+        ], forDocument: dbSelfDestination)
+        
+        let dbOtherDestination = db
+            .collection("Conversations")
+            .document(otherEmail)
+            .collection(selfEmail)
+            .document(specifiedDate)
+        batch.setData([
             "date": specifiedDate,
             "isRead": true,
             "messageText": message,
             "selfSender": false,
-            "messageID": messageID
-        ])
-        
-        db.child("Chats/\(correctSelfEmail)/\(correctOtherEmail)")
+            "messageID": specifiedDate
+        ], forDocument: dbOtherDestination)
+                
+        batch.commit() { error in
+            guard let error = error else { return }
+            print(error.localizedDescription)
+        }
     }
     
     func getMessages(withEmail otherEmail: String, andLimit limit: Int, completion: @escaping ([MessageModel]) -> Void) {
         self.isPaginating = true
         
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
-        let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
+        let selfEmail = UserLoginDataManager.shared.email!
+        
+        var messages = [MessageModel]()
         
         let query = db
-            .child("Conversations")
-            .child(correctSelfEmail)
-            .child("conversation-with-\(correctOtherEmail)")
-            .queryLimited(toLast: UInt(limit))
+            .collection("Conversations")
+            .document(selfEmail)
+            .collection(otherEmail)
+            .order(by: "date")
+            .limit(toLast: limit)
         
-        query.observe(.value) { data in
-            guard data.exists() != false else {
-                self.isPaginating = false
-                return
-            }
-            guard let value = data.value as? [String:[String:Any]] else { return }
+        messagesListener = query.addSnapshotListener { snapshot, error in
+            guard let snapshot = snapshot?.documents else { return }
             
-            var messages = [MessageModel]()
+            print("smth")
             
-            value.forEach { (_, value: [String : Any]) in
-                let messageTextValue = value["messageText"] as? String
-                let dateValue = value["date"] as? String
-                let isReadValue = value["isRead"] as? Bool
-                let selfSenderValue = value["selfSender"] as? Bool
-                let messageValue = value["messageID"] as? String
+            snapshot.forEach { rawData in
+                let data = rawData.data()
+                let messageTextValue = data["messageText"] as? String
+                let dateValue = data["date"] as? String
+                let isReadValue = data["isRead"] as? Bool
+                let selfSenderValue = data["selfSender"] as? Bool
+                let messageValue = data["messageID"] as? String
                 
                 let message = MessageModel(
                     messageText: messageTextValue ?? "No message information",
@@ -173,21 +172,65 @@ class FireBaseDatabaseManager {
                     selfSender: selfSenderValue ?? false,
                     messageID: messageValue ?? ""
                 )
-                
                 messages.append(message)
             }
-            let sortedMessages = messages.sorted(by: {$0.date < $1.date})
-            completion(sortedMessages)
             
+            completion(messages)
             self.isPaginating = false
         }
     }
     
-    func readMessage(messageID: String, otherEmail: String) {
-        let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
+    func deleteMessageForYourself(messageID: String, otherEmail: String) {
+        let selfEmail = UserLoginDataManager.shared.email!
         
-        db.child("Conversations/\(correctOtherEmail)/conversation-with-\(correctSelfEmail)/\(messageID)/isRead").setValue(true)
+        let dbSelfDestination = db
+            .collection("Conversations")
+            .document(selfEmail)
+            .collection(otherEmail)
+            .document("\(messageID)")
+        
+        dbSelfDestination.delete() { error in
+            guard let error = error else { return }
+            print(error.localizedDescription)
+        }
+    }
+    
+    func deleteMessageForAll(messageID: String, otherEmail: String) {
+        let selfEmail = UserLoginDataManager.shared.email!
+
+        let batch = db.batch()
+
+        let dbSelfDestination = db
+            .collection("Conversations")
+            .document(selfEmail)
+            .collection(otherEmail)
+            .document("\(messageID)")
+        
+        let dbOtherDestination = db
+            .collection("Conversations")
+            .document(otherEmail)
+            .collection(selfEmail)
+            .document("\(messageID)")
+        
+        batch.deleteDocument(dbSelfDestination)
+        batch.deleteDocument(dbOtherDestination)
+        
+        batch.commit { error in
+            guard let error = error else { return }
+            print(error.localizedDescription)
+        }
+    }
+    
+    func readMessage(messageID: String, otherEmail: String) {
+        let selfEmail = UserLoginDataManager.shared.email!
+        
+        let dbOtherDestination = db
+            .collection("Conversations")
+            .document(selfEmail)
+            .collection(otherEmail)
+            .document(messageID)
+        
+        dbOtherDestination.updateData(["isRead":true])
     }
     
     func getChats(completion: @escaping ([ChatModel]) -> Void ) {
@@ -228,49 +271,33 @@ class FireBaseDatabaseManager {
         //        }
     }
     
-    func deleteMessageForYourself(messageID: String, otherEmail: String) {
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
-        let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
-        
-        db.child("Conversations/\(correctSelfEmail)/conversation-with-\(correctOtherEmail)/\(messageID)").removeValue()
-    }
-    
-    func deleteMessageForAll(messageID: String, otherEmail: String) {
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
-        let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
-        
-        db.child("Conversations/\(correctSelfEmail)/conversation-with-\(correctOtherEmail)/\(messageID)").removeValue()
-        db.child("Conversations/\(correctOtherEmail)/conversation-with-\(correctSelfEmail)/\(messageID)").removeValue()
-    }
     
     func userOnline() {
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email ?? "")
+        let SelfEmail = UserLoginDataManager.shared.email ?? ""
         
-        db.child("Users/\(correctSelfEmail)/isOnline").setValue(true)
+        db.collection("Users").document("\(SelfEmail)").updateData(["isOnline":true])
     }
     
     func userOffline() {
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email ?? "")
+        let SelfEmail = UserLoginDataManager.shared.email ?? ""
         
-        db.child("Users/\(correctSelfEmail)/isOnline").setValue(false)
+        db.collection("Users").document("\(SelfEmail)").updateData(["isOnline":false])
     }
+    
     
     func checkUserStatus(otherEmail: String, completion: @escaping (Bool) -> Void) {
-        let correctOtherEmail = convertToCorrectEmail(email: otherEmail)
-        
-        db.child("Users/\(correctOtherEmail)/isOnline").observe(.value) { data in
-            guard data.exists() else { return }
-            guard let isOnline = data.value as? Bool else { return }
+        userStatusListener = db.collection("Users").document(otherEmail).addSnapshotListener { snapshot, error in
+            guard let rawData = snapshot else { return }
+            let data = rawData.data()
+            guard let isOnline = data?["isOnline"] as? Bool else { return }
             completion(isOnline)
         }
+        
     }
     
+    
     func removeConversationObservers(with email: String, withOnlineStatus: Bool) {
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
-        let correctOtherEmail = convertToCorrectEmail(email: email)
-        
-        db.child("Conversations").child(correctSelfEmail).child("conversation-with-\(correctOtherEmail)").removeAllObservers()
-        guard withOnlineStatus else { return }
-        db.child("Users/\(correctOtherEmail)/isOnline").removeAllObservers()
+        messagesListener?.remove()
+        userStatusListener?.remove()
     }
 }

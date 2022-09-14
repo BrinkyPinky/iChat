@@ -423,7 +423,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ioF-fL-ryz">
-                                    <rect key="frame" x="132.66666666666666" y="17.000000000000007" width="124.99999999999997" height="123.66666666666667"/>
+                                    <rect key="frame" x="132.66666666666666" y="17.000000000000007" width="124.99999999999997" height="123.66666666666669"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ioF-fL-ryz" secondAttribute="height" multiplier="1:1" id="LVv-kO-9vt"/>
                                         <constraint firstAttribute="height" constant="125" id="Yyv-ar-NdM"/>
