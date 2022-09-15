@@ -48,7 +48,11 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
             onlineStatusView.backgroundColor = .opaqueSeparator
         }
         
-        if chatsViewModelCell?.unreadedMessagesCount != 0 {
+        if chatsViewModelCell?.unreadedMessagesCount ?? 0 >= 50 {
+            viewBackgroundMessagesCount.isHidden = false
+            messagesCountLabel.isHidden = false
+            messagesCountLabel.text = "50+"
+        }else if chatsViewModelCell?.unreadedMessagesCount != 0 {
             viewBackgroundMessagesCount.isHidden = false
             messagesCountLabel.isHidden = false
             messagesCountLabel.text = "\(chatsViewModelCell?.unreadedMessagesCount ?? 0)"
@@ -66,8 +70,8 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         }
         
         FireBaseStorageManager.shared.getUserImage(emailIfOtherUser: chatsViewModelCell?.email) { [unowned self] imageData in
-                guard let imageData = imageData else { return }
-                personImage.image = UIImage(data: imageData)
+            guard let imageData = imageData else { return }
+            personImage.image = UIImage(data: imageData)
             RealmDataManager.shared.saveUserImage(imageData: imageData, email: chatsViewModelCell?.email ?? "")
         }
     }
@@ -76,7 +80,7 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         super.awakeFromNib()
         
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

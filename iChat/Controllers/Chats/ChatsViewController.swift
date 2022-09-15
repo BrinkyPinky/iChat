@@ -41,8 +41,6 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
         interactor?.getChats()
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         FireBaseDatabaseManager.shared.userOnline()
-        FireBaseDatabaseManager.shared.getSelfUser(email: "i-brinypiny-ru") { _, _ in
-        }
     }
     
     // MARK: Routing

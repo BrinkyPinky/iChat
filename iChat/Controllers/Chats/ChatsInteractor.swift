@@ -32,7 +32,6 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
             guard rawChats.isEmpty == false else { return }
             provideChats()
             RealmDataManager.shared.writeLastChats(chatModel: rawChats)
-            print(rawChats)
         }
     }
 
@@ -41,6 +40,10 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
         rawChats = RealmDataManager.shared.getLastChats()
         
         FireBaseDatabaseManager.shared.getChats { [unowned self] chat in
+            guard rawChats.isEmpty == false else {
+                rawChats.append(chat)
+                return
+            }
             rawChats = rawChats.map({
                 if $0.email == chat.email {
                     return chat
