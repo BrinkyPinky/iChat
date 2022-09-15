@@ -68,7 +68,6 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
             object: nil
         )  //in file (Extension + Keyboard)
         interactor?.stopObservingMessages()
-        self.tabBarController?.tabBar.isHidden = false
         
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.backgroundColor = .clear

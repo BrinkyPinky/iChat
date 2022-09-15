@@ -43,6 +43,11 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
         FireBaseDatabaseManager.shared.userOnline()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: Routing
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -60,6 +60,11 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
         searchController.searchResultsUpdater = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: Routing
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
