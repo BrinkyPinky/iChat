@@ -42,7 +42,7 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         onlineStatusView.layer.cornerRadius = onlineStatusView.frame.width / 2
         backgroundOnlineStatusView.layer.cornerRadius = backgroundOnlineStatusView.frame.width / 2
         
-        if ((chatsViewModelCell?.isOnline) != nil) {
+        if chatsViewModelCell?.isOnline == true {
             onlineStatusView.backgroundColor = .systemGreen
         } else {
             onlineStatusView.backgroundColor = .opaqueSeparator
@@ -57,7 +57,11 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
             messagesCountLabel.isHidden = true
         }
         
-        if let imageData = RealmDataManager.shared.getUserImage(email: chatsViewModelCell?.email ?? "") {
+        var email = chatsViewModelCell?.email ?? ""
+        email = email.replacingOccurrences(of: "-", with: "@")
+        email = email.replacingOccurrences(of: "-", with: ".")
+        
+        if let imageData = RealmDataManager.shared.getUserImage(email: email) {
             personImage.image = UIImage(data: imageData)
         }
         

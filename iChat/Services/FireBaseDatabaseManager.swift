@@ -58,6 +58,31 @@ class FireBaseDatabaseManager {
         }
     }
     
+    // MARK: User Online Status
+    
+    func userOnline() {
+        let SelfEmail = UserLoginDataManager.shared.email ?? ""
+        
+        db.collection("Users").document("\(SelfEmail)").updateData(["isOnline":true])
+    }
+    
+    func userOffline() {
+        let SelfEmail = UserLoginDataManager.shared.email ?? ""
+        
+        db.collection("Users").document("\(SelfEmail)").updateData(["isOnline":false])
+    }
+    
+    
+    func checkUserStatus(otherEmail: String, completion: @escaping (Bool) -> Void) {
+        userStatusListener = db.collection("Users").document(otherEmail).addSnapshotListener { snapshot, error in
+            guard let rawData = snapshot else { return }
+            let data = rawData.data()
+            guard let isOnline = data?["isOnline"] as? Bool else { return }
+            completion(isOnline)
+        }
+        
+    }
+    
     // MARK: SearchUser
     
     func searchUser(username: String, completion: @escaping ([UserModel]) -> Void) {
@@ -131,7 +156,36 @@ class FireBaseDatabaseManager {
             "selfSender": false,
             "messageID": specifiedDate
         ], forDocument: dbOtherDestination)
-                
+        
+        let dbSelfChatsDestination = db
+            .collection("Chats")
+            .document(selfEmail)
+        let dbOtherUserReference = db
+            .collection("Users")
+            .document(otherEmail)
+        batch.setData([
+            "\(otherEmail)": [
+                "lastMessageText":message,
+                "lastMessageDate":specifiedDate,
+                "userInfo":dbOtherUserReference
+            ]
+        ], forDocument: dbSelfChatsDestination, merge: true)
+        
+        let dbOtherChatsDestination = db
+            .collection("Chats")
+            .document(otherEmail)
+        let dbSelfUserReference = db
+            .collection("Users")
+            .document(selfEmail)
+        
+        batch.setData([
+            "\(selfEmail)": [
+                "lastMessageText":message,
+                "lastMessageDate":specifiedDate,
+                "userInfo":dbSelfUserReference
+            ]
+        ], forDocument: dbOtherChatsDestination, merge: true)
+        
         batch.commit() { error in
             guard let error = error else { return }
             print(error.localizedDescription)
@@ -197,9 +251,9 @@ class FireBaseDatabaseManager {
     
     func deleteMessageForAll(messageID: String, otherEmail: String) {
         let selfEmail = UserLoginDataManager.shared.email!
-
+        
         let batch = db.batch()
-
+        
         let dbSelfDestination = db
             .collection("Conversations")
             .document(selfEmail)
@@ -226,14 +280,84 @@ class FireBaseDatabaseManager {
         
         let dbOtherDestination = db
             .collection("Conversations")
-            .document(selfEmail)
-            .collection(otherEmail)
+            .document(otherEmail)
+            .collection(selfEmail)
             .document(messageID)
         
         dbOtherDestination.updateData(["isRead":true])
     }
     
-    func getChats(completion: @escaping ([ChatModel]) -> Void ) {
+    // MARK: Chats interaction
+    
+    func getChats(completion: @escaping (ChatModel) -> Void ) {
+        let selfEmail = UserLoginDataManager.shared.email!
+        
+        db.collection("Chats").document(selfEmail).addSnapshotListener { snapshot, error in
+            guard let data = snapshot?.data() else { return }
+                        
+            data.forEach { (key: String, value: Any) in
+                guard let value = value as? [String:Any] else { return }
+                
+                let userInfoReference = value["userInfo"] as? DocumentReference
+                let userEmailValue = key
+                let lastMessageDateValue = value["lastMessageDate"] as? String
+                let lastMessageTextValue = value["lastMessageText"] as? String
+                
+                userInfoReference?.addSnapshotListener { snapshot, error in
+                    guard let data = snapshot?.data() else { return }
+                    
+                    let userIsOnlineValue = data["isOnline"] as? Bool
+                    let userNameValue = data["name"] as? String
+                    let userSurnameValue = data["surname"] as? String
+                    let userUsernameValue = data["username"] as? String
+                    
+                    let unreadedMessagesReference = self.db
+                        .collection("Conversations")
+                        .document(selfEmail)
+                        .collection(userEmailValue)
+                        .order(by: "date")
+                        .whereField("isRead", isEqualTo: false)
+                        .limit(toLast: 100)
+                    
+                    unreadedMessagesReference.getDocuments { snapshot, error in
+                        guard let documents = snapshot?.documents else {
+                                completion(ChatModel(
+                                    email: userEmailValue,
+                                    fullname: "\(userNameValue) \(userSurnameValue)",
+                                    lastMessageDate: lastMessageDateValue,
+                                    lastMessageText: lastMessageTextValue,
+                                    username: userUsernameValue,
+                                    unreadedMessagesCount: 0,
+                                    isOnline: userIsOnlineValue
+                                ))
+                            return
+                        }
+                        let unreadedMessagesCountValue = documents.count
+                        
+                        
+                            completion(ChatModel(
+                                email: userEmailValue,
+                                fullname: "\(userNameValue) \(userSurnameValue)",
+                                lastMessageDate: lastMessageDateValue,
+                                lastMessageText: lastMessageTextValue,
+                                username: userUsernameValue,
+                                unreadedMessagesCount: unreadedMessagesCountValue,
+                                isOnline: userIsOnlineValue
+                            ))
+                    }
+                }
+            }
+        }
+        //        ChatModel(
+        //            email: T##String?,
+        //            fullname: T##String?,
+        //            lastMessageDate: T##String?,
+        //            lastMessageText: T##String?,
+        //            username: T##String?,
+        //            unreadedMessagesCount: T##Int,
+        //            isOnline: T##Bool?)
+        
+        
         //        let query = db.child("Users/\(correctSelfEmail)/listOfConversations").queryLimited(toFirst: 25)
         //
         //        query.observe(.value) { data in
@@ -270,31 +394,6 @@ class FireBaseDatabaseManager {
         //            completion(sortedChats)
         //        }
     }
-    
-    
-    func userOnline() {
-        let SelfEmail = UserLoginDataManager.shared.email ?? ""
-        
-        db.collection("Users").document("\(SelfEmail)").updateData(["isOnline":true])
-    }
-    
-    func userOffline() {
-        let SelfEmail = UserLoginDataManager.shared.email ?? ""
-        
-        db.collection("Users").document("\(SelfEmail)").updateData(["isOnline":false])
-    }
-    
-    
-    func checkUserStatus(otherEmail: String, completion: @escaping (Bool) -> Void) {
-        userStatusListener = db.collection("Users").document(otherEmail).addSnapshotListener { snapshot, error in
-            guard let rawData = snapshot else { return }
-            let data = rawData.data()
-            guard let isOnline = data?["isOnline"] as? Bool else { return }
-            completion(isOnline)
-        }
-        
-    }
-    
     
     func removeConversationObservers(with email: String, withOnlineStatus: Bool) {
         messagesListener?.remove()
