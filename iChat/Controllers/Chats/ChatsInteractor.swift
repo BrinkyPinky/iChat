@@ -44,6 +44,7 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
                 rawChats.append(chat)
                 return
             }
+            
             rawChats = rawChats.map({
                 if $0.email == chat.email {
                     return chat

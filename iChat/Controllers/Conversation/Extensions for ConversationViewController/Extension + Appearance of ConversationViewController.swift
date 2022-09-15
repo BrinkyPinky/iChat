@@ -11,8 +11,14 @@ import UIKit
 // MARK: SetupUI
 extension ConversationViewController {
     
+    @objc override func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     func setupUI() {
-        self.hideKeyboardWhenTappedAround()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        conversationCollectionView.addGestureRecognizer(tap)
         
         // MARK: Actions
         
