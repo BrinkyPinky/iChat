@@ -13,9 +13,9 @@ protocol OutgoingMessageCellModelRepresentable {
 
 class ConversationCollectionViewCellOutgoingMessage: UICollectionViewCell, OutgoingMessageCellModelRepresentable {
     @IBOutlet var viewBackgroundTheMessage: UIView!
-    @IBOutlet var timeLabel: UILabel!
-    @IBOutlet var messageText: UILabel!
-    @IBOutlet var isReadLabel: UIImageView!
+    @IBOutlet private var timeLabel: UILabel!
+    @IBOutlet private var messageText: UILabel!
+    @IBOutlet private var isReadLabel: UIImageView!
     
     var messageCellModel: CellIdentifiable? {
         didSet {
@@ -23,14 +23,21 @@ class ConversationCollectionViewCellOutgoingMessage: UICollectionViewCell, Outgo
         }
     }
         
-    func setupMessage() {
+    private func setupMessage() {
         guard let cellModel = messageCellModel as? MessageCellViewModel else { return }
         messageText.text = cellModel.messageText
         timeLabel.text = cellModel.messageDate
-        isReadLabel.image = cellModel.isRead ?? false ? UIImage(systemName: "arrowshape.turn.up.left.2.fill") : UIImage(systemName: "arrowshape.turn.up.left.2")
-        
         viewBackgroundTheMessage.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMinXMaxYCorner]
         viewBackgroundTheMessage.layer.cornerRadius = 15
+        
+        switch cellModel.selfSender {
+        case true:
+            outgoingMessage(cellModel: cellModel)
+        case false:
+            incomingMessage()
+        default:
+            print("")
+        }
     }
     
     override init(frame: CGRect) {
@@ -39,5 +46,36 @@ class ConversationCollectionViewCellOutgoingMessage: UICollectionViewCell, Outgo
     
     required init?(coder aCoder: NSCoder) {
         super.init(coder: aCoder)
+    }
+    
+    private func incomingMessage() {
+        isReadLabel.isHidden = true
+        self.transform = CGAffineTransform(scaleX: -1, y: 1)
+        timeLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
+        messageText.transform = CGAffineTransform(scaleX: -1, y: 1)
+        viewBackgroundTheMessage.backgroundColor = UIColor(
+            red: 234/255,
+            green: 239/255,
+            blue: 252/255,
+            alpha: 1
+        )
+        messageText.textColor = .black
+    }
+    
+    private func outgoingMessage(cellModel: MessageCellViewModel) {
+        isReadLabel.isHidden = false
+        self.transform = CGAffineTransform(scaleX: 1, y: 1)
+        timeLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
+        messageText.transform = CGAffineTransform(scaleX: 1, y: 1)
+        
+        viewBackgroundTheMessage.backgroundColor = UIColor(
+            red: 94/255,
+            green: 121/255,
+            blue: 236/255,
+            alpha: 1
+        )
+        messageText.textColor = .white
+        
+        isReadLabel.image = cellModel.isRead ?? false ? UIImage(systemName: "arrowshape.turn.up.left.2.fill") : UIImage(systemName: "arrowshape.turn.up.left.2")
     }
 }

@@ -202,49 +202,29 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let messageCellModel = messagesRows[indexPath.section][indexPath.row]
         
-        if messageCellModel.cellIdentifier == "OutgoingMessage" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellOutgoingMessage
             cell.messageCellModel = messageCellModel
             return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellIncomingMessage
-            cell.messageCellModel = messageCellModel
-            return cell
-        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         guard let indexPath = configuration.identifier as? IndexPath else { return nil }
-        let cellViewModel = messagesRows[indexPath.section][indexPath.row]
         
-        if cellViewModel.cellIdentifier == "OutgoingMessage" {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellOutgoingMessage else { return nil }
             let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
             targetedPreview.parameters.backgroundColor = .clear
             return targetedPreview
-        } else {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellIncomingMessage else { return nil }
-            let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
-            targetedPreview.parameters.backgroundColor = .clear
-            return targetedPreview
-        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         guard let indexPath = configuration.identifier as? IndexPath else { return nil }
-        let cellViewModel = messagesRows[indexPath.section][indexPath.row]
         
-        if cellViewModel.cellIdentifier == "OutgoingMessage" {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellOutgoingMessage else { return nil }
             let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
             targetedPreview.parameters.backgroundColor = .clear
             return targetedPreview
-        } else {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellIncomingMessage else { return nil }
-            let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
-            targetedPreview.parameters.backgroundColor = .clear
-            return targetedPreview
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {

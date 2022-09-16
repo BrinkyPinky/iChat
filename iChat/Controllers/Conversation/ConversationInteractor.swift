@@ -77,8 +77,8 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     }
     
     func readMessage(request: Conversation.ReadMessage.Request) {
-        guard request.displayingCell.cellIdentifier == "IncomingMessage" else { return }
         guard let message = request.displayingCell as? MessageCellViewModel else { return }
+        guard message.selfSender == false else { return }
         guard message.isRead == false else { return }
         FireBaseDatabaseManager.shared.readMessage(messageID: message.messageID, otherEmail: userInfo?.email ?? "")
     }

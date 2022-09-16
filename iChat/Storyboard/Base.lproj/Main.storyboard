@@ -275,59 +275,6 @@
                                             <outlet property="viewBackgroundTheMessage" destination="1dx-FB-8O4" id="sy4-2v-zGA"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="IncomingMessage" id="CnQ-Ph-esd" customClass="ConversationCollectionViewCellIncomingMessage" customModule="iChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="163" width="390" height="80"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SI3-W1-aQn">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="80"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4I-xE-Ihq">
-                                                    <rect key="frame" x="16" y="0.0" width="239" height="53"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1B-r2-kBk">
-                                                            <rect key="frame" x="16" y="16" width="207" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstItem="v1B-r2-kBk" firstAttribute="top" secondItem="r4I-xE-Ihq" secondAttribute="top" constant="16" id="0fW-WK-y6l"/>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="275" id="Bgd-a8-K8v"/>
-                                                        <constraint firstItem="v1B-r2-kBk" firstAttribute="leading" secondItem="r4I-xE-Ihq" secondAttribute="leading" constant="16" id="NF5-sg-HqE"/>
-                                                        <constraint firstAttribute="trailing" secondItem="v1B-r2-kBk" secondAttribute="trailing" constant="16" id="ZYC-Ju-XGh"/>
-                                                        <constraint firstAttribute="bottom" secondItem="v1B-r2-kBk" secondAttribute="bottom" constant="16" id="ccy-sd-Z2h"/>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="400" id="h1n-bJ-F4K"/>
-                                                    </constraints>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5:55 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1o-5h-aFz">
-                                                    <rect key="frame" x="16" y="57" width="48" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="SnO-lw-38X"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="T1o-5h-aFz" secondAttribute="bottom" constant="8" id="17h-u0-mNm"/>
-                                                <constraint firstItem="r4I-xE-Ihq" firstAttribute="top" secondItem="SI3-W1-aQn" secondAttribute="top" id="8E8-QD-sGV"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="T1o-5h-aFz" secondAttribute="trailing" constant="20" symbolic="YES" id="e0O-2U-Kyt"/>
-                                                <constraint firstItem="r4I-xE-Ihq" firstAttribute="leading" secondItem="SI3-W1-aQn" secondAttribute="leading" constant="16" id="htM-rn-wTE"/>
-                                                <constraint firstItem="T1o-5h-aFz" firstAttribute="leading" secondItem="SI3-W1-aQn" secondAttribute="leading" constant="16" id="lrr-SO-1Zq"/>
-                                                <constraint firstItem="T1o-5h-aFz" firstAttribute="top" secondItem="r4I-xE-Ihq" secondAttribute="bottom" constant="4" id="w0A-Di-fks"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="390" height="80"/>
-                                        <connections>
-                                            <outlet property="messageText" destination="v1B-r2-kBk" id="npU-VH-i8u"/>
-                                            <outlet property="timeLabel" destination="T1o-5h-aFz" id="z4V-rm-brj"/>
-                                            <outlet property="viewBackgroundTheMessage" destination="r4I-xE-Ihq" id="Utb-Uc-3oh"/>
-                                        </connections>
-                                    </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MessageHeader" id="6QP-vQ-Q2w" customClass="ConversationCollectionHeaderView" customModule="iChat" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="45"/>
@@ -844,9 +791,6 @@
         </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

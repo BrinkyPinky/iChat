@@ -38,7 +38,7 @@ enum Conversation {
         struct ViewModel {
             struct MessageCellViewModel: CellIdentifiable {
                 var cellIdentifier: String {
-                    selfSender! ? "OutgoingMessage" : "IncomingMessage"
+                    "OutgoingMessage"
                 }
                 
                 let messageText: String?
