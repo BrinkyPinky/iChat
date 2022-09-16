@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol OutgoingMessageCellModelRepresentable {
+protocol ConversationCollectionViewCellMessageRepresentable {
     var messageCellModel: CellIdentifiable? { get set }
 }
 
-class ConversationCollectionViewCellOutgoingMessage: UICollectionViewCell, OutgoingMessageCellModelRepresentable {
+class ConversationCollectionViewCellMessage: UICollectionViewCell, ConversationCollectionViewCellMessageRepresentable {
     @IBOutlet var viewBackgroundTheMessage: UIView!
     @IBOutlet private var timeLabel: UILabel!
     @IBOutlet private var messageText: UILabel!

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class ConversationPresenterWorkerMessagesSorting {
-    func sortMessages(rawMessages: [MessageModel]) -> ([[MessageCellViewModel]], [HeadersMessageCellViewModel]) {
+    func sortMessages(rawMessages: [MessageModel]) -> ([[MessageCellViewModel]], [HeadersMessageCellViewModel], Bool?) {
         
         var referenceDateToCompare: String?
         
@@ -69,6 +69,8 @@ class ConversationPresenterWorkerMessagesSorting {
         }
         sortedMessages.append(firstLevelMessages)
         
-        return (sortedMessages, headersDatesRows)
+        let selfSender = sortedMessages.last?.last?.selfSender
+        
+        return (sortedMessages, headersDatesRows, selfSender)
     }
 }

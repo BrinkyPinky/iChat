@@ -3,6 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -213,7 +214,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="OutgoingMessage" id="W60-KN-8Sl" customClass="ConversationCollectionViewCellOutgoingMessage" customModule="iChat" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Message" id="W60-KN-8Sl" customClass="ConversationCollectionViewCellMessage" customModule="iChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="45" width="390" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zUd-4N-cjW">
@@ -313,16 +314,36 @@
                                     <outlet property="delegate" destination="aBx-af-yBy" id="kaR-Yh-an9"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDM-ze-Ebf">
+                                <rect key="frame" x="324" y="646" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="FDM-ze-Ebf" secondAttribute="height" multiplier="1:1" id="fuB-1P-sUh"/>
+                                    <constraint firstAttribute="width" constant="50" id="gZZ-67-6UO"/>
+                                    <constraint firstAttribute="height" constant="50" id="lWi-lF-IZB"/>
+                                </constraints>
+                                <color key="tintColor" red="0.91764705879999997" green="0.93725490199999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" imagePadding="0.0" cornerStyle="capsule">
+                                    <imageReference key="image" image="arrow.down" catalog="system"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="18" weight="medium"/>
+                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="scrollDownButtonTapped:" destination="aBx-af-yBy" eventType="touchUpInside" id="aoO-xF-5bN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4NB-de-sSK"/>
                         <color key="backgroundColor" red="0.91764705882352937" green="0.93725490196078431" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YRo-aP-iua" firstAttribute="leading" secondItem="4NB-de-sSK" secondAttribute="leading" id="695-9P-fXV"/>
+                            <constraint firstItem="4NB-de-sSK" firstAttribute="trailing" secondItem="FDM-ze-Ebf" secondAttribute="trailing" constant="16" id="9K6-KL-qOC"/>
                             <constraint firstItem="BhN-Ke-nT1" firstAttribute="top" secondItem="YRo-aP-iua" secondAttribute="bottom" id="9on-yH-1fJ"/>
                             <constraint firstItem="BhN-Ke-nT1" firstAttribute="bottom" secondItem="4NB-de-sSK" secondAttribute="bottom" id="Ez7-QF-48w"/>
                             <constraint firstItem="4NB-de-sSK" firstAttribute="trailing" secondItem="YRo-aP-iua" secondAttribute="trailing" id="NoK-YR-Ug5"/>
                             <constraint firstItem="BhN-Ke-nT1" firstAttribute="trailing" secondItem="4NB-de-sSK" secondAttribute="trailing" id="V2C-4J-XW7"/>
                             <constraint firstItem="BhN-Ke-nT1" firstAttribute="leading" secondItem="4NB-de-sSK" secondAttribute="leading" id="YQu-2i-Zsj"/>
+                            <constraint firstItem="BhN-Ke-nT1" firstAttribute="top" secondItem="FDM-ze-Ebf" secondAttribute="bottom" constant="16" id="dbg-CG-e91"/>
                             <constraint firstItem="YRo-aP-iua" firstAttribute="top" secondItem="4NB-de-sSK" secondAttribute="top" id="oBf-bN-thp"/>
                         </constraints>
                     </view>
@@ -330,6 +351,7 @@
                     <connections>
                         <outlet property="MessageToolBar" destination="BhN-Ke-nT1" id="c3R-XH-fxt"/>
                         <outlet property="conversationCollectionView" destination="YRo-aP-iua" id="Q5Z-cA-n23"/>
+                        <outlet property="scrollDownButton" destination="FDM-ze-Ebf" id="iB1-WC-CAj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UTW-WG-4TF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -781,11 +803,15 @@
         <segue reference="SuM-zk-5Fw"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="arrowshape.turn.up.backward.2" catalog="system" width="128" height="86"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="xmark.circle" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

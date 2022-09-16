@@ -87,6 +87,8 @@ extension ConversationViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
+    // MARK: Height of the TextView depending on the text in
+    
     func setTitle(title:String, isActive: Bool) -> UIView {
         let titleLabel = UILabel(frame: CGRect(x: 0, y: -2, width: 0, height: 0))
 
@@ -118,6 +120,42 @@ extension ConversationViewController {
         }
 
         return titleView
+    }
+    
+    // MARK: ConversationCollectionView scrolling
+    
+    func reloadConversationCollectionView(viewModel: Conversation.Messages.ViewModel, with completion: @escaping () -> Void) {
+        DispatchQueue.main.async { [self] in
+            let isItFirstDisplayingMessages = headersDatesRows.isEmpty
+            let currentContentSize = conversationCollectionView.contentSize.height
+            let currentOffset = conversationCollectionView.contentOffset.y
+            
+            completion()
+            
+            conversationCollectionView.reloadData()
+            conversationCollectionView.layoutIfNeeded()
+            
+            let heightOfContentSize = self.conversationCollectionView.contentSize.height
+            let heightOfCollectionView = self.conversationCollectionView.frame.height
+            
+            let section = conversationCollectionView.numberOfSections - 1
+            let row = conversationCollectionView.numberOfItems(inSection: section) - 1
+            
+            if heightOfContentSize <= heightOfCollectionView + 50 {
+                
+            } else if isItFirstDisplayingMessages {
+                conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: false)
+            } else if currentOffset <= 50 {
+                let targetYPosition = heightOfContentSize - currentContentSize
+                conversationCollectionView.contentOffset.y = targetYPosition
+            } else if viewModel.lastMessageSelfSender {
+                conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: true)
+            } else {
+                let targetYPosition = heightOfContentSize - heightOfCollectionView
+                guard currentOffset >= targetYPosition - 300 else { return }
+                conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: true)
+            }
+        }
     }
 }
 

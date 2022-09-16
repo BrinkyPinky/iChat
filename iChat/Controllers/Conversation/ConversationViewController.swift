@@ -25,6 +25,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     let messageTextView = UITextView() //logic in file (Extension + TextFieldDelegate)
     let sendMessageButton = UIButton() //setup in file (Extension + Appearance)
     let stackViewForToolBar = UIStackView() //setup in file (Extension + Appearance)
+    @IBOutlet var scrollDownButton: UIButton!
     
     var messagesRows: [[CellIdentifiable]] = [[]]
     var headersDatesRows: [CellIdentifiable] = []
@@ -96,40 +97,9 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     // MARK: Display Messages
     
     func displayMessages(viewModel: Conversation.Messages.ViewModel) {
-        
-        let isItFirstDisplayingMessages = headersDatesRows.isEmpty
-        let currentContentSize = conversationCollectionView.contentSize.height
-        let currentOffset = conversationCollectionView.contentOffset.y
-        
-        DispatchQueue.main.async { [self] in
-            
+        reloadConversationCollectionView(viewModel: viewModel) { [unowned self] in
             messagesRows = viewModel.messagesRows
             headersDatesRows = viewModel.headersDatesRows
-            
-            conversationCollectionView.reloadData()
-            conversationCollectionView.layoutIfNeeded()
-            
-            let heightOfContentSize = self.conversationCollectionView.contentSize.height
-            let heightOfCollectionView = self.conversationCollectionView.frame.height
-            
-            let section = conversationCollectionView.numberOfSections - 1
-            let row = conversationCollectionView.numberOfItems(inSection: section) - 1
-            
-            if heightOfContentSize <= heightOfCollectionView + 50 {
-                
-            } else if isItFirstDisplayingMessages {
-                conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: false)
-            } else if currentOffset <= 50 {
-                let targetYPosition = heightOfContentSize - currentContentSize
-                conversationCollectionView.contentOffset.y = targetYPosition
-            } else if messagesRows[section][row].cellIdentifier == "OutgoingMessage" {
-                conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: true)
-            } else {
-                let targetYPosition = heightOfContentSize - heightOfCollectionView
-                guard currentOffset >= targetYPosition - 300 else { return }
-                conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: true)
-            }
-            
         }
     }
     
@@ -157,9 +127,33 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let conversationCollectionContentHeight = conversationCollectionView.contentSize.height
+        let conversationCollectionViewHeight = conversationCollectionView.frame.height
+        
+        let currentOffset = conversationCollectionContentHeight - conversationCollectionViewHeight
+        
         if scrollView.contentOffset.y == 0 {
             interactor?.getMessages(isNeedToUpLimit: true)
+        } else if scrollView.contentOffset.y < currentOffset - 50 {
+            UIView.animate(
+                withDuration: 0.25,
+                delay: 0,
+                options: .curveEaseInOut) {
+                    self.scrollDownButton.layer.opacity = 1
+                } completion: { _ in
+                    self.scrollDownButton.isHidden = false
+                }
+        } else if scrollView.contentOffset.y > currentOffset - 50 {
+            self.scrollDownButton.isHidden = true
         }
+    }
+    
+    @IBAction func scrollDownButtonTapped(_ sender: Any) {
+        let section = conversationCollectionView.numberOfSections - 1
+        let row = conversationCollectionView.numberOfItems(inSection: section) - 1
+        let indexPath = IndexPath(row: row, section: section)
+        
+        conversationCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
 }
 
@@ -202,29 +196,31 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let messageCellModel = messagesRows[indexPath.section][indexPath.row]
         
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellOutgoingMessage
-            cell.messageCellModel = messageCellModel
-            return cell
-
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellMessage
+        cell.messageCellModel = messageCellModel
+        return cell
+        
     }
+    
+    // MARK: ContextMenu
     
     func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         guard let indexPath = configuration.identifier as? IndexPath else { return nil }
         
-            guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellOutgoingMessage else { return nil }
-            let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
-            targetedPreview.parameters.backgroundColor = .clear
-            return targetedPreview
-
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellMessage else { return nil }
+        let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
+        targetedPreview.parameters.backgroundColor = .clear
+        return targetedPreview
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         guard let indexPath = configuration.identifier as? IndexPath else { return nil }
         
-            guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellOutgoingMessage else { return nil }
-            let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
-            targetedPreview.parameters.backgroundColor = .clear
-            return targetedPreview
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellMessage else { return nil }
+        let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
+        targetedPreview.parameters.backgroundColor = .clear
+        return targetedPreview
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {

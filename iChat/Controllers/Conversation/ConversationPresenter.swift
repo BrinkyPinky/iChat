@@ -35,11 +35,14 @@ class ConversationPresenter: ConversationPresentationLogic {
         
         let messagesRows = sortedData!.0
         let headersDatesRows = sortedData!.1
-                    
+        let lastMessageSelfSender = sortedData!.2
+        
         let viewModel = Conversation.Messages.ViewModel(
             messagesRows: messagesRows,
-            headersDatesRows: headersDatesRows
+            headersDatesRows: headersDatesRows,
+            lastMessageSelfSender: lastMessageSelfSender ?? false
         )
+        
         viewController?.displayMessages(viewModel: viewModel)
     }
 }
