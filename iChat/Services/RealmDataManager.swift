@@ -31,6 +31,12 @@ class RealmDataManager {
         }
     }
     
+    func deleteAll() {
+        try! realm.write {
+            realm.deleteAll()
+        }
+    }
+    
     func getUserImage(email: String) -> Data? {
         return realm.object(ofType: UserImageModel.self, forPrimaryKey: email)?.imageData
     }

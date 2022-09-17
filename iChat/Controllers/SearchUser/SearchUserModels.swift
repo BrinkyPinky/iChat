@@ -14,11 +14,6 @@ import UIKit
 
 typealias UserCellViewModel = SearchUser.Search.ViewModel.UserCellViewModel
 
-
-protocol CellIdentifiable {
-    var cellIdentifier: String { get }
-}
-
 enum SearchUser {
     // MARK: Use cases
     

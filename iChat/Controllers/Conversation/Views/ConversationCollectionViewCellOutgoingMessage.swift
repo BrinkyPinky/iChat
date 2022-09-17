@@ -53,13 +53,20 @@ class ConversationCollectionViewCellMessage: UICollectionViewCell, ConversationC
         self.transform = CGAffineTransform(scaleX: -1, y: 1)
         timeLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
         messageText.transform = CGAffineTransform(scaleX: -1, y: 1)
-        viewBackgroundTheMessage.backgroundColor = UIColor(
-            red: 234/255,
-            green: 239/255,
-            blue: 252/255,
-            alpha: 1
-        )
-        messageText.textColor = .black
+        
+        if self.window?.traitCollection.userInterfaceStyle == .light {
+            viewBackgroundTheMessage.backgroundColor = UIColor(
+                red: 234/255,
+                green: 239/255,
+                blue: 252/255,
+                alpha: 1
+            )
+            messageText.textColor = .black
+        } else {
+            viewBackgroundTheMessage.backgroundColor = #colorLiteral(red: 0.2763007581, green: 0.2438369989, blue: 0.3258192241, alpha: 1)
+            
+            messageText.textColor = .white
+        }
     }
     
     private func outgoingMessage(cellModel: MessageCellViewModel) {
@@ -68,13 +75,23 @@ class ConversationCollectionViewCellMessage: UICollectionViewCell, ConversationC
         timeLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
         messageText.transform = CGAffineTransform(scaleX: 1, y: 1)
         
-        viewBackgroundTheMessage.backgroundColor = UIColor(
-            red: 94/255,
-            green: 121/255,
-            blue: 236/255,
-            alpha: 1
-        )
-        messageText.textColor = .white
+        if self.window?.traitCollection.userInterfaceStyle == .light {
+            viewBackgroundTheMessage.backgroundColor = UIColor(
+                red: 94/255,
+                green: 121/255,
+                blue: 236/255,
+                alpha: 1
+            )
+            messageText.textColor = .white
+        } else {
+            viewBackgroundTheMessage.backgroundColor = UIColor(
+                red: 94/255,
+                green: 121/255,
+                blue: 236/255,
+                alpha: 1
+            )
+            messageText.textColor = .white
+        }
         
         isReadLabel.image = cellModel.isRead ?? false ? UIImage(systemName: "arrowshape.turn.up.left.2.fill") : UIImage(systemName: "arrowshape.turn.up.left.2")
     }

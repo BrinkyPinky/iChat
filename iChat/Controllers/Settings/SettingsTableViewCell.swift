@@ -12,7 +12,7 @@ protocol SettingsTableViewCellRepresentable {
 }
 
 class SettingsTableViewCell: UITableViewCell, SettingsTableViewCellRepresentable {
-   
+       
     var cellViewModel: CellIdentifiable? {
         didSet {
             setup()
@@ -35,7 +35,6 @@ class SettingsTableViewCell: UITableViewCell, SettingsTableViewCellRepresentable
             configuration.image = UIImage(systemName: cellViewModel.imagename!)
             contentConfiguration = configuration
         }
-        
     }
     
     override func awakeFromNib() {

@@ -35,7 +35,6 @@ extension ConversationViewController {
         let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
         
         // MARK: SafeArea when keyboard appears
-        
         UIView.animate(withDuration: animationDuration,
                        delay: 0,
                        options: animationCurve,

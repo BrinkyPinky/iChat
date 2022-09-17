@@ -51,6 +51,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI() //in file (Extension + Appearance)
+        print("loaded")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,10 +142,17 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
                 options: .curveEaseInOut) {
                     self.scrollDownButton.layer.opacity = 1
                 } completion: { _ in
-                    self.scrollDownButton.isHidden = false
+                    self.scrollDownButton.isEnabled = true
                 }
         } else if scrollView.contentOffset.y > currentOffset - 50 {
-            self.scrollDownButton.isHidden = true
+            UIView.animate(
+                withDuration: 0.25,
+                delay: 0,
+                options: .curveEaseInOut) {
+                    self.scrollDownButton.layer.opacity = 0
+                } completion: { _ in
+                    self.scrollDownButton.isEnabled = false
+                }
         }
     }
     

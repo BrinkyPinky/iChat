@@ -48,6 +48,12 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
             onlineStatusView.backgroundColor = .opaqueSeparator
         }
         
+        if self.traitCollection.userInterfaceStyle == .light {
+            backgroundOnlineStatusView.backgroundColor = .white
+        } else {
+            backgroundOnlineStatusView.backgroundColor = .systemGray6
+        }
+        
         if chatsViewModelCell?.unreadedMessagesCount ?? 0 >= 50 {
             viewBackgroundMessagesCount.isHidden = false
             messagesCountLabel.isHidden = false

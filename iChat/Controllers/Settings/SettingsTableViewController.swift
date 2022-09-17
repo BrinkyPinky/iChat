@@ -13,7 +13,6 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet var userFullname: UILabel!
     @IBOutlet var userUsername: UILabel!
     
-    
     let imagePickerController = UIImagePickerController()
     
     var viewModel: SettingsViewModelProtocol!
@@ -77,6 +76,10 @@ extension SettingsTableViewController {
         let cellViewModel = viewModel.rows[indexPath.section][indexPath.row] as! SettingCellViewModel
         tableView.deselectRow(at: indexPath, animated: true)
         cellViewModel.handler()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        50
     }
 }
 

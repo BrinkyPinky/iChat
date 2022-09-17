@@ -36,6 +36,16 @@ class SettingsViewModel: SettingsViewModelProtocol {
         [
             SettingCellViewModel(
                 type: .simple,
+                text: "Change profile information",
+                imagename: "person",
+                handler: {
+                    self.view.performSegue(withIdentifier: "ShowChangeUserProfile", sender: nil)
+                }
+            )
+        ],
+        [
+            SettingCellViewModel(
+                type: .simple,
                 text: "Add or update profile photo",
                 imagename: "square.and.arrow.down",
                 handler: {
@@ -65,6 +75,8 @@ class SettingsViewModel: SettingsViewModelProtocol {
                 imagename: nil,
                 handler: {
                     UserLoginDataManager.shared.removeData()
+                    RealmDataManager.shared.deleteAll()
+                    FireBaseAuthManager.shared.logout()
                     self.view.showViewController(with: "NavigationControllerLogin")
                 }
             )

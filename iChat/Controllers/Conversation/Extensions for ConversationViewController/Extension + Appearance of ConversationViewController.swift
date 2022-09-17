@@ -20,6 +20,17 @@ extension ConversationViewController {
         tap.cancelsTouchesInView = false
         conversationCollectionView.addGestureRecognizer(tap)
         
+        if self.view.traitCollection.userInterfaceStyle == .light {
+            view.backgroundColor = UIColor(
+                red: 234/255,
+                green: 239/255,
+                blue: 252/255,
+                alpha: 1
+            )
+        } else {
+            view.backgroundColor = #colorLiteral(red: 0.2763007581, green: 0.2438369989, blue: 0.3258192241, alpha: 1)
+        }
+        
         // MARK: Actions
         
         sendMessageButton.addTarget(self, action: #selector(sendMessageButtonPressed), for: .touchUpInside)
@@ -62,12 +73,16 @@ extension ConversationViewController {
         // MARK: NavigationBar Setup
         
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.backgroundColor = UIColor(
-            red: 234/255,
-            green: 239/255,
-            blue: 252/255,
-            alpha: 1
-        )
+        if view.traitCollection.userInterfaceStyle == .light {
+            navigationBarAppearance.backgroundColor = UIColor(
+                red: 234/255,
+                green: 239/255,
+                blue: 252/255,
+                alpha: 1
+            )
+        } else {
+            navigationBarAppearance.backgroundColor = #colorLiteral(red: 0.2763007581, green: 0.2438369989, blue: 0.3258192241, alpha: 1)
+        }
         navigationBarAppearance.shadowColor = .clear
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
