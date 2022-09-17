@@ -508,6 +508,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="doneButton" destination="e9t-Af-zxA" id="dTr-SY-75d"/>
                         <outlet property="nameTextField" destination="QdH-a5-fCq" id="CeZ-qP-XPK"/>
                         <outlet property="stackView" destination="sqS-ry-m8D" id="GAz-Ul-g5w"/>
                         <outlet property="surnameTextField" destination="MtN-zq-VT2" id="u1e-Lz-rdg"/>

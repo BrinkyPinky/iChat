@@ -105,6 +105,17 @@ class FireBaseDatabaseManager {
         }
     }
     
+    func changeUserInformation(username: String, name: String, surname: String) {
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
+        
+        db.child("Users/\(correctSelfEmail)").updateChildValues([
+            "name": name,
+            "surname": surname,
+            "username": username,
+            "usernameForSearch": username.lowercased()
+        ])
+    }
+    
     // MARK: Messages Interactions
     
     func sendMessage(to email: String, withName name: String, andUsername username: String, message: String) {

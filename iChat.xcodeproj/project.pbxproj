@@ -68,6 +68,7 @@
 		E2D1E62528D3774300CE6029 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E2D1E62428D3774300CE6029 /* Realm */; };
 		E2D1E62728D3774300CE6029 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2D1E62628D3774300CE6029 /* RealmSwift */; };
 		E2DE9E5528C15A2F00147E51 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DE9E5428C15A2F00147E51 /* UserModel.swift */; };
+		E2E45FFE28D64C64006A8571 /* ChangeUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E45FFD28D64C64006A8571 /* ChangeUserProfileViewModel.swift */; };
 		E2EAD9B828D6011D00AD44BB /* ChangeUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EAD9B728D6011D00AD44BB /* ChangeUserProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,7 @@
 		E2C8934528BF192300FC6210 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		E2C8934728BF193F00FC6210 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		E2DE9E5428C15A2F00147E51 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		E2E45FFD28D64C64006A8571 /* ChangeUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserProfileViewModel.swift; sourceTree = "<group>"; };
 		E2EAD9B728D6011D00AD44BB /* ChangeUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,7 +230,7 @@
 				E2C450F328BFEF5A00F9C473 /* Logining */,
 				E253FA2C28CA3F0A003F6564 /* Settings */,
 				E2EAD9B628D600DE00AD44BB /* SettingsChangeUserInformation */,
-				E2EAD9B928D62AEB00AD44BB /* Public Protocol */,
+				E2EAD9B928D62AEB00AD44BB /* Public Protocols */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -377,16 +379,17 @@
 			isa = PBXGroup;
 			children = (
 				E2EAD9B728D6011D00AD44BB /* ChangeUserProfileViewController.swift */,
+				E2E45FFD28D64C64006A8571 /* ChangeUserProfileViewModel.swift */,
 			);
 			path = SettingsChangeUserInformation;
 			sourceTree = "<group>";
 		};
-		E2EAD9B928D62AEB00AD44BB /* Public Protocol */ = {
+		E2EAD9B928D62AEB00AD44BB /* Public Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				E299A3FD28D62B4D001F813B /* CellIdentifiableProtocol.swift */,
 			);
-			path = "Public Protocol";
+			path = "Public Protocols";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -524,6 +527,7 @@
 				E253FA3228CA550D003F6564 /* SettingsViewModel.swift in Sources */,
 				E264997A28C61B5E00C54A51 /* ConversationRouter.swift in Sources */,
 				E24B348828BB69F20041CF4F /* FireBaseDatabaseManager.swift in Sources */,
+				E2E45FFE28D64C64006A8571 /* ChangeUserProfileViewModel.swift in Sources */,
 				E229B95628C55EA300F795B7 /* ChatsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

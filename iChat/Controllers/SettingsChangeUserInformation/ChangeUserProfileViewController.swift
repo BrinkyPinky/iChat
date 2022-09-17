@@ -9,23 +9,37 @@ import UIKit
 
 class ChangeUserProfileViewController: UIViewController {
     
-    @IBOutlet var usernameTextField: UITextField!
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var surnameTextField: UITextField!
-    @IBOutlet var stackView: UIStackView!
+    @IBOutlet private var usernameTextField: UITextField!
+    @IBOutlet private var nameTextField: UITextField!
+    @IBOutlet private var surnameTextField: UITextField!
+    @IBOutlet private var doneButton: UIButton!
+    @IBOutlet private var stackView: UIStackView!
+    
+    private var viewOriginY: CGFloat = 0
+    
+    private var viewModel: ChangeUserProfileViewModelProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = ChangeUserProfileViewModel(view: self)
+        
         usernameTextField.underlined()
         nameTextField.underlined()
         surnameTextField.underlined()
+        doneButton.configuration?.cornerStyle = .capsule
     }
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.onKeyboardWillChangeFrame),
-            name: UIResponder.keyboardWillChangeFrameNotification,
+            selector: #selector(keyboardWillShowForResizing),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHideForResizing),
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
@@ -33,13 +47,19 @@ class ChangeUserProfileViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(
             self,
-            name: UIResponder.keyboardWillChangeFrameNotification,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
     }
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
+        
         self.view.frame = CGRect(
             x: 0,
             y: self.view.frame.height - (stackView.frame.height + 50),
@@ -47,40 +67,33 @@ class ChangeUserProfileViewController: UIViewController {
             height: stackView.frame.height + 50
         )
         self.view.layer.cornerRadius = 20
+        
+        viewOriginY = self.view.frame.origin.y
     }
     
     @IBAction func doneButtonAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        viewModel.doneButtonPressed(username: usernameTextField.text, name: nameTextField.text, surname: surnameTextField.text) { isDismissNeeded in
+            guard isDismissNeeded else { return }
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
     }
 }
 
 extension ChangeUserProfileViewController {
-    @objc func onKeyboardWillChangeFrame(_ notification: NSNotification) {
-        guard let userInfo = notification.userInfo else {return}
-        guard let _ = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
-        
-        guard
-            let userInfo = notification.userInfo,
-            let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        else {
-            return
-        }
-        
-        // MARK: Animation settings
-        
-        let keyboardAnimationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey]
-        let animationDuration: TimeInterval = (keyboardAnimationDuration as? NSNumber)?.doubleValue ?? 0
-        let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
-        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
-        let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
-        
-        // MARK: SafeArea when keyboard appears
-        
-        UIView.animate(withDuration: animationDuration,
-                       delay: 0,
-                       options: animationCurve,
-                       animations: {
-            self.view.frame.origin.y = -(keyboardFrame.height - 75)
-        }, completion: nil)
+    @objc func keyboardWillShowForResizing(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+                
+        self.view.frame.origin.y = keyboardSize.origin.y - keyboardSize.height
+    }
+    
+    @objc func keyboardWillHideForResizing(notification: Notification) {
+        self.view.frame.origin.y = viewOriginY
     }
 }
