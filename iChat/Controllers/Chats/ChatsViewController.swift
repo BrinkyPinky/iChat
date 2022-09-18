@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 protocol ChatsDisplayLogic: AnyObject {
     func displayChats(viewModel: Chats.gettingChats.ViewModel)
@@ -39,8 +38,7 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.getChats()
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        FireBaseDatabaseManager.shared.userOnline()
+//        FireBaseDatabaseManager.shared.userOnline()
     }
     
     override func viewWillAppear(_ animated: Bool) {

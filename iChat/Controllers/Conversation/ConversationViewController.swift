@@ -45,13 +45,11 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         setup()
     }
     
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI() //in file (Extension + Appearance)
-        print("loaded")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,6 +131,10 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         
         let currentOffset = conversationCollectionContentHeight - conversationCollectionViewHeight
         
+//        if conversationCollectionContentHeight <= conversationCollectionViewHeight + 50 {
+//            self.scrollDownButton.layer.opacity = 0
+//            print("kqr")
+//            self.scrollDownButton.isEnabled = false
         if scrollView.contentOffset.y == 0 {
             interactor?.getMessages(isNeedToUpLimit: true)
         } else if scrollView.contentOffset.y < currentOffset - 50 {
@@ -144,7 +146,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
                 } completion: { _ in
                     self.scrollDownButton.isEnabled = true
                 }
-        } else if scrollView.contentOffset.y > currentOffset - 50 {
+        } else if scrollView.contentOffset.y > currentOffset - 100 {
             UIView.animate(
                 withDuration: 0.25,
                 delay: 0,
@@ -182,7 +184,7 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
-                withReuseIdentifier: "MessageHeader",
+                withReuseIdentifier: messageHeaderCellModel.cellIdentifier,
                 for: indexPath
             ) as! ConversationCollectionHeaderView
             

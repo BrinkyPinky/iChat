@@ -16,6 +16,15 @@ extension ConversationViewController {
     }
     
     func setupUI() {
+        scrollDownButton.isEnabled = false
+        scrollDownButton.layer.opacity = 0
+        
+        
+        
+        
+        
+        
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         conversationCollectionView.addGestureRecognizer(tap)

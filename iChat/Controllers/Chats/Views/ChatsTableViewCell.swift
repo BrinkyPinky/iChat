@@ -69,7 +69,6 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         let email = chatsViewModelCell?.email
         
         if let imageData = RealmDataManager.shared.getUserImage(email: email ?? "") {
-            print("jopa")
             personImage.image = UIImage(data: imageData)
         }
         
