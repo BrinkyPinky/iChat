@@ -73,7 +73,6 @@ class SignUpViewModel: SignUpViewModelProtocol {
                 guard let error = error else {
                     FireBaseDatabaseManager.shared.createUser(username: username ?? "", email: email ?? "", name: name ?? "", surname: surname ?? "")
                     UserLoginDataManager.shared.saveData(email: email ?? "", password: password ?? "")
-                    UserLoginDataManager.shared.getUserInformation(email: email ?? "")
                     view.showViewController(with: "MainTabBar")
                     return
                 }

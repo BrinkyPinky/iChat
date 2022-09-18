@@ -9,9 +9,9 @@ import UIKit
 
 class ChangeUserProfileViewController: UIViewController {
     
-    @IBOutlet private var usernameTextField: UITextField!
-    @IBOutlet private var nameTextField: UITextField!
-    @IBOutlet private var surnameTextField: UITextField!
+    @IBOutlet var usernameTextField: UITextField!
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var surnameTextField: UITextField!
     @IBOutlet private var doneButton: UIButton!
     @IBOutlet private var stackView: UIStackView!
     
@@ -19,9 +19,12 @@ class ChangeUserProfileViewController: UIViewController {
     
     private var viewModel: ChangeUserProfileViewModelProtocol!
     
+    // MARK: ViewController Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = ChangeUserProfileViewModel(view: self)
+        viewModel.didLoad()
         
         usernameTextField.underlined()
         nameTextField.underlined()
@@ -57,6 +60,8 @@ class ChangeUserProfileViewController: UIViewController {
         )
     }
     
+    // MARK: Calculate height of view
+    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -71,12 +76,22 @@ class ChangeUserProfileViewController: UIViewController {
         viewOriginY = self.view.frame.origin.y
     }
     
-    @IBAction func doneButtonAction(_ sender: Any) {
+    func displayUserInfo(username: String, name: String, surname: String) {
+        usernameTextField.text = username
+        nameTextField.text = name
+        surnameTextField.text = surname
+    }
+    
+    // MARK: Done Button Action
+    
+    @IBAction private  func doneButtonAction(_ sender: Any) {
         viewModel.doneButtonPressed(username: usernameTextField.text, name: nameTextField.text, surname: surnameTextField.text) { isDismissNeeded in
             guard isDismissNeeded else { return }
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
+    // MARK: Alert Method
     
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -86,14 +101,14 @@ class ChangeUserProfileViewController: UIViewController {
 }
 
 extension ChangeUserProfileViewController {
-    @objc func keyboardWillShowForResizing(notification: Notification) {
+    @objc private func keyboardWillShowForResizing(notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
                 
         self.view.frame.origin.y = keyboardSize.origin.y - keyboardSize.height
     }
     
-    @objc func keyboardWillHideForResizing(notification: Notification) {
-        self.view.frame.origin.y = viewOriginY
+    @objc private func keyboardWillHideForResizing(notification: Notification) {
+        self.view.frame.origin.y = self.viewOriginY
     }
 }

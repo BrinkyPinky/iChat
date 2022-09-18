@@ -13,6 +13,8 @@ class RealmDataManager {
     
     let realm = try! Realm()
 
+    // MARK: Chats
+    
     func writeLastChats(chatModel: [ChatModel]) {
         try! realm.write {
             realm.add(chatModel, update: .all)
@@ -23,6 +25,8 @@ class RealmDataManager {
         return Array(realm.objects(ChatModel.self))
     }
     
+    // MARK: Images
+    
     func saveUserImage(imageData: Data, email: String) {
         let imageModel = UserImageModel(email: email, imageData: imageData)
         
@@ -31,13 +35,22 @@ class RealmDataManager {
         }
     }
     
+    func getUserImage(email: String) -> Data? {
+        return realm.object(ofType: UserImageModel.self, forPrimaryKey: email)?.imageData
+    }
+    
+    // MARK: SelfUser
+    
+    func saveSelfUser(fullname: String, username: String) {
+        
+    }
+    
+    
+    // MARK: Clean realm data
+    
     func deleteAll() {
         try! realm.write {
             realm.deleteAll()
         }
-    }
-    
-    func getUserImage(email: String) -> Data? {
-        return realm.object(ofType: UserImageModel.self, forPrimaryKey: email)?.imageData
     }
 }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 protocol ChatsViewModelCellRepresentable {
     var chatsViewModelCell: CellIdentifiable? { get set }
@@ -67,11 +66,10 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
             messagesCountLabel.isHidden = true
         }
         
-        var email = chatsViewModelCell?.email ?? ""
-        email = email.replacingOccurrences(of: "-", with: "@")
-        email = email.replacingOccurrences(of: "-", with: ".")
+        let email = chatsViewModelCell?.email
         
-        if let imageData = RealmDataManager.shared.getUserImage(email: email) {
+        if let imageData = RealmDataManager.shared.getUserImage(email: email ?? "") {
+            print("jopa")
             personImage.image = UIImage(data: imageData)
         }
         

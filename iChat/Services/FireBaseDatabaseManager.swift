@@ -25,6 +25,7 @@ class FireBaseDatabaseManager {
     
     func checkIfUserNameIsFree(username: String, completion: @escaping (Bool) -> Void) {
         let usernameForSearch = username.lowercased()
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         
         let query = db
             .child("Users")
@@ -32,8 +33,15 @@ class FireBaseDatabaseManager {
             .queryEqual(toValue: usernameForSearch)
             .queryLimited(toFirst: 1)
         
-        query.observeSingleEvent(of: .value) { Data in
-            guard Data.exists() else {
+        query.observeSingleEvent(of: .value) { data in
+            guard data.exists() else {
+                completion(true)
+                return
+            }
+            
+            guard let value = data.value as? [String:[String:Any]] else { return }
+            let email = value.first?.key
+            guard email != correctSelfEmail else {
                 completion(true)
                 return
             }
@@ -44,8 +52,8 @@ class FireBaseDatabaseManager {
     func createUser(username: String, email: String, name: String, surname: String) {
         let correctEmail = convertToCorrectEmail(email: email)
         
-        db.child("Users").child(correctEmail).setValue([
-            "email": email,
+        db.child("Users").child(correctEmail.lowercased()).setValue([
+            "email": email.lowercased(),
             "name": name,
             "surname": surname,
             "username": username,
@@ -53,19 +61,18 @@ class FireBaseDatabaseManager {
         ])
     }
     
-    func getSelfUser(email: String, completion: @escaping (String, String) -> Void) {
-        let correctSelfEmail = convertToCorrectEmail(email: email)
+    func getSelfUser(completion: @escaping (String?, String?, String?) -> Void) {
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         
-        db.child("Users/\(correctSelfEmail)").observeSingleEvent(of: .value) { data in
+        db.child("Users/\(correctSelfEmail)").observe(.value) { data in
             guard data.exists() != false else { return }
             guard let value = data.value as? [String:Any] else { return }
             
             let name = value["name"] as? String
             let surname = value["surname"] as? String
             let username = value["username"] as? String
-            let fullname = "\(name ?? "unknown") \(surname ?? "unknown")"
             
-            completion(fullname, username ?? "unknown")
+            completion(username, name, surname)
         }
     }
     
@@ -333,6 +340,8 @@ class FireBaseDatabaseManager {
         }
     }
     
+    // MARK: Remove Observers
+    
     func removeConversationObservers(with email: String, withOnlineStatus: Bool) {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         let correctOtherEmail = convertToCorrectEmail(email: email)
@@ -340,5 +349,11 @@ class FireBaseDatabaseManager {
         db.child("Conversations").child(correctSelfEmail).child("conversation-with-\(correctOtherEmail)").removeAllObservers()
         guard withOnlineStatus else { return }
         db.child("Users/\(correctOtherEmail)/isOnline").removeAllObservers()
+    }
+    
+    func removeSelfUserObservers() {
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
+        
+        db.child("Users/\(correctSelfEmail)").removeAllObservers()
     }
 }

@@ -8,8 +8,9 @@
 import Foundation
 
 protocol ChangeUserProfileViewModelProtocol {
-    func doneButtonPressed(username: String?, name: String?, surname: String?, completion: @escaping (Bool) -> Void)
     init(view: ChangeUserProfileViewController)
+    func doneButtonPressed(username: String?, name: String?, surname: String?, completion: @escaping (Bool) -> Void)
+    func didLoad()
 }
 
 class ChangeUserProfileViewModel: ChangeUserProfileViewModelProtocol {
@@ -46,5 +47,14 @@ class ChangeUserProfileViewModel: ChangeUserProfileViewModelProtocol {
             )
             completion(true)
         })
+    }
+    
+    func didLoad() {
+        UserLoginDataManager.shared.fetchData()
+        view.displayUserInfo(
+            username: UserLoginDataManager.shared.username ?? "",
+            name: UserLoginDataManager.shared.name ?? "",
+            surname: UserLoginDataManager.shared.surname ?? ""
+        )
     }
 }

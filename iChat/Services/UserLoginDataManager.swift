@@ -10,10 +10,11 @@ import Foundation
 class UserLoginDataManager {
     static let shared = UserLoginDataManager()
     
-    var email: String? 
+    var email: String?
     var password: String?
-    var fullname: String?
     var username: String?
+    var name: String?
+    var surname: String?
     
     init() {
         fetchData()
@@ -22,27 +23,30 @@ class UserLoginDataManager {
     func fetchData() {
         email = UserDefaults.standard.string(forKey: "email")
         password = UserDefaults.standard.string(forKey: "password")
-        fullname = UserDefaults.standard.string(forKey: "fullname")
         username = UserDefaults.standard.string(forKey: "username")
+        name = UserDefaults.standard.string(forKey: "name")
+        surname = UserDefaults.standard.string(forKey: "surname")
     }
     
     func saveData(email: String, password: String) {
-        UserDefaults.standard.set(email, forKey: "email")
+        let correctEmail = email.lowercased()
+        UserDefaults.standard.set(correctEmail, forKey: "email")
         UserDefaults.standard.set(password, forKey: "password")
         fetchData()
     }
     
-    func getUserInformation(email: String) {
-        FireBaseDatabaseManager.shared.getSelfUser(email: email) { fullnameValue, usernameValue in
-            UserDefaults.standard.set(fullnameValue, forKey: "fullname")
-            UserDefaults.standard.set(usernameValue, forKey: "username")
-        }
+    func saveUserInfo(username: String, name: String, surname: String) {
+        UserDefaults.standard.set(username, forKey: "username")
+        UserDefaults.standard.set(name, forKey: "name")
+        UserDefaults.standard.set(surname, forKey: "surname")
     }
     
     func removeData() {
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
-        UserDefaults.standard.removeObject(forKey: "fullname")
         UserDefaults.standard.removeObject(forKey: "username")
+        UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "surname")
+        fetchData()
     }
 }

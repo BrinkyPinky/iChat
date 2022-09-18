@@ -27,6 +27,7 @@ protocol SettingsViewModelProtocol {
     init(view: SettingsTableViewController)
     func viewLoad()
     func pickedImage(with image: Data?)
+    func willDisappear()
 }
 
 class SettingsViewModel: SettingsViewModelProtocol {
@@ -89,9 +90,14 @@ class SettingsViewModel: SettingsViewModelProtocol {
     
     func viewLoad() {
         UserLoginDataManager.shared.fetchData()
+        view.displayFullname(with: "\(UserLoginDataManager.shared.name ?? "Unknown") \(UserLoginDataManager.shared.surname ?? "Unknown")")
+        view.displayUsername(with: UserLoginDataManager.shared.username ?? "Unknown")
         
-        view.displayFullname(with: UserLoginDataManager.shared.fullname ?? "Unknown")
-        view.displayUsername(with: "@\(UserLoginDataManager.shared.username ?? "Unknown")")
+        FireBaseDatabaseManager.shared.getSelfUser { username, name, surname in
+            UserLoginDataManager.shared.saveUserInfo(username: username ?? "", name: name ?? "", surname: surname ?? "")
+            self.view.displayUsername(with: username ?? "@Unknown")
+            self.view.displayFullname(with: "\(name ?? "Unknown") \(surname ?? "Unknown")")
+        }
         
         if let userImageData = RealmDataManager.shared.getUserImage(email: UserLoginDataManager.shared.email ?? "") {
             view.displayUserImage(with: userImageData)
@@ -104,6 +110,10 @@ class SettingsViewModel: SettingsViewModelProtocol {
             RealmDataManager.shared.saveUserImage(imageData: imageData, email: UserLoginDataManager.shared.email ?? "")
         }
         
+    }
+    
+    func willDisappear() {
+        FireBaseDatabaseManager.shared.removeSelfUserObservers()
     }
     
     func pickedImage(with image: Data?) {

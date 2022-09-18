@@ -23,7 +23,6 @@ class LoginViewModel: LoginViewModelProtocol {
         FireBaseAuthManager.shared.login(email: email ?? "", password: password ?? "") { [unowned self] error in
             guard let error = error else {
                 UserLoginDataManager.shared.saveData(email: email ?? "", password: password ?? "")
-                UserLoginDataManager.shared.getUserInformation(email: email ?? "")
                 view.showViewController(with: "MainTabBar")
                 return
             }
