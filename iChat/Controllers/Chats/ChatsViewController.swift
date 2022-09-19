@@ -35,10 +35,12 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
         setup()
     }
     
+    // MARK: View lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor?.getChats()
-//        FireBaseDatabaseManager.shared.userOnline()
+        FireBaseDatabaseManager.shared.userOnline()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +58,8 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
             }
         }
     }
+    
+    // MARK: DisplayChats
      
     func displayChats(viewModel: Chats.gettingChats.ViewModel) {
         chatsRows = viewModel.rows
@@ -81,8 +85,9 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
     }
 }
 
+// MARK: TableView
+
 extension ChatsViewController {
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         chatsRows.count
     }

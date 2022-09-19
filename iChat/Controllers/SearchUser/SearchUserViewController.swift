@@ -17,11 +17,10 @@ protocol SearchUserDisplayLogic: AnyObject {
 }
 
 class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
-        
-    var searchController = UISearchController()
-    
     var interactor: SearchUserBusinessLogic?
     var router: (NSObjectProtocol & SearchUserRoutingLogic & SearchUserDataPassing)?
+    
+    private var searchController = UISearchController()
     
     private var rows: [CellIdentifiable] = []
     
@@ -35,19 +34,6 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
-    }
-    
-    func setup() {
-        let viewController = self
-        let interactor = SearchUserInteractor()
-        let presenter = SearchUserPresenter()
-        let router = SearchUserRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
     }
     
     // MARK: View lifecycle
@@ -78,16 +64,18 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
     
     // MARK: Provide text in search field to interactor
     
-    func provideSearchText(with text: String?) {
+    private func provideSearchText(with text: String?) {
         let request = SearchUser.Search.Request(searchText: text)
         interactor?.getUsersData(request: request)
     }
     
-    func provideSelectedUser(with user: CellIdentifiable) {
+    private func provideSelectedUser(with user: CellIdentifiable) {
         let request = SearchUser.Selected.Request(selectedUser: user)
         interactor?.getSelectedUser(request: request)
         router?.routeToConversation(segue: nil)
     }
+    
+    // MARK: Display users
     
     func presentUsers(viewModel: SearchUser.Search.ViewModel) {
         rows = viewModel.rows
@@ -95,13 +83,32 @@ class SearchUserViewController: UITableViewController, SearchUserDisplayLogic {
             self.tableView.reloadData()
         }
     }
+    
+    // MARK: Setup
+    
+    private func setup() {
+        let viewController = self
+        let interactor = SearchUserInteractor()
+        let presenter = SearchUserPresenter()
+        let router = SearchUserRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
 }
+
+// MARK: UISearchController
 
 extension SearchUserViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         provideSearchText(with: searchController.searchBar.text)
     }
 }
+
+// MARK: TableView
 
 extension SearchUserViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

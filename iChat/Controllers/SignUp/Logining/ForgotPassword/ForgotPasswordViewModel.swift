@@ -20,6 +20,8 @@ class ForgotPasswordViewModel: ForgotPasswordViewModelProtocol {
         self.view = view
     }
     
+    // MARK: Send Email Button Tapped
+    
     func sendEmailButtonPressed(with email: String?) {
         FireBaseAuthManager.shared.recoverPassword(email: email ?? "") { [unowned self] error in
             guard let error = error else {

@@ -32,27 +32,27 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
     func setup() {
         let chatsViewModelCell = chatsViewModelCell as? ChatsViewModelCell
         
+        //text
         fullname.text = chatsViewModelCell?.fullname
         username.text = chatsViewModelCell?.username
         messageText.text = chatsViewModelCell?.lastMessageText
         messageDate.text = chatsViewModelCell?.lastMessageDate
+        
+        //appearence
         personImage.layer.cornerRadius = personImage.frame.width / 2
         viewBackgroundMessagesCount.layer.cornerRadius = viewBackgroundMessagesCount.frame.width / 2
         onlineStatusView.layer.cornerRadius = onlineStatusView.frame.width / 2
         backgroundOnlineStatusView.layer.cornerRadius = backgroundOnlineStatusView.frame.width / 2
+        backgroundOnlineStatusView.backgroundColor = .white
         
+        //online status
         if chatsViewModelCell?.isOnline == true {
             onlineStatusView.backgroundColor = .systemGreen
         } else {
             onlineStatusView.backgroundColor = .opaqueSeparator
         }
         
-        if self.traitCollection.userInterfaceStyle == .light {
-            backgroundOnlineStatusView.backgroundColor = .white
-        } else {
-            backgroundOnlineStatusView.backgroundColor = .systemGray6
-        }
-        
+        //unreaded messages
         if chatsViewModelCell?.unreadedMessagesCount ?? 0 >= 50 {
             viewBackgroundMessagesCount.isHidden = false
             messagesCountLabel.isHidden = false
@@ -66,8 +66,8 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
             messagesCountLabel.isHidden = true
         }
         
+        //user image
         let email = chatsViewModelCell?.email
-        
         if let imageData = RealmDataManager.shared.getUserImage(email: email ?? "") {
             personImage.image = UIImage(data: imageData)
         }
@@ -81,7 +81,6 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -17,7 +17,6 @@ protocol SignUpViewModelProtocol: AnyObject {
 }
 
 class SignUpViewModel: SignUpViewModelProtocol {
-    
     unowned var view: SignUpViewController
     
     required init(view: SignUpViewController) {
@@ -32,9 +31,13 @@ class SignUpViewModel: SignUpViewModelProtocol {
     
     var viewModelDidChanged: ((SignUpViewModelProtocol) -> Void)?
     
+    // MARK: EmailTextFieldDidChanged
+    
     func emailTextFieldDidChanged(email: String?) {
         emailIsValid = ValidationManager.shared.checkMailValidation(email: email ?? "")
     }
+    
+    // MARK: SignUp Button tapped
     
     func signUpButtonTapped(username: String?, name: String?, surname: String?, email: String?, password: String?) {
         guard ValidationManager.shared.checkNameValidation(name: username ?? "") else {
@@ -56,8 +59,8 @@ class SignUpViewModel: SignUpViewModelProtocol {
             usernameIsFree = isFree
         }
 
+        //after checking for the validity and freedom of the username
         func continueSignUp() {
-            
             guard ValidationManager.shared.checkNameValidation(name: name ?? "") else {
                 view.alert(message: "Invalid name")
                 return
@@ -69,7 +72,6 @@ class SignUpViewModel: SignUpViewModelProtocol {
             }
             
             FireBaseAuthManager.shared.signUp(email: email ?? "", password: password ?? "") { [unowned self] error in
-                
                 guard let error = error else {
                     FireBaseDatabaseManager.shared.createUser(username: username ?? "", email: email ?? "", name: name ?? "", surname: surname ?? "")
                     UserLoginDataManager.shared.saveData(email: email ?? "", password: password ?? "")

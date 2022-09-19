@@ -63,8 +63,7 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         }
                 
         FireBaseDatabaseManager.shared.getMessages(withEmail: userInfo?.email ?? "", andLimit: limitOfMessages) { arrayOfMessages in
-            rawMessages = []
-            rawMessages.append(contentsOf: arrayOfMessages)
+            rawMessages = arrayOfMessages
         }
     }
     

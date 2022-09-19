@@ -76,6 +76,8 @@ class ChangeUserProfileViewController: UIViewController {
         viewOriginY = self.view.frame.origin.y
     }
     
+    // MARK: Display user info
+    
     func displayUserInfo(username: String, name: String, surname: String) {
         usernameTextField.text = username
         nameTextField.text = name
@@ -99,6 +101,8 @@ class ChangeUserProfileViewController: UIViewController {
         present(alert, animated: true)
     }
 }
+
+// MARK: Keyboard logic
 
 extension ChangeUserProfileViewController {
     @objc private func keyboardWillShowForResizing(notification: Notification) {

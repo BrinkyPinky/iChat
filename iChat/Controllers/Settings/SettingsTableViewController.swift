@@ -17,6 +17,8 @@ class SettingsTableViewController: UITableViewController {
     
     var viewModel: SettingsViewModelProtocol!
     
+    // MARK: ViewController Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -27,24 +29,7 @@ class SettingsTableViewController: UITableViewController {
         viewModel.willDisappear()
     }
     
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: .none))
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func setupUI() {
-        viewModel = SettingsViewModel(view: self)
-        viewModel.viewLoad()
-        
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        
-        userImage.layer.cornerRadius = userImage.frame.size.width/2
-    }
-    
-    // MARK: Displaying UserData from ViewModel
+    // MARK: Displaying UserInfo from ViewModel
     
     func displayUsername(with username: String) {
         userUsername.text = username
@@ -57,7 +42,30 @@ class SettingsTableViewController: UITableViewController {
     func displayUserImage(with data: Data) {
         userImage.image = UIImage(data: data)
     }
+    
+    // MARK: SetupUI
+    
+    func setupUI() {
+        viewModel = SettingsViewModel(view: self)
+        viewModel.viewLoad()
+        
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        userImage.layer.cornerRadius = userImage.frame.size.width/2
+    }
+    
+    // MARK: Alert Method
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: .none))
+        present(alert, animated: true, completion: nil)
+    }
 }
+
+// MARK: tableView
 
 extension SettingsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -88,6 +96,8 @@ extension SettingsTableViewController {
     }
 }
 
+// MARK: UIImagePicker
+
 extension SettingsTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -98,9 +108,7 @@ extension SettingsTableViewController: UIImagePickerControllerDelegate, UINaviga
             showAlert(title: "Error", message: "Something went wrong with uploading the image to the server")
             return
         }
-        
         viewModel.pickedImage(with: data)
-        
         picker.dismiss(animated: true, completion: nil)
     }
     

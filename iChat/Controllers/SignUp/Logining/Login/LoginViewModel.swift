@@ -19,6 +19,8 @@ class LoginViewModel: LoginViewModelProtocol {
         self.view = view
     }
     
+    // MARK: Login Button tapped
+    
     func loginButtonTapped(email: String?, password: String?) {
         FireBaseAuthManager.shared.login(email: email ?? "", password: password ?? "") { [unowned self] error in
             guard let error = error else {

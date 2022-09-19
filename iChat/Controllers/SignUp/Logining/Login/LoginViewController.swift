@@ -20,11 +20,15 @@ class LoginViewController: UIViewController {
     
     private var viewModel: LoginViewModelProtocol!
     
+    // MARK: ViewController LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         viewModel = LoginViewModel(view: self)
     }
+    
+    // MARK: Login Button Action
     
     @IBAction private func loginButtonAction(_ sender: Any) {
         viewModel.loginButtonTapped(
@@ -32,6 +36,8 @@ class LoginViewController: UIViewController {
             password: passwordTextField.text
         )
     }
+    
+    // MARK: SetupUI
     
     private func setupUI() {
         self.hideKeyboardWhenTappedAround()
@@ -42,6 +48,8 @@ class LoginViewController: UIViewController {
         
         loginButton.configuration?.cornerStyle = .capsule
     }
+    
+    // MARK: Alert method
     
      func alert(with message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)

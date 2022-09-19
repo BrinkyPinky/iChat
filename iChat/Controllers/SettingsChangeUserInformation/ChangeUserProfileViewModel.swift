@@ -21,6 +21,8 @@ class ChangeUserProfileViewModel: ChangeUserProfileViewModelProtocol {
         self.view = view
     }
     
+    // MARK: Done Button Pressed
+    
     func doneButtonPressed(username: String?, name: String?, surname: String?, completion: @escaping (Bool) -> Void) {
         guard ValidationManager.shared.checkNameValidation(name: username ?? "") else {
             view.showAlert(message: "Invalid username")
@@ -48,6 +50,8 @@ class ChangeUserProfileViewModel: ChangeUserProfileViewModelProtocol {
             completion(true)
         })
     }
+    
+    // MARK: ViewDidLoad
     
     func didLoad() {
         UserLoginDataManager.shared.fetchData()

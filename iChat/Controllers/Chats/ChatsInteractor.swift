@@ -38,6 +38,8 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
     // MARK: Get raw list of chats
     func getChats() {
         rawChats = RealmDataManager.shared.getLastChats()
+        rawChats = rawChats.sorted(by: { $0.lastMessageDate ?? "" > $1.lastMessageDate ?? "" })
+        
         
         FireBaseDatabaseManager.shared.getChats { [unowned self] chat in
             guard rawChats.isEmpty == false else {
@@ -53,6 +55,7 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
                 }
                 return $0
             })
+            rawChats = rawChats.sorted(by: { $0.lastMessageDate ?? "" > $1.lastMessageDate ?? "" })
         }
     }
     

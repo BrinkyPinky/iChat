@@ -8,6 +8,7 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet private var firstNameTextField: UITextField!
     @IBOutlet private var lastNameTextField: UITextField!
@@ -16,6 +17,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet private var signUpButton: UIButton!
     
     var viewModel: SignUpViewModelProtocol!
+    
+    // MARK: ViewController LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,8 @@ class SignUpViewController: UIViewController {
         )
     }
     
+    // MARK: SignUp Button Action
+    
     @IBAction private func signUpButtonAction(_ sender: Any) {
         viewModel.signUpButtonTapped(
             username: usernameTextField.text,
@@ -51,11 +56,14 @@ class SignUpViewController: UIViewController {
         )
     }
     
+    // MARK: TextField did change
+    
     @objc private func textFieldDidChange() {
         viewModel.emailTextFieldDidChanged(email: emailTextField.text)
         updateEmailValidImage(with: viewModel.emailIsValid ? "checkmark" : "xmark")
     }
     
+    // MARK: updating the icon when email is correct/incorrect
     
     private func updateEmailValidImage(with imageName: String) {
         emailTextField.rightViewMode = UITextField.ViewMode.always
@@ -66,11 +74,11 @@ class SignUpViewController: UIViewController {
         emailTextField.rightView = imageView
     }
     
+    // MARK: SetupUI
+    
     private func setupUI() {
         self.hideKeyboardWhenTappedAround()
-        
-        signUpButton.configuration?.cornerStyle = .capsule
-        
+                
         viewModel.viewModelDidChanged = { [unowned self] updatedViewModel in
             viewModel = updatedViewModel
         }
@@ -80,9 +88,12 @@ class SignUpViewController: UIViewController {
         lastNameTextField.underlined()
         emailTextField.underlined()
         passwordTextField.underlined()
+        signUpButton.configuration?.cornerStyle = .capsule
         
         emailTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
+    
+    // MARK: Alert method
     
     func alert(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)

@@ -14,14 +14,20 @@ class ForgotPasswordViewController: UIViewController {
     
     private var viewModel: ForgotPasswordViewModelProtocol!
     
+    // MARK: ViewController LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
+    // MARK: Send Email button action
+    
     @IBAction func sendEmailButtonAction(_ sender: Any) {
         viewModel.sendEmailButtonPressed(with: emailTextField.text)
     }
+    
+    // MARK: SetupUI
     
     private func setupUI() {
         self.hideKeyboardWhenTappedAround()
@@ -30,6 +36,8 @@ class ForgotPasswordViewController: UIViewController {
         sendEmailButton.configuration?.cornerStyle = .capsule
         viewModel = ForgotPasswordViewModel(self)
     }
+    
+    // MARK: Alert Method
     
     func showAlert(with message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)

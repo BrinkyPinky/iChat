@@ -29,16 +29,13 @@ extension ConversationViewController {
         tap.cancelsTouchesInView = false
         conversationCollectionView.addGestureRecognizer(tap)
         
-        if self.view.traitCollection.userInterfaceStyle == .light {
-            view.backgroundColor = UIColor(
-                red: 234/255,
-                green: 239/255,
-                blue: 252/255,
-                alpha: 1
-            )
-        } else {
-            view.backgroundColor = #colorLiteral(red: 0.2763007581, green: 0.2438369989, blue: 0.3258192241, alpha: 1)
-        }
+        
+        view.backgroundColor = UIColor(
+            red: 234/255,
+            green: 239/255,
+            blue: 252/255,
+            alpha: 1
+        )
         
         // MARK: Actions
         
@@ -82,16 +79,12 @@ extension ConversationViewController {
         // MARK: NavigationBar Setup
         
         let navigationBarAppearance = UINavigationBarAppearance()
-        if view.traitCollection.userInterfaceStyle == .light {
-            navigationBarAppearance.backgroundColor = UIColor(
-                red: 234/255,
-                green: 239/255,
-                blue: 252/255,
-                alpha: 1
-            )
-        } else {
-            navigationBarAppearance.backgroundColor = #colorLiteral(red: 0.2763007581, green: 0.2438369989, blue: 0.3258192241, alpha: 1)
-        }
+        navigationBarAppearance.backgroundColor = UIColor(
+            red: 234/255,
+            green: 239/255,
+            blue: 252/255,
+            alpha: 1
+        )
         navigationBarAppearance.shadowColor = .clear
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
@@ -155,8 +148,9 @@ extension ConversationViewController {
             let currentOffset = conversationCollectionView.contentOffset.y
             
             completion()
-            
+                        
             conversationCollectionView.reloadData()
+            conversationCollectionView.insertItems(at: [IndexPath(item: 0, section: 0)])
             conversationCollectionView.layoutIfNeeded()
             
             let heightOfContentSize = self.conversationCollectionView.contentSize.height
@@ -166,14 +160,12 @@ extension ConversationViewController {
             let row = conversationCollectionView.numberOfItems(inSection: section) - 1
             
             if heightOfContentSize <= heightOfCollectionView + 50 {
-                
+
             } else if isItFirstDisplayingMessages {
                 conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: false)
             } else if currentOffset <= 50 {
                 let targetYPosition = heightOfContentSize - currentContentSize
                 conversationCollectionView.contentOffset.y = targetYPosition
-            } else if viewModel.lastMessageSelfSender {
-                conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: true)
             } else {
                 let targetYPosition = heightOfContentSize - heightOfCollectionView
                 guard currentOffset >= targetYPosition - 300 else { return }

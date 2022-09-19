@@ -22,16 +22,13 @@ protocol SearchUserDataStore {
 }
 
 class SearchUserInteractor: SearchUserBusinessLogic, SearchUserDataStore {
-    
-    var selectedUser: CellIdentifiable?
-    
     var presenter: SearchUserPresentationLogic?
+    var selectedUser: CellIdentifiable?
         
     // MARK: Getting List Of Users From Database
     
     func getUsersData(request: SearchUser.Search.Request) {
         FireBaseDatabaseManager.shared.searchUser(username: request.searchText ?? "") { [unowned self] users in
-            
             let response = SearchUser.Search.Response(users: users)
             presenter?.presentUsers(response: response)
         }

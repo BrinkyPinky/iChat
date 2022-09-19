@@ -17,14 +17,12 @@ protocol SearchUserPresentationLogic {
 }
 
 class SearchUserPresenter: SearchUserPresentationLogic {
-    
     weak var viewController: SearchUserDisplayLogic?
     
     // MARK: PresentUsers
     
     func presentUsers(response: SearchUser.Search.Response) {
         var rows: [UserCellViewModel] = []
-        
         response.users.forEach { userModel in
             rows.append(UserCellViewModel(user: userModel))
         }
