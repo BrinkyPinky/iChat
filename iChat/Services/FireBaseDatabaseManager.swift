@@ -25,7 +25,7 @@ class FireBaseDatabaseManager {
     
     func checkIfUserNameIsFree(username: String, completion: @escaping (Bool) -> Void) {
         let usernameForSearch = username.lowercased()
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email ?? "")
         
         let query = db
             .child("Users")
@@ -132,7 +132,7 @@ class FireBaseDatabaseManager {
         let specifiedDate = String(Date().timeIntervalSince1970)
         let messageID = specifiedDate.replacingOccurrences(of: ".", with: "-")
         
-        // MARK: Self Database Desination
+        //Self Database Desination
         
         let dbSelfDestination = db
             .child("Conversations")
@@ -158,7 +158,7 @@ class FireBaseDatabaseManager {
             return
         }
         
-        // MARK: Other Database Desination
+        //Other Database Desination
         
         let dbOtherDestination = db
             .child("Conversations")
@@ -233,7 +233,7 @@ class FireBaseDatabaseManager {
         db.child("Conversations/\(correctSelfEmail)/conversation-with-\(correctOtherEmail)/\(messageID)/isRead").setValue(true)
     }
     
-    func getChats(completion: @escaping (ChatModel) -> Void ) {
+    func getChats(completion: @escaping (ChatModel) -> Void) {
         let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
         
         let query = db.child("Chats/\(correctSelfEmail)")
@@ -352,7 +352,7 @@ class FireBaseDatabaseManager {
     }
     
     func removeSelfUserObservers() {
-        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email!)
+        let correctSelfEmail = convertToCorrectEmail(email: UserLoginDataManager.shared.email ?? "")
         
         db.child("Users/\(correctSelfEmail)").removeAllObservers()
     }

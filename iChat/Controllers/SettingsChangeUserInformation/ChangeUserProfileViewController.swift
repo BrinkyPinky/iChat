@@ -87,7 +87,12 @@ class ChangeUserProfileViewController: UIViewController {
     // MARK: Done Button Action
     
     @IBAction private  func doneButtonAction(_ sender: Any) {
-        viewModel.doneButtonPressed(username: usernameTextField.text, name: nameTextField.text, surname: surnameTextField.text) { isDismissNeeded in
+        viewModel.doneButtonPressed(
+            username: usernameTextField.text,
+            name: nameTextField.text,
+            surname: surnameTextField.text
+        ) { isDismissNeeded in
+            
             guard isDismissNeeded else { return }
             self.dismiss(animated: true, completion: nil)
         }

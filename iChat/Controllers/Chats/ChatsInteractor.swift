@@ -34,15 +34,14 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
             RealmDataManager.shared.writeLastChats(chatModel: rawChats)
         }
     }
-
+    
     // MARK: Get raw list of chats
     func getChats() {
         rawChats = RealmDataManager.shared.getLastChats()
         rawChats = rawChats.sorted(by: { $0.lastMessageDate ?? "" > $1.lastMessageDate ?? "" })
         
-        
         FireBaseDatabaseManager.shared.getChats { [unowned self] chat in
-            guard rawChats.isEmpty == false else {
+            guard rawChats.contains(where: { $0.email == chat.email }) else {
                 rawChats.append(chat)
                 return
             }
@@ -50,11 +49,10 @@ class ChatsInteractor: ChatsBusinessLogic, ChatsDataStore {
             rawChats = rawChats.map({
                 if $0.email == chat.email {
                     return chat
-                } else {
-                    rawChats.append(chat)
                 }
                 return $0
             })
+            
             rawChats = rawChats.sorted(by: { $0.lastMessageDate ?? "" > $1.lastMessageDate ?? "" })
         }
     }

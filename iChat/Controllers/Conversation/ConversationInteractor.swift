@@ -35,13 +35,20 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     var userInfo: ConversationUserModel? {
         didSet {
             FireBaseDatabaseManager.shared.checkUserStatus(otherEmail: userInfo?.email ?? "") { [unowned self] isOnline in
-                let response = Conversation.userTitleLabel.Response(fullname: userInfo?.fullName ?? "Unknown", isOnline: isOnline)
+                let response = Conversation.userTitleLabel.Response(
+                    fullname: userInfo?.fullName ?? "Unknown",
+                    isOnline: isOnline
+                )
+                
                 presenter?.presentTitle(response: response)
             }
             
-            let response = Conversation.userTitleLabel.Response(fullname: userInfo?.fullName ?? "Unknown", isOnline: userInfo?.isOnline ?? false)
-            presenter?.presentTitle(response: response)
+            let response = Conversation.userTitleLabel.Response(
+                fullname: userInfo?.fullName ?? "Unknown",
+                isOnline: userInfo?.isOnline ?? false
+            )
             
+            presenter?.presentTitle(response: response)
             getMessages(isNeedToUpLimit: false)
         }
     }
@@ -70,8 +77,19 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     func sendMessage(request: Conversation.SendMessage.Request) {
         guard userInfo != nil else { return }
         guard request.messageText != "" && request.messageText != "Message" else { return }
-        FireBaseDatabaseManager.shared.removeConversationObservers(with: userInfo?.email ?? "", withOnlineStatus: false)
-        FireBaseDatabaseManager.shared.sendMessage(to: userInfo!.email, withName: userInfo!.fullName, andUsername: userInfo!.username, message: request.messageText)
+        
+        FireBaseDatabaseManager.shared.removeConversationObservers(
+            with: userInfo?.email ?? "",
+            withOnlineStatus: false
+        )
+        
+        FireBaseDatabaseManager.shared.sendMessage(
+            to: userInfo!.email,
+            withName: userInfo!.fullName,
+            andUsername: userInfo!.username,
+            message: request.messageText
+        )
+        
         getMessages(isNeedToUpLimit: false)
     }
     
@@ -79,7 +97,11 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
         guard let message = request.displayingCell as? MessageCellViewModel else { return }
         guard message.selfSender == false else { return }
         guard message.isRead == false else { return }
-        FireBaseDatabaseManager.shared.readMessage(messageID: message.messageID, otherEmail: userInfo?.email ?? "")
+        
+        FireBaseDatabaseManager.shared.readMessage(
+            messageID: message.messageID,
+            otherEmail: userInfo?.email ?? ""
+        )
     }
         
     // MARK: Context Menu Actions
@@ -87,13 +109,19 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     func deleteMessageForAll(cellViewModel: CellIdentifiable) {
         guard let cellViewModel = cellViewModel as? MessageCellViewModel else { return }
         
-        FireBaseDatabaseManager.shared.deleteMessageForAll(messageID: cellViewModel.messageID, otherEmail: userInfo?.email ?? "")
+        FireBaseDatabaseManager.shared.deleteMessageForAll(
+            messageID: cellViewModel.messageID,
+            otherEmail: userInfo?.email ?? ""
+        )
     }
     
     func deleteMessageForYourself(cellViewModel: CellIdentifiable) {
         guard let cellViewModel = cellViewModel as? MessageCellViewModel else { return }
 
-        FireBaseDatabaseManager.shared.deleteMessageForYourself(messageID: cellViewModel.messageID, otherEmail: userInfo?.email ?? "")
+        FireBaseDatabaseManager.shared.deleteMessageForYourself(
+            messageID: cellViewModel.messageID,
+            otherEmail: userInfo?.email ?? ""
+        )
     }
     
     func copyMessageToClipboard(cellViewModel: CellIdentifiable) {
@@ -105,7 +133,10 @@ class ConversationInteractor: ConversationBusinessLogic, ConversationDataStore {
     // MARK: When view disappear database stops the observer for messages
     
     func stopObservingMessages() {
-        FireBaseDatabaseManager.shared.removeConversationObservers(with: userInfo?.email ?? "", withOnlineStatus: true)
+        FireBaseDatabaseManager.shared.removeConversationObservers(
+            with: userInfo?.email ?? "",
+            withOnlineStatus: true
+        )
     }
     
     var presenter: ConversationPresentationLogic?

@@ -25,7 +25,11 @@ class ConversationPresenter: ConversationPresentationLogic {
     // MARK: presentUserFullName
     
     func presentTitle(response: Conversation.userTitleLabel.Response) {
-        let viewModel = Conversation.userTitleLabel.ViewModel(fullname: response.fullname, isOnline: response.isOnline)
+        let viewModel = Conversation.userTitleLabel.ViewModel(
+            fullname: response.fullname,
+            isOnline: response.isOnline
+        )
+        
         viewController?.displayTitle(viewModel: viewModel)
     }
     

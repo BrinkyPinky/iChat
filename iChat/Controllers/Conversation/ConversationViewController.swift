@@ -31,7 +31,7 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
     var headersDatesRows: [CellIdentifiable] = []
     
     var interactor: ConversationBusinessLogic?
-    var router: (NSObjectProtocol & ConversationRoutingLogic & ConversationDataPassing)?
+    var router: (NSObjectProtocol & ConversationDataPassing)?
     
     // MARK: Object lifecycle
     
@@ -76,21 +76,13 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         navigationController?.navigationBar.compactAppearance = nil
     }
     
-    // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
     // MARK: Display FullName
     
     func displayTitle(viewModel: Conversation.userTitleLabel.ViewModel) {
-        self.navigationItem.titleView = setTitle(title: viewModel.fullname, isActive: viewModel.isOnline)
+        self.navigationItem.titleView = setTitle(
+            title: viewModel.fullname,
+            isActive: viewModel.isOnline
+        )
     }
     
     // MARK: Display Messages
@@ -131,10 +123,6 @@ class ConversationViewController: UIViewController, ConversationDisplayLogic {
         
         let currentOffset = conversationCollectionContentHeight - conversationCollectionViewHeight
         
-//        if conversationCollectionContentHeight <= conversationCollectionViewHeight + 50 {
-//            self.scrollDownButton.layer.opacity = 0
-//            print("kqr")
-//            self.scrollDownButton.isEnabled = false
         if scrollView.contentOffset.y == 0 {
             interactor?.getMessages(isNeedToUpLimit: true)
         } else if scrollView.contentOffset.y < currentOffset - 50 {
@@ -205,9 +193,10 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let messageCellModel = messagesRows[indexPath.section][indexPath.row]
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: messageCellModel.cellIdentifier, for: indexPath) as! ConversationCollectionViewCellMessage
+        
         cell.messageCellModel = messageCellModel
+        
         return cell
         
     }
@@ -216,20 +205,22 @@ extension ConversationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         guard let indexPath = configuration.identifier as? IndexPath else { return nil }
-        
         guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellMessage else { return nil }
+
         let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
-        targetedPreview.parameters.backgroundColor = .clear
+        targetedPreview.parameters.shadowPath = UIBezierPath()
+
         return targetedPreview
         
     }
     
     func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         guard let indexPath = configuration.identifier as? IndexPath else { return nil }
-        
         guard let cell = collectionView.cellForItem(at: indexPath) as? ConversationCollectionViewCellMessage else { return nil }
+        
         let targetedPreview = UITargetedPreview(view: cell.viewBackgroundTheMessage)
-        targetedPreview.parameters.backgroundColor = .clear
+        targetedPreview.parameters.shadowPath = UIBezierPath()
+        
         return targetedPreview
     }
     

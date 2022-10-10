@@ -63,7 +63,10 @@ class SettingsViewModel: SettingsViewModelProtocol {
                     let email = UserLoginDataManager.shared.email
                     FireBaseAuthManager.shared.recoverPassword(email: email ?? "") { error in
                         guard let error = error else {
-                            self.view.showAlert(title: "Check your E-Mail", message: "Instructions have been sent to your e-mail")
+                            self.view.showAlert(
+                                title: "Check your E-Mail",
+                                message: "Instructions have been sent to your e-mail"
+                            )
                             return
                         }
                         self.view.showAlert(title: "Error", message: error.localizedDescription)
@@ -115,7 +118,10 @@ class SettingsViewModel: SettingsViewModelProtocol {
             guard let imageData = imageData else { return }
             view.displayUserImage(with: imageData)
             
-            RealmDataManager.shared.saveUserImage(imageData: imageData, email: UserLoginDataManager.shared.email ?? "")
+            RealmDataManager.shared.saveUserImage(
+                imageData: imageData,
+                email: UserLoginDataManager.shared.email ?? ""
+            )
         }
     }
     

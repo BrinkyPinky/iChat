@@ -16,28 +16,23 @@ extension ConversationViewController {
     }
     
     func setupUI() {
+        
+        // MARK: Scroll Down Button
+        
         scrollDownButton.isEnabled = false
         scrollDownButton.layer.opacity = 0
         
-        
-        
-        
-        
-        
+        // MARK: Tap Recognizer to dismiss keyboard
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         conversationCollectionView.addGestureRecognizer(tap)
         
+        // MARK: View behind collectionView BackgroundColor
         
-        view.backgroundColor = UIColor(
-            red: 234/255,
-            green: 239/255,
-            blue: 252/255,
-            alpha: 1
-        )
+        view.backgroundColor = #colorLiteral(red: 0.9345796704, green: 0.9495114684, blue: 0.9921932817, alpha: 1)
         
-        // MARK: Actions
+        // MARK: Send Message Button Action
         
         sendMessageButton.addTarget(self, action: #selector(sendMessageButtonPressed), for: .touchUpInside)
         
@@ -79,12 +74,7 @@ extension ConversationViewController {
         // MARK: NavigationBar Setup
         
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.backgroundColor = UIColor(
-            red: 234/255,
-            green: 239/255,
-            blue: 252/255,
-            alpha: 1
-        )
+        navigationBarAppearance.backgroundColor = #colorLiteral(red: 0.9131569266, green: 0.9380695224, blue: 0.993408978, alpha: 1)
         navigationBarAppearance.shadowColor = .clear
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
@@ -117,12 +107,20 @@ extension ConversationViewController {
 
         let subtitleLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 0, height: 0))
         subtitleLabel.backgroundColor = .clear
-        subtitleLabel.textColor = isActive ? UIColor(red: 94/255, green: 121/255, blue: 236/255, alpha: 1) : .secondaryLabel
+        subtitleLabel.textColor = isActive ? #colorLiteral(red: 0.3390406966, green: 0.478356421, blue: 0.9565412402, alpha: 1) : .secondaryLabel
         subtitleLabel.font = UIFont.boldSystemFont(ofSize: 12)
         subtitleLabel.text = isActive ? "Online" : "Offline"
         subtitleLabel.sizeToFit()
 
-        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: max(titleLabel.frame.size.width, subtitleLabel.frame.size.width), height: 30))
+        let titleView = UIView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: max(titleLabel.frame.size.width,
+                           subtitleLabel.frame.size.width),
+                height: 30
+            )
+        )
         titleView.addSubview(titleLabel)
         titleView.addSubview(subtitleLabel)
 
@@ -156,20 +154,28 @@ extension ConversationViewController {
             let heightOfContentSize = self.conversationCollectionView.contentSize.height
             let heightOfCollectionView = self.conversationCollectionView.frame.height
             
-            let section = conversationCollectionView.numberOfSections - 1
-            let row = conversationCollectionView.numberOfItems(inSection: section) - 1
+            let lastSection = conversationCollectionView.numberOfSections - 1
+            let lastRow = conversationCollectionView.numberOfItems(inSection: lastSection) - 1
             
             if heightOfContentSize <= heightOfCollectionView + 50 {
 
             } else if isItFirstDisplayingMessages {
-                conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: false)
+                conversationCollectionView.scrollToItem(
+                    at: IndexPath(row: lastRow, section: lastSection),
+                    at: .bottom,
+                    animated: false
+                )
             } else if currentOffset <= 50 {
                 let targetYPosition = heightOfContentSize - currentContentSize
                 conversationCollectionView.contentOffset.y = targetYPosition
             } else {
                 let targetYPosition = heightOfContentSize - heightOfCollectionView
                 guard currentOffset >= targetYPosition - 300 else { return }
-                conversationCollectionView.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: true)
+                conversationCollectionView.scrollToItem(
+                    at: IndexPath(row: lastRow, section: lastSection),
+                    at: .bottom,
+                    animated: true
+                )
             }
         }
     }

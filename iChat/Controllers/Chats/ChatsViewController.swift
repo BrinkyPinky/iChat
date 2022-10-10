@@ -21,6 +21,7 @@ class ChatsViewController: UITableViewController, ChatsDisplayLogic {
     var interactor: ChatsBusinessLogic?
     var router: (NSObjectProtocol & ChatsRoutingLogic & ChatsDataPassing)?
     
+    @IBOutlet var chatsTableView: UITableView!
     private var chatsRows = [CellIdentifiable]()
     
     // MARK: Object lifecycle

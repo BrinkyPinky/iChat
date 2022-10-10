@@ -32,7 +32,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let password = UserLoginDataManager.shared.password
         
         FireBaseAuthManager.shared.login(email: email!, password: password!) { error in
-            guard let _ = error else { return }
+            guard let _ = error else {
+                return
+            }
             showLoginViewController()
         }
         
@@ -45,6 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
+        FireBaseDatabaseManager.shared.userOffline()
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {

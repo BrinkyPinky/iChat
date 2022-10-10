@@ -37,8 +37,8 @@ class FireBaseStorageManager {
             switch result {
             case .success(let data):
                 completion(data)
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                do {}
             }
         }
     }

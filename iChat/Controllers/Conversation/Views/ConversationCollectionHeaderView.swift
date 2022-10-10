@@ -40,11 +40,6 @@ class ConversationCollectionHeaderView: UICollectionReusableView, MessageHeaderC
         backgroundViewDateLabel.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         backgroundViewDateLabel.layer.cornerRadius = 15
         
-        backgroundViewDateLabel.backgroundColor = UIColor(
-            red: 234/255,
-            green: 239/255,
-            blue: 252/255,
-            alpha: 1
-        )
+        backgroundViewDateLabel.backgroundColor = #colorLiteral(red: 0.9131569266, green: 0.9380695224, blue: 0.993408978, alpha: 1)
     }
 }

@@ -73,9 +73,16 @@ class ChatsTableViewCell: UITableViewCell, ChatsViewModelCellRepresentable {
         }
         
         FireBaseStorageManager.shared.getUserImage(emailIfOtherUser: chatsViewModelCell?.email) { [unowned self] imageData in
-            guard let imageData = imageData else { return }
+            guard let imageData = imageData else {
+                personImage.image = UIImage(systemName: "xmark.circle")
+                return
+            }
             personImage.image = UIImage(data: imageData)
-            RealmDataManager.shared.saveUserImage(imageData: imageData, email: chatsViewModelCell?.email ?? "")
+            
+            RealmDataManager.shared.saveUserImage(
+                imageData: imageData,
+                email: chatsViewModelCell?.email ?? ""
+            )
         }
     }
     
