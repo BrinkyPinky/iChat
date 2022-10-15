@@ -10,7 +10,7 @@ iChat - мессенджер написанный с использование�
 
 Технологии
 ---
-+ SwiftUI
++ UIKit
 + Clean Swift + MVVM
 + Firebase Database
 + Firebase Storage
